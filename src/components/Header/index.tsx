@@ -1,13 +1,31 @@
 import { 
-  Box,
-  Flex, 
-  Link as ChakraLink, 
+  Flex,
+  useBreakpointValue,
+  Link as ChakraLink,
   Text
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import Lordicon from '../ReactLordicon';
+import { FaUser } from 'react-icons/fa';
+import { AppLogo } from '../AppLogo';
+import { UserProfile } from './UserProfile';
 
-export function Header() {
+type HeaderTypes = {
+  hasUserProfile?: boolean;
+  hasSignInButton?: Boolean; 
+};
+
+export interface HeaderProps {
+  headerType?: HeaderTypes;
+}
+
+export function Header({
+  headerType,
+}: HeaderProps) {
+  const isWideVersion = useBreakpointValue({
+    base: false,
+    md: true,
+  });
+
   return (
     <>
       <Flex
@@ -23,43 +41,62 @@ export function Header() {
         w="100%"
       >
         <Flex
+          alignItems="center"
           maxWidth={1024}
           width="100%"
           px="8"
           py="4"
           mx="auto"
         >
-          <NextLink href="/dashboard">
-            <ChakraLink
-              display="flex"
+          <AppLogo />
+          {headerType?.hasSignInButton && (
+            <Flex
+              ml="auto"
+              gap="12"
               alignItems="center"
-              gap="2"
-              _hover={{
-                textDecoration: "none"
-              }}
             >
-              <Box
-                maxW={["8", "12"]}
-              >
-                <Lordicon
-                  size={"100%"}
-                  icon='nightSky'
-                  colors={{
-                    primary:'#fff',
-                    secondary: '#a90f64'
+              <NextLink href="/login" passHref>
+                <ChakraLink
+                  fontStyle={["sm", "md"]}
+                  fontWeight="bold"
+
+                  _hover={{
+                    textDecoration: "none"
                   }}
-                  trigger='loop'
-                  delay={3000}
-                />
-              </Box>
-              <Text
-                fontWeight="bold"
-                fontSize={["md", "2xl"]}
-              >
-                Kaguya
-              </Text>
-            </ChakraLink>
-          </NextLink>
+                >
+                  <Text
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="center"
+                    gap="3"
+                  >
+                    <FaUser /> Entrar
+                  </Text>                  
+                </ChakraLink>
+              </NextLink>
+
+              <NextLink href="/register" passHref>
+                <ChakraLink
+                  fontStyle={["sm", "md"]}
+                  fontWeight="bold"
+                  border="1px solid"
+                  borderColor="pink.500"
+                  borderRadius="md"
+                  p="2"
+                  px="6"
+                  transition="all 0.3s"
+
+                  _hover={{
+                    textDecoration: "none",
+                    bg:"pink.500"
+                  }}
+                >
+                  <Text>Criar Conta</Text>                  
+                </ChakraLink>
+              </NextLink>
+            </Flex>
+          )}
+          {headerType?.hasUserProfile && <UserProfile showProfileData={isWideVersion} /> }
         </Flex>        
       </Flex>
     </>
