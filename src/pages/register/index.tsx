@@ -23,7 +23,7 @@ export default function RegisterUser() {
   return (
     <>
       <Head>
-        <title>Kaguya | Logar na plataforma</title>
+        <title>Kaguya | Registrar-se na plataforma</title>
       </Head>
 
       <Flex
