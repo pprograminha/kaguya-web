@@ -34,18 +34,23 @@ export const theme = extendTheme({
         textDecoration: 'none',
       },
       input: {
-        '&::-webkit-autofill': {
-          boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
-          WebkitTextFillColor: 'blackAlpha.600',
-          '&::active': {
-            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
-          },
-          '&::hover': {
-            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
-          },
-          '&::focus': {
-            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
-          },
+        color: 'gray.300',
+
+        '&:-webkit-autofill': {
+          boxShadow: '0 0 0 30px #242731 inset !important',
+          '-webkit-text-fill-color': '#9a9ea3',
+          borderRadius: '0',
+          border: 'none',
+          'caret-color': '#9a9ea3',
+        },
+        '&:active': {
+          boxShadow: '0 0 0 30px #242731 inset !important',
+        },
+        '&:hover': {
+          boxShadow: '0 0 0 30px #242731 inset !important',
+        },
+        '&:focus': {
+          boxShadow: '0 0 0 30px #242731 inset !important',
         },
       },
       '*': {
