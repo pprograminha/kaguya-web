@@ -19,7 +19,7 @@ export function Trail() {
         <ChakraLink
           display="flex"
           w="100%"
-          bg="blackAlpha.500"
+          bg="blackAlpha.800"
           px={["4", "8"]}
           py={["4", "6"]}
           borderRadius="md"

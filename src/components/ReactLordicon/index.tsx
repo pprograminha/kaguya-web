@@ -35,6 +35,7 @@ export type LordiconIcons =
   | 'bin'
   | 'flatArrow'
   | 'camera'
+  | 'checkInBox'
 
 export type LordiconTrigger =
   | 'hover'
@@ -80,6 +81,7 @@ export const Lordicon: React.FC<LordiconProps> = ({
 
   const lordiconIcons: Record<LordiconIcons, string> = {
     confetti: 'lupuorrc',
+    checkInBox: 'jvihlqtw',
     share: 'udwhdpod',
     wings: 'hpxruznz',
     bolt: 'giaigwkd',
