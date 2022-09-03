@@ -33,6 +33,21 @@ export const theme = extendTheme({
         color: 'inherit',
         textDecoration: 'none',
       },
+      input: {
+        '&::-webkit-autofill': {
+          boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
+          WebkitTextFillColor: 'blackAlpha.600',
+          '&::active': {
+            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
+          },
+          '&::hover': {
+            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
+          },
+          '&::focus': {
+            boxShadow: '0 0 0 30px blackAlpha.600 inset !important',
+          },
+        },
+      },
       '*': {
         margin: '0',
         padding: '0',

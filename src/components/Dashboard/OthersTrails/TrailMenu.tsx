@@ -9,7 +9,7 @@ import Lordicon from '../../ReactLordicon';
 export function TrailMenu() {
   return (
     <>
-      <Menu>
+      <Menu placement='bottom-end'>
         <MenuButton
           aria-label='Options'
         >
