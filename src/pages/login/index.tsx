@@ -2,7 +2,6 @@ import {
   Box, 
   Flex, 
   VStack, 
-  Button as ChakraButton,
   Link as ChakraLink,
   Heading,
   Text,
@@ -14,10 +13,11 @@ import { FcGoogle } from 'react-icons/fc';
 import { AiFillGithub } from 'react-icons/ai';
 import { FaLock } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
+
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Form/Input';
-import { HorizontalDividerLine } from '../../components/HorizontalDividerLine';
 import { Header } from '../../components/Header';
+import { DividerLine } from '../../components/DividerLine';
 
 export default function UserLogin() {
   return (
@@ -125,9 +125,9 @@ export default function UserLogin() {
                 </Button>
               </VStack>
 
-              <HorizontalDividerLine>
-                ou
-              </HorizontalDividerLine>
+              <DividerLine />
+              <Text>ou</Text>
+              <DividerLine />
 
               <VStack
                 spacing="3"
