@@ -123,7 +123,9 @@ export default function RegisterUser() {
                 </Button>
               </VStack>
 
-              <HorizontalDividerLine />
+              <HorizontalDividerLine>
+                ou
+              </HorizontalDividerLine>
 
               <VStack
                 spacing="3"

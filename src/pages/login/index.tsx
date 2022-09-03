@@ -125,7 +125,9 @@ export default function UserLogin() {
                 </Button>
               </VStack>
 
-              <HorizontalDividerLine />
+              <HorizontalDividerLine>
+                ou
+              </HorizontalDividerLine>
 
               <VStack
                 spacing="3"
