@@ -28,6 +28,7 @@ export const theme = extendTheme({
       body: {
         bg: 'blackAlpha.900',
         color: 'gray.50',
+        minWidth: '280px'
       },
       a: {
         color: 'inherit',
