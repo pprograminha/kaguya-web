@@ -1,29 +1,31 @@
 import { Avatar, Flex, Text } from '@chakra-ui/react';
+import { ProfilePopover } from './ProfilePopover';
 
 export interface UserProfileProps {
-  showProfileData?: boolean;
+  isWideVersion?: boolean;
 }
 
 export function UserProfile({
-  showProfileData
+  isWideVersion
 }: UserProfileProps) {
   return (
-    <>
       <Flex
         ml="auto"
         alignItems="center"
         gap="4"
       >
-        {showProfileData && (
+        {isWideVersion && (
           <Text color="gray.300">Gotim</Text>
         )}
-        <Avatar
-          src=""
-          name="Tiago Gonçalves"
+        <ProfilePopover isWideVersion={isWideVersion}>
+          <Avatar
+            src=""
+            name="Tiago Gonçalves"
 
-          size={["sm", "md"]}
-        />
-      </Flex>
-    </>
+            size={["sm", "md"]}
+            cursor="pointer"
+          />
+      </ProfilePopover>
+    </Flex>
   );
 }

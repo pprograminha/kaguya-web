@@ -96,7 +96,7 @@ export function Header({
               </NextLink>
             </Flex>
           )}
-          {headerType?.hasUserProfile && <UserProfile showProfileData={isWideVersion} /> }
+          {headerType?.hasUserProfile && <UserProfile isWideVersion={isWideVersion} /> }
         </Flex>        
       </Flex>
     </>
