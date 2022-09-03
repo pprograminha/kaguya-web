@@ -1,4 +1,5 @@
 import { GridItem, Button, Image, Text } from '@chakra-ui/react';
+import { Progress } from '../../Progress';
 import Lordicon from '../../ReactLordicon';
 
 export function Trail() {
@@ -6,7 +7,8 @@ export function Trail() {
     <>
       <GridItem
         bg="blackAlpha.700"
-        p="8"
+        py="8"
+        px="6"
         display="flex"
         alignItems="center"
         flexDirection="column"
@@ -41,6 +43,7 @@ export function Trail() {
         >
           HTML
         </Text>
+        <Progress percent={79} />
       </GridItem>
     </>
   );
