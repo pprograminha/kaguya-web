@@ -8,6 +8,7 @@ export function OthersTrails() {
   return (
     <>
       <Flex
+        borderRadius={'lg'}
         bg="linear-gradient(to right, rgb(15, 16, 20), #0F0F11)"
         flexDirection="column"
         flex="1"
