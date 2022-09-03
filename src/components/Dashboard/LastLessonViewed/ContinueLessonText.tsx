@@ -6,7 +6,6 @@ export function ContinueLessonText() {
     <>
       <Flex
         ml={["auto"]}
-        mr={["auto", "auto", "0"]}
         mt={["2", "0"]}
         alignItems="center"
         gap="6"
