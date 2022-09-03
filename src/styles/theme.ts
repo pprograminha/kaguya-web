@@ -10,10 +10,9 @@ export const theme = extendTheme({
     },
     blackAlpha: {
       "900": "#0F0F11",
-      "800": "#0D0E12",
+      "800": "#121419",
       "700": "#181a21",
       "600": "#242731",
-      "500": "#121419",
     },
     gray: {
       "300": "#9a9ea3"
@@ -28,7 +27,6 @@ export const theme = extendTheme({
       body: {
         bg: 'blackAlpha.900',
         color: 'gray.50',
-        minWidth: '280px'
       },
       a: {
         color: 'inherit',
