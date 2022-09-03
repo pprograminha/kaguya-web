@@ -1,6 +1,12 @@
 import { Box, Flex, Text } from '@chakra-ui/react';
 
-export function HorizontalDividerLine() {
+export interface HorizontalDividerLineProps {
+  children?: React.ReactNode;
+}
+
+export function HorizontalDividerLine({
+  children
+}: HorizontalDividerLineProps) {
   return (
     <>
       <Flex
@@ -18,7 +24,7 @@ export function HorizontalDividerLine() {
           color="gray.300"
           fontSize={["sm", "md"]}
         >
-          ou
+          {children}
         </Text>
         <Box
           bg="-webkit-gradient(linear, 0 0, 100% 0, from(rgb(24, 26, 33)), to(rgb(24, 26, 33)), color-stop(0.5, rgb(72, 74, 79)))"
