@@ -11,7 +11,7 @@ export function LastLessonViewed() {
           #181a21 32%, 
           #a90f64 300%
         )"
-        mr="auto"
+        ml="auto"
         mt="6"
         p={["4", "6", "8"]}
         w="100%"
