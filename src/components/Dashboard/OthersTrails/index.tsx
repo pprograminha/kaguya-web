@@ -14,7 +14,7 @@ export function OthersTrails() {
         flex="1"
         // calc(tela - tamanho do header)
         h="calc(100vh - 80px)"
-        p="8"
+        p={["4", "6", "8"]}
       >
         <Heading
           fontSize={["md", "lg", "2xl"]}
@@ -31,7 +31,7 @@ export function OthersTrails() {
           w="100%"
           mt="8"
           overflowY="auto"
-          pr="2"
+          px="2"
           pb="8"
         >
           <Trail />

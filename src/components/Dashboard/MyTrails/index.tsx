@@ -7,7 +7,7 @@ export function MyTrails() {
     <>
       <Box
         as="section"
-        p={["8"]}
+        p={["4", "6", "8"]}
       >
         <Heading
           fontSize={["md", "lg", "2xl"]}

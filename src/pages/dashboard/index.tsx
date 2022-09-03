@@ -46,7 +46,8 @@ export default function Dashboard() {
               alignItems="flex-start"
 
               mt="8"
-              p={["8"]}
+              py={["8"]}
+              px={["4", "6", "8"]}
               w="100%"
             >
               <Welcome />
