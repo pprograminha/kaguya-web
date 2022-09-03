@@ -32,17 +32,17 @@ export function Header({
         as="header"
         background="-webkit-gradient(
           linear, 0 0, 100% 0, 
-          from(rgb(13, 14, 18)), 
-          to(rgb(13, 14, 18)), 
+          from(#0F0F11), 
+          to(#0F0F11), 
           color-stop(0.5, rgb(27, 29, 36))
         )"
         mx="auto"
-        maxW={1440}
+        maxW={1480}
         w="100%"
       >
         <Flex
           alignItems="center"
-          maxWidth={1024}
+          maxWidth={1480}
           width="100%"
           px="8"
           py="4"
