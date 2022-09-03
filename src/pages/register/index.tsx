@@ -123,9 +123,11 @@ export default function RegisterUser() {
                 </Button>
               </VStack>
 
-              <DividerLine />
-              <Text>ou</Text>
-              <DividerLine />
+              <Flex gap="2" my="4" alignItems="center">
+                <DividerLine />
+                <Text>ou</Text>
+                <DividerLine />
+              </Flex>
 
               <VStack
                 spacing="3"
