@@ -135,9 +135,15 @@ export default function UserLogin() {
                     </Button>
                   </VStack>
 
-                  <DividerLine />
-                  <Text>ou</Text>
-                  <DividerLine />
+                  <Flex
+                    alignItems="center"
+                    my="4"
+                  >
+                    <DividerLine />
+                    <Text color="gray.300">ou</Text>
+                    <DividerLine />
+                  </Flex>
+
 
                   <VStack
                     spacing="3"
