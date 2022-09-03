@@ -29,6 +29,31 @@ export const theme = extendTheme({
         bg: 'blackAlpha.900',
         color: 'gray.50',
       },
+      a: {
+        color: 'inherit',
+        textDecoration: 'none',
+      },
+      '*': {
+        margin: '0',
+        padding: '0',
+        boxSizing: 'border-box',
+
+        '&::-webkit-scrollbar': {
+          width: '4px',
+          height: '4px',
+        },
+        '&::-webkit-scrollbar-track': {
+          borderRadius: '10px'
+        },
+        '&::-webkit-scrollbar-thumb': {
+          background: 'pink.700',
+          borderRadius: '10px',
+          transition: 'all 0.2s',
+        },
+        '&::-webkit-scrollbar-thumb:hover': {
+          background: 'pink.600'
+        }
+      }
     },
   },
 });

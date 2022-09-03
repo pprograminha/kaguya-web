@@ -21,9 +21,10 @@ export function MyTrails() {
         <Grid
           gridTemplateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
           gap="4"
+          overflowY="auto"
+          pr="2"
+          maxH={400}
         >
-          <Trail />
-          <Trail />
           <Trail />
         </Grid>
       </Box>

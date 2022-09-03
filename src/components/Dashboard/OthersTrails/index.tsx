@@ -32,9 +32,10 @@ export function OthersTrails() {
           gap="4"
           w="100%"
           mt="8"
+          overflowY="auto"
+          pr="2"
+          pb="8"
         >
-          <Trail />
-          <Trail />
           <Trail />
         </Flex>
       </Flex>
