@@ -122,12 +122,12 @@ export default function RegisterUser() {
                 </Heading>
 
                 <VStack spacing="3">
-                  <Button type="button" disabled>
+                  <Button w="100%" type="button" disabled>
                     <FcGoogle />
                     Entrar com a Google
                   </Button>
                   
-                  <Button type="button" disabled>
+                  <Button w="100%" type="button" disabled>
                     <AiFillGithub />
                     Entrar com o Github
                   </Button>
@@ -162,8 +162,8 @@ export default function RegisterUser() {
                   />
                 </VStack>
                 
-                <Button type="submit" disabled mt="8">
-                  Entrar
+                <Button w="100%" type="submit" disabled mt="8">
+                  Criar conta
                 </Button>
               </Box>
             </VStack>

@@ -22,7 +22,6 @@ export function Button({
         size={["xs", "md"]}
         gap="2"
         py={["5", "6"]}
-        w="100%"
         bg="blackAlpha.600"
         cursor="pointer"
         fontWeight="normal"

@@ -124,12 +124,12 @@ export default function UserLogin() {
                   <VStack
                     spacing="3"
                   >
-                    <Button type="button" disabled>
+                    <Button w="100%" type="button" disabled>
                       <FcGoogle />
                       Entrar com a Google
                     </Button>
                     
-                    <Button type="button" disabled>
+                    <Button w="100%" type="button" disabled>
                       <AiFillGithub />
                       Entrar com o Github
                     </Button>
@@ -187,7 +187,7 @@ export default function UserLogin() {
                     </NextLink>
                   </Box>
                   
-                  <Button type="submit" disabled>
+                  <Button w="100%" type="submit" disabled>
                     Entrar
                   </Button>
                 </Box>
