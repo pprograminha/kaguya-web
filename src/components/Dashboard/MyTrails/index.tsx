@@ -1,6 +1,19 @@
-import { Box, Grid, Heading } from '@chakra-ui/react';
+import { Box, Grid, Heading, keyframes } from '@chakra-ui/react';
+import { useEffect, useState } from 'react';
+import { MyTrailsNoContent } from './MyTrailsNoContent';
 // import { MyTrailsNoContent } from './MyTrailsNoContent';
 import { Trail } from './Trail';
+
+const animate = keyframes`
+  from {  
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {  
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
 
 export function MyTrails() {
   return (
@@ -8,6 +21,7 @@ export function MyTrails() {
       <Box
         as="section"
         p={["4", "6", "8"]}
+        animation={`${animate} 0.8s ease-out`}
       >
         <Heading
           fontSize={["md", "lg", "2xl"]}
