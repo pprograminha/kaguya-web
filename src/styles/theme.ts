@@ -38,10 +38,10 @@ export const theme = extendTheme({
 
         '&:-webkit-autofill': {
           boxShadow: '0 0 0 30px #242731 inset !important',
-          '-webkit-text-fill-color': '#9a9ea3',
+          WebkitTextFillColor: '#9a9ea3',
           borderRadius: '0',
           border: 'none',
-          'caret-color': '#9a9ea3',
+          caretColor: '#9a9ea3',
         },
         '&:active': {
           boxShadow: '0 0 0 30px #242731 inset !important',
