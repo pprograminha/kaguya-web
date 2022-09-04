@@ -24,7 +24,7 @@ export function ButtonItem({
         color="gray.300"
         _hover={{
           bg:"none",
-          color: "pink.600"
+          color: "pink.500"
         }}
         _active={{
           bg:"none"

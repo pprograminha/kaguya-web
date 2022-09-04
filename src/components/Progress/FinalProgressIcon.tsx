@@ -10,7 +10,7 @@ export function FinalProgressIcon({
 }: FinalProgressIconProps) {
   const [pink600] = useToken(
     'colors',
-    ['pink.600'],
+    ['pink.500'],
   );
 
   if(percentage < 80) {

@@ -3,10 +3,11 @@ import { extendTheme } from '@chakra-ui/react';
 export const theme = extendTheme({
   colors: {     
     pink: {       
-      "900": "#a90f64",       
-      "800": "#D1107A",       
-      "700": "#C950C4",       
-      "600": "#FF69F9",       
+      "900": "#a90f6478", 
+      "800": "#a90f64",  
+      "700": "#D1107A",       
+      "600": "#C950C4",       
+      "500": "#FF69F9",       
     },
     blackAlpha: {
       "900": "#0F0F11",
@@ -65,12 +66,12 @@ export const theme = extendTheme({
           borderRadius: '10px'
         },
         '&::-webkit-scrollbar-thumb': {
-          background: 'pink.700',
+          background: 'pink.600',
           borderRadius: '10px',
           transition: 'all 0.2s',
         },
         '&::-webkit-scrollbar-thumb:hover': {
-          background: 'pink.600'
+          background: 'pink.500'
         }
       }
     },

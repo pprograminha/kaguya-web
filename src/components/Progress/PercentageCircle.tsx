@@ -10,7 +10,7 @@ export function PercentageCircle({
 }: PercentageCircleProps) {
   const [pink600] = useToken(
     'colors',
-    ['pink.600'],
+    ['pink.500'],
   );
   
   return (
@@ -21,7 +21,7 @@ export function PercentageCircle({
         zIndex={1}
         borderRadius="full"
         border="2px solid"
-        borderColor="pink.600"
+        borderColor="pink.500"
         bg="blackAlpha.700"
         transform="translate(0, -50%)" 
         pos="absolute"

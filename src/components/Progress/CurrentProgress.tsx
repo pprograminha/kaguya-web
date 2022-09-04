@@ -12,7 +12,7 @@ export function CurrentProgress({
 }: CurrentProgressProps) {
   const [pink600] = useToken(
     'colors',
-    ['pink.600'],
+    ['pink.500'],
   );
 
   const finalPercent = 
@@ -29,7 +29,7 @@ export function CurrentProgress({
         borderRadius="full"
         top={0}
         left={0}
-        bg="pink.600"
+        bg="pink.500"
         boxShadow={`0 0 0 1px ${pink600}`}
         w={`${finalPercent}%`}
         h="full"

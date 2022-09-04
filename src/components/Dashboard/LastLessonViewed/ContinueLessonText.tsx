@@ -16,7 +16,7 @@ export function ContinueLessonText() {
           Continuar assistindo
         </Text>
         <Box
-          background="pink.800"
+          background="pink.700"
           p={["2", "3"]}
           borderRadius="50%"
         >

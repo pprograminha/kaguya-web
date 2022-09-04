@@ -73,7 +73,7 @@ export default function UserLogin() {
 
                     borderTopLeftRadius="md"
                     textAlign="center"
-                    color="pink.600"
+                    color="pink.500"
                     bg="blackAlpha.700"
                     cursor="default"
                     fontWeight="normal"

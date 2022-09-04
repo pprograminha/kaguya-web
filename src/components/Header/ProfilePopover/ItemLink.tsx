@@ -29,7 +29,7 @@ export function ItemLink({
           color="gray.300"
           _hover={{
             bg:"none",
-            color: "pink.700",
+            color: "pink.600",
           }}
           _active={{
             bg:"none"
