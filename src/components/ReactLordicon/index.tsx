@@ -126,7 +126,7 @@ export const Lordicon: React.FC<LordiconProps> = ({
       delay={delay}
       {...rest}
       style={{
-        width: size,
+        minWidth: size,
         height: size,
         ...(rest.style ? rest.style : {})
       }}
