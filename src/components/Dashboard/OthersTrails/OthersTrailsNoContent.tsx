@@ -1,3 +1,4 @@
+
 import { Flex, Text } from '@chakra-ui/react';
 import Lordicon from '../../ReactLordicon';
 
@@ -5,14 +6,14 @@ export function OthersTrailsNoContent() {
   return (
     <>
       <Flex
-        mt="16"
+        h="100vh"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
       >
         <Lordicon
           size={80}
-          icon='spaFlower'
+          icon='clock'
           delay={3000}
           colors={{
             primary: "#9a9ea3",
@@ -23,7 +24,7 @@ export function OthersTrailsNoContent() {
           color="gray.300"
           mt="4"
         >
-          Você não pussuí nenhuma trilha em sua conta
+          Aguarde a criação de novas trilhas
         </Text>
       </Flex>
     </>
