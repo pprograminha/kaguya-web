@@ -1,7 +1,7 @@
 import { 
-  Flex, Text, useBreakpointValue
+  Flex, 
+  useBreakpointValue
 } from '@chakra-ui/react';
-import { DividerLine } from '../../../../components/DividerLine';
 import { AddTrailAlert } from '../AddTrailAlert';
 import { TrailDescription } from '../TrailDescription';
 
@@ -29,15 +29,15 @@ export function TrailInfoHeader() {
           #181a2159 32%, 
           #a90f64 300%
         )"
-        p="8"
-        pb="16"
+        pt={["4", "6", "8"]}
+        px={["4", "6", "8"]}
+        pb={["10", "16"]}
         mt="12"
         mx={["4"]}
         position="relative"
       >
         <AddTrailAlert isSmVersion={isSmVersion}/>
 
-        <DividerLine />
 
         <Flex
           flexDirection="column"

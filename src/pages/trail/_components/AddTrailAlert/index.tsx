@@ -1,4 +1,5 @@
 import { Flex, Text } from '@chakra-ui/react';
+import { DividerLine } from '../../../../components/DividerLine';
 import Lordicon from '../../../../components/ReactLordicon';
 
 export interface AddTrailAlertProps {
@@ -10,8 +11,8 @@ export function AddTrailAlert({
 }: AddTrailAlertProps) {
   return (
     <>
-     <Flex>
-      <Flex
+      <Flex>
+        <Flex
           alignItems="center"
           justifyContent="center"
           flexDirection={!isSmVersion ? "column": "row"}
@@ -33,11 +34,13 @@ export function AddTrailAlert({
             letterSpacing="wider"
             fontSize={["xs", "sm", "md"]}
             fontWeight="bold"
+            textAlign="center"
           >
             Adicione esta trilha antes de acessar as playlists
           </Text>
         </Flex>
       </Flex>
+      <DividerLine />
     </>
   );
 }
