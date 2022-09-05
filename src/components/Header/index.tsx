@@ -43,8 +43,10 @@ export function Header({
         <Flex
           alignItems="center"
           maxWidth={1480}
+          flexWrap="wrap"
+          gap="4"
           width="100%"
-          px="8"
+          px={["4", "6", "8"]}
           py="4"
           mx="auto"
         >
@@ -68,6 +70,7 @@ export function Header({
                     display="flex"
                     alignItems="center"
                     justifyContent="center"
+                    fontSize={["xs", "md"]}
                     gap="3"
                   >
                     <FaUser /> Entrar
@@ -85,13 +88,13 @@ export function Header({
                   p="2"
                   px="6"
                   transition="all 0.3s"
-
+                  whiteSpace="nowrap"
                   _hover={{
                     textDecoration: "none",
                     bg:"pink.500"
                   }}
                 >
-                  <Text>Criar Conta</Text>                  
+                  <Text fontSize={["xs", "md"]}>Criar Conta</Text>                  
                 </ChakraLink>
               </NextLink>
             </Flex>

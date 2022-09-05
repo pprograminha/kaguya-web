@@ -1,13 +1,27 @@
-import { Box, Flex, Grid, Heading } from '@chakra-ui/react';
+import { Flex, Heading, keyframes, useBoolean, useOutsideClick } from '@chakra-ui/react';
+import { useRef } from 'react';
 import { DividerLine } from '../../DividerLine';
 
 // import { OthersTrailsNoContent } from './OthersTrailsNoContent';
 import { Trail } from './Trail';
 
+const animate = keyframes`
+  from {  
+    opacity: 0;
+    transform: translateX(100px);
+  }
+  to {  
+    opacity: 1;
+    transform: translateX(0);
+  }
+`
+
 export function OthersTrails() {
+
   return (
     <>
       <Flex
+        animation={`${animate} 0.6s ease`}
         borderRadius={'lg'}
         bg="linear-gradient(to right, rgb(15, 16, 20), #0F0F11)"
         flexDirection="column"
