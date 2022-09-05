@@ -1,7 +1,7 @@
 // import { useRouter } from 'next/router';
 
 import { 
-  Flex, 
+  Flex, useBreakpointValue, 
 } from '@chakra-ui/react';
 
 import Head from 'next/head';
@@ -15,6 +15,11 @@ import { PLaylistsContainer } from './_components/Playlists';
 import { OtherInfoFromTrail } from './_components/OtherInfoFromTrail';
 
 export default function Trail() {
+  const is2xlVersion = useBreakpointValue({ 
+    base: false,
+    "2xl": true
+  });
+
   // const router = useRouter()
   // const trailSlug = router.query;
 
@@ -34,9 +39,9 @@ export default function Trail() {
 
           display="flex"
           flexDirection={"column"}
-          
+
           mt="16"
-          mx={["0", "2", "auto"]}
+          mx={["0", "auto"]}
         >
           <BreadCrumbContainer 
             currentItem={{
@@ -57,12 +62,15 @@ export default function Trail() {
           <DividerLine />
 
           <Flex
-            mt={["6", "6", "6", "6", "18"]}
-            mx={["4", "4", "4", "6"]}
-            gap="8"
-            flexDirection={["column-reverse", "column-reverse", "column-reverse", "column-reverse", "row"]}
+            mt={is2xlVersion ? "8" : "10"}
+            gap="4"
+            mx={"4"}
+            justifyContent="space-between"
+            flexDirection={is2xlVersion ? "row" : "column-reverse"}
           >
-            <PLaylistsContainer />
+            <PLaylistsContainer 
+              is2xlVersion={is2xlVersion}
+            />
             <OtherInfoFromTrail />
           </Flex>
         </Flex>

@@ -4,17 +4,19 @@ import Lordicon from '../../../../components/ReactLordicon';
 export interface AuthorProps {
   authorName: string;
   referenceLink?: string;
+  isWideVersion?: boolean;
 }
 
 export function Author({
   authorName,
-  referenceLink
+  referenceLink,
+  isWideVersion
 }: AuthorProps) {
   return (
     <>
       <Link
         href={referenceLink}
-        fontSize={["sm", "md"]}
+        fontSize={["xs", "sm", "md"]}
         fontWeight="bold"
         letterSpacing="wider"
         display="flex"
@@ -26,7 +28,7 @@ export function Author({
       >
         - {authorName}
         <Lordicon
-          size={40}
+          size={!isWideVersion ? 32 : 40}
           icon='share'
           trigger='loop'
           colors={{

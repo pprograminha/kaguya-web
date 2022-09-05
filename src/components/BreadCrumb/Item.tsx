@@ -17,7 +17,11 @@ export function BreadCrumbItem({
 }: BreadCrumbItemProps) {
   return (
     <>
-      <BreadcrumbItem color="gray.300" {...rest}>
+      <BreadcrumbItem
+        color="gray.300"
+        fontSize={["sm", "md"]}
+        {...rest}
+      >
         <NextLink href={link}>
           <BreadcrumbLink>{title}</BreadcrumbLink>
         </NextLink>

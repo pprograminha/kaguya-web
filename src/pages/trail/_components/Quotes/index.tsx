@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useBreakpointValue } from '@chakra-ui/react';
 
 import Lordicon from '../../../../components/ReactLordicon';
 
@@ -6,16 +6,21 @@ import { Author } from './Author';
 import { Description } from './Description';
 
 export function Quotes() {
+  const isWideVersion = useBreakpointValue({ 
+    base: false,
+    "lg": true
+  });
+
   return (
     <>
       <Flex
         alignItems="flex-end"
-        mx={["4", "6"]}
+        mx={["4"]}
         mb="8"
         gap="4"
       >
         <Lordicon 
-          size={70} 
+          size={isWideVersion ? 70 : 48} 
           icon='book' 
           colors={{
             primary: '#a90f64',
@@ -32,6 +37,7 @@ export function Quotes() {
           <Author
             referenceLink={"https://pt.wikipedia.org/wiki/George_Berkeley"}
             authorName={"George Berkley"}
+            isWideVersion={isWideVersion}
           />
         </Flex>
       </Flex>

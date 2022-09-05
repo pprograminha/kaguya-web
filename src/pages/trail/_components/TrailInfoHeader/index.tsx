@@ -32,7 +32,7 @@ export function TrailInfoHeader() {
         p="8"
         pb="16"
         mt="12"
-        mx={["4", "6"]}
+        mx={["4"]}
         position="relative"
       >
         <AddTrailAlert isSmVersion={isSmVersion}/>

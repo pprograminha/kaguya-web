@@ -10,7 +10,7 @@ export function Description({
   return (
     <>
       <Text
-        fontSize={["sm"]}
+        fontSize={["xs", "sm"]}
         color="white"
         letterSpacing="wider"
       >

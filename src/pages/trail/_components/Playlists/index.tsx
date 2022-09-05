@@ -5,12 +5,19 @@ import {
  } from '@chakra-ui/react';
 import { PlaylistItem } from './PlaylistItem';
 
-export function PLaylistsContainer() {
+export interface PlaylistsContainerProps {
+  is2xlVersion?: boolean;
+}
+
+export function PLaylistsContainer({
+  is2xlVersion
+}: PlaylistsContainerProps) {
   return (
     <>
       <Box
-        maxWidth={890}
-        p={["0", "0", "0", "0", "6", "8"]}
+        maxWidth={900}
+        p={!is2xlVersion ? "4" : "8"}
+        pr={["4", "0"]}
         w="100%"
       >
         <Heading

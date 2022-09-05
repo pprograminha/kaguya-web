@@ -13,6 +13,7 @@ export function PlaylistTitle({
       <Text
         fontWeight="bold"
         mb="4"
+        fontSize={["sm", "md", "lg"]}
         {...rest}
       >
         Introdução ao HTML 5

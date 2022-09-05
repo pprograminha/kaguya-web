@@ -13,6 +13,7 @@ export function PlaylistDescription({
         color="gray.300"
         letterSpacing="wider"
         lineHeight="1.6"
+        fontSize={["xs", "sm", "md"]}
       >
         {description}
       </Text>

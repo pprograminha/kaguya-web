@@ -22,6 +22,7 @@ export function DiscordButtonToAccess() {
         cursor="pointer"
         w="max"
         transition="all 0.2s"
+        fontSize={["sm", "md"]}
         _hover={{
           filter: "brightness(110%)"
         }}
