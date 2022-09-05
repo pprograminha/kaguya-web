@@ -8,8 +8,8 @@ import {
   Text
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { Button } from '../../Button';
-import Lordicon from '../../ReactLordicon';
+import { Button } from '../../../../components/Button';
+import Lordicon from '../../../../components/ReactLordicon';
 import { TrailMenu } from './TrailMenu';
 
 export function Trail() {

@@ -1,6 +1,5 @@
-import { Flex, Heading, keyframes, useBoolean, useOutsideClick } from '@chakra-ui/react';
-import { useRef } from 'react';
-import { DividerLine } from '../../DividerLine';
+import { Flex, Heading, keyframes } from '@chakra-ui/react';
+import { DividerLine } from '../../../../components/DividerLine';
 
 // import { OthersTrailsNoContent } from './OthersTrailsNoContent';
 import { Trail } from './Trail';

@@ -1,6 +1,5 @@
-
 import { Flex, Text } from '@chakra-ui/react';
-import Lordicon from '../../ReactLordicon';
+import Lordicon from '../../../../components/ReactLordicon';
 
 export function OthersTrailsNoContent() {
   return (

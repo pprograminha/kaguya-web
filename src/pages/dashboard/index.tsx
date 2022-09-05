@@ -1,10 +1,10 @@
 import { Box, Flex, HStack, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { LastLessonViewed } from '../../components/Dashboard/LastLessonViewed';
-import { MyTrails } from '../../components/Dashboard/MyTrails';
-import { OthersTrails } from '../../components/Dashboard/OthersTrails';
-import { Welcome } from '../../components/Dashboard/Welcome';
+import { LastLessonViewed } from './_components/LastLessonViewed';
+import { MyTrails } from './_components/MyTrails';
+import { OthersTrails } from './_components/OthersTrails';
+import { Welcome } from './_components/Welcome';
 
 import { Header } from '../../components/Header';
 
@@ -18,7 +18,6 @@ const animate = keyframes`
     transform: translateX(0);
   }
 `
-
 
 export default function Dashboard() {
   const isWideVersion = useBreakpointValue({ 

@@ -5,7 +5,7 @@ import {
   MenuList,
   useMediaQuery,
 } from '@chakra-ui/react';
-import Lordicon from '../../ReactLordicon';
+import Lordicon from '../../../../components/ReactLordicon';
 
 export function TrailMenu() {
   const [isLargerThan380] = useMediaQuery('(min-width: 380px)')

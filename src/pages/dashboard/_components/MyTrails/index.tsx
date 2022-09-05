@@ -1,6 +1,4 @@
 import { Box, Grid, Heading, keyframes } from '@chakra-ui/react';
-import { useEffect, useState } from 'react';
-import { MyTrailsNoContent } from './MyTrailsNoContent';
 // import { MyTrailsNoContent } from './MyTrailsNoContent';
 import { Trail } from './Trail';
 
