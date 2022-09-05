@@ -1,13 +1,24 @@
 import { 
-  Flex, Text
+  Flex, Text, useBreakpointValue
 } from '@chakra-ui/react';
 import { DividerLine } from '../../../../components/DividerLine';
 import { AddTrailAlert } from '../AddTrailAlert';
+import { TrailDescription } from '../TrailDescription';
 
 import { AddRemoveTrailButton } from './AddRemoveTrailButton';
 import { TrailTitle } from './TrailTitle';
 
 export function TrailInfoHeader() {
+  const isMdVersion = useBreakpointValue({ 
+    base: false,
+    "md": true
+  });
+
+  const isSmVersion = useBreakpointValue({ 
+    base: false,
+    "sm": true
+  });
+
   return (
     <>
       <Flex
@@ -22,8 +33,9 @@ export function TrailInfoHeader() {
         pb="16"
         mt="12"
         mx={["4", "6"]}
+        position="relative"
       >
-        <AddTrailAlert />
+        <AddTrailAlert isSmVersion={isSmVersion}/>
 
         <DividerLine />
 
@@ -35,17 +47,17 @@ export function TrailInfoHeader() {
             alignItems="center"
             mt="8"
           >
-            <TrailTitle />
-            <AddRemoveTrailButton />
+            <TrailTitle
+              trailName='HTML'
+            />
+            <AddRemoveTrailButton 
+              isMdVersion={isMdVersion}
+              trailActived={false}
+            />
           </Flex>
-          <Text
-            color="gray.300"
-            mt="6"
-            lineHeight="1.8"
-            fontSize={["sx", "sm", "md"]}
-          >
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quidem atque quis doloremque earum odio eum nulla? Sit, error molestias aliquid pariatur soluta provident dolores repudiandae est dignissimos quo cupiditate.
-          </Text>
+          <TrailDescription
+            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quidem atque quis doloremque earum odio eum nulla? Sit, error molestias aliquid pariatur soluta provident dolores repudiandae est dignissimos quo cupiditate."
+          />
         </Flex>
       </Flex>
     </>

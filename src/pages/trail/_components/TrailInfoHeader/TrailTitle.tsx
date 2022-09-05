@@ -1,6 +1,12 @@
 import { Heading, Text } from '@chakra-ui/react';
 
-export function TrailTitle() {
+export interface TrailTitleProps {
+  trailName: string;
+}
+
+export function TrailTitle({
+  trailName
+}: TrailTitleProps) {
   return (
     <>
       <Heading
@@ -14,7 +20,7 @@ export function TrailTitle() {
           color="pink.500"
           fontSize={["lg", "2xl"]}
         >
-          HTML
+          {trailName}
         </Text>
       </Heading>
     </>
