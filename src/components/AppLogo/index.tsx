@@ -1,16 +1,27 @@
-import { 
+import {
   Box,
-  Link as ChakraLink, 
-  Text
+  ChakraProps,
+  Link as ChakraLink, Text, useToken
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
+import { useRouter } from 'next/router';
 import Lordicon from '../ReactLordicon';
 
-export function AppLogo() {
+type AppLogoProps = ChakraProps & {
+  lordiconSize?: string[]
+}
+export function AppLogo({
+  lordiconSize,
+  fontSize
+}: AppLogoProps) {
+  const router = useRouter() 
+  const [pink800, white]= useToken("colors", ['pink.800', 'white'])
+  
   return (
     <>
        <NextLink href="/dashboard">
         <ChakraLink
+          cursor={router.pathname === '/dashboard' ? 'not-allowed' : undefined}
           display="flex"
           alignItems="center"
           gap="2"
@@ -19,14 +30,14 @@ export function AppLogo() {
           }}
         >
           <Box
-            maxW={["8", "12"]}
+            w={lordiconSize || ["8", "12"]}
           >
             <Lordicon
               size={"100%"}
               icon='nightSky'
               colors={{
-                primary:'#fff',
-                secondary: '#a90f64'
+                primary: white,
+                secondary: pink800
               }}
               trigger='loop'
               delay={3000}
@@ -34,7 +45,7 @@ export function AppLogo() {
           </Box>
           <Text
             fontWeight="bold"
-            fontSize={["md", "2xl"]}
+            fontSize={fontSize || ["md", "2xl"]}
           >
             Kaguya
           </Text>
