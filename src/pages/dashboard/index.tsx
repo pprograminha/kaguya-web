@@ -33,9 +33,7 @@ export default function Dashboard() {
 
       <HStack flexDirection="column">
         <Header
-          headerType={{
-            hasUserProfile: true
-          }}
+          headerType={'has-user-profile'}
         />
 
         <Box

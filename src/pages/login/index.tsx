@@ -72,6 +72,7 @@ export default function UserLogin() {
                     fontSize={["xs","sm", "md"]}
 
                     borderTopLeftRadius="md"
+                    borderTopRightRadius="md"
                     textAlign="center"
                     color="pink.500"
                     bg="blackAlpha.700"
@@ -109,7 +110,7 @@ export default function UserLogin() {
                 <Box
                   px={["4", "8"]}
                   w="100%"
-                  pb="8"
+                  pb="12"
                   as="form"
                 >
                   <Heading
@@ -160,22 +161,22 @@ export default function UserLogin() {
                     />
                   </VStack>
 
-                  <Box
-                    display="inline-flex"
+                  <Text
                     w="100%"
-                    gap="2"
                     pb="6"
+                    fontWeight="bold"
+                    color="gray.300"
+                    fontSize={["sm", "md"]}
                     pt="3"
                   >
-                    <Text
-                      color="gray.300"
-                      fontSize={["sm", "md"]}
-                    >
+                    
+                    <Text as="span" mr="1">
                       Esqueceu sua senha?
                     </Text>
                     <NextLink href="/recover-password" passHref>
                       <ChakraLink
                         color="gray.300"
+                        fontWeight="bold"
                         fontSize={["sm", "md"]}
                         _hover={{
                           color: "pink.500",
@@ -185,9 +186,9 @@ export default function UserLogin() {
                         Redefinir agora
                       </ChakraLink>
                     </NextLink>
-                  </Box>
+                  </Text>
                   
-                  <Button w="100%" type="submit" disabled>
+                  <Button mt="2" w="100%" type="submit" disabled>
                     Entrar
                   </Button>
                 </Box>

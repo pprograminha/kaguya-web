@@ -12,7 +12,8 @@ export const theme = extendTheme({
       "500": "#FF69F9",       
     },
     blackAlpha: {
-      "900": "#0F0F11",
+      "900": "#0D0E12",
+      "850": "#0f1014",
       "800": "#121419",
       "700": "#181a21",
       "600": "#242731",
@@ -28,8 +29,15 @@ export const theme = extendTheme({
   },
   styles: {
     global: {
+      '#__next': {
+        height: '100%',
+      },
+      html: {
+        height: '100%',
+      },
       body: {
-        bg: 'black',
+        height: '100%',
+        bg: 'blackAlpha.900',
         color: 'gray.50',
       },
       a: {

@@ -70,6 +70,7 @@ export default function RegisterUser() {
 
                     w="100%"
                     padding={["4"]}
+                    
                     fontSize={["xs","sm", "md"]}
                     
                     bg="linear-gradient(to left, rgb(13, 14, 18), rgb(24, 26, 33))"
@@ -91,13 +92,14 @@ export default function RegisterUser() {
                   padding={["4"]}
                   fontSize={["xs","sm", "md"]}
 
+                  borderTopLeftRadius="md"
                   borderTopRightRadius="md"
                   textAlign="center"
                   color="pink.500"
                   bg="blackAlpha.700"
                   cursor="default"
                   fontWeight="normal"
-                  boxShadow="rgb(24 26 33) 0px 15px, rgb(0 0 0 / 50%) 4px 4px 10px"
+                  boxShadow="rgb(24 26 33) 0px 15px, rgb(0 0 0 / 50%) -4px 4px 10px"
                   _hover={{
                     bg: "blackAlpha.700"
                   }}
@@ -109,7 +111,7 @@ export default function RegisterUser() {
               <Box
                 px={["4", "8"]}
                 w="100%"
-                pb="8"
+                pb="12"
                 as="form"
               >
                 <Heading
