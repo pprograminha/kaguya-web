@@ -7,7 +7,6 @@ import {
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineUser } from 'react-icons/ai';
 
-import { ButtonItem } from './ButtonItem';
 import { ItemLink } from './ItemLink';
 import { DividerLine } from '../../DividerLine';
 
@@ -49,10 +48,14 @@ export function ProfilePopover({
 
             <DividerLine />
 
-            <ButtonItem>
+            <ItemLink 
+              nextLink={{
+                href: "/login",
+                passHref: true,
+              }}>
               <FiLogOut size={18} />
               Sair da conta
-            </ButtonItem>
+            </ItemLink>
           </PopoverBody>
         </PopoverContent>
 
