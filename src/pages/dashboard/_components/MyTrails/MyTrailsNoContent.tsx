@@ -4,21 +4,22 @@ export function MyTrailsNoContent() {
   return (
     <>
       <Flex
-        mt="16"
+        my="16"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
       >
         <Lordicon
-          size={80}
+          size={120}
           icon='spaFlower'
           delay={3000}
           colors={{
-            primary: "#9a9ea3",
-            secondary: "#9a9ea3",
+            primary: "#fff",
+            secondary: "#fff",
           }}
         />
         <Text
+          textAlign="center"
           color="gray.300"
           mt="4"
         >

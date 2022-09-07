@@ -1,6 +1,6 @@
-import { Box, Grid, Heading, keyframes } from '@chakra-ui/react';
+import { Box, Heading, keyframes } from '@chakra-ui/react';
+import { MyTrailsNoContent } from './MyTrailsNoContent';
 // import { MyTrailsNoContent } from './MyTrailsNoContent';
-import { Trail } from './Trail';
 
 const animate = keyframes`
   from {  
@@ -28,16 +28,16 @@ export function MyTrails() {
           Minhas trilhas
         </Heading>
 
-        {/* <MyTrailsNoContent /> */}
+        <MyTrailsNoContent />
         
-        <Grid
+        {/* <Grid
           gridTemplateColumns={["repeat(1, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
           gap="4"
           overflowY="auto"
           maxH={400}
         >
           <Trail />
-        </Grid>
+        </Grid> */}
       </Box>
     </>
   );

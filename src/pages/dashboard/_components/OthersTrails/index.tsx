@@ -1,5 +1,6 @@
-import { Flex, Heading, keyframes } from '@chakra-ui/react';
+import { Flex, Heading, keyframes,useToken } from '@chakra-ui/react';
 import { DividerLine } from '../../../../components/DividerLine';
+import { useRef } from 'react';
 
 // import { OthersTrailsNoContent } from './OthersTrailsNoContent';
 import { Trail } from './Trail';
@@ -16,13 +17,14 @@ const animate = keyframes`
 `
 
 export function OthersTrails() {
-
+  const [blackAlpha900, blackAlpha850] = useToken('colors', ['blackAlpha.900','blackAlpha.850'])
+  
   return (
     <>
       <Flex
         animation={`${animate} 0.6s ease`}
         borderRadius={'lg'}
-        bg="linear-gradient(to right, rgb(15, 16, 20), #0F0F11)"
+        bg={`linear-gradient(to right, ${blackAlpha850}, ${blackAlpha900})`}
         flexDirection="column"
         flex="1"
         // calc(tela - tamanho do header)
