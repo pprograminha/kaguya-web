@@ -22,7 +22,7 @@ export function BreadCrumbItem({
         fontSize={["sm", "md"]}
         {...rest}
       >
-        <NextLink href={link}>
+        <NextLink href={link} passHref>
           <BreadcrumbLink>{title}</BreadcrumbLink>
         </NextLink>
       </BreadcrumbItem>

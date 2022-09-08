@@ -6,13 +6,13 @@ import {
 
 import Head from 'next/head';
 
-import { DividerLine } from '../../components/DividerLine';
-import { Header } from '../../components/Header';
-import { BreadCrumbContainer } from '../../components/BreadCrumb/Container';
-import { TrailInfoHeader } from './_components/TrailInfoHeader';
-import { Quotes } from './_components/Quotes';
-import { PLaylistsContainer } from './_components/Playlists';
-import { OtherInfoFromTrail } from './_components/OtherInfoFromTrail';
+import { DividerLine } from '../../../components/DividerLine';
+import { Header } from '../../../components/Header';
+import { BreadCrumbContainer } from '../../../components/BreadCrumb/Container';
+import { TrailInfoHeader } from '../_components/TrailInfoHeader';
+import { Quotes } from '../_components/Quotes';
+import { PLaylistsContainer } from '../_components/Playlists';
+import { OtherInfoFromTrail } from '../_components/OtherInfoFromTrail';
 
 export default function Trail() {
   const is2xlVersion = useBreakpointValue({ 
@@ -32,12 +32,11 @@ export default function Trail() {
       <Flex
         flexDirection="column"
       >
-        <Header headerType={{ hasUserProfile: true }}/>
+        <Header headerType={'has-user-profile'}/>
 
         <Flex
           maxW={1480}
 
-          display="flex"
           flexDirection={"column"}
 
           mt="16"

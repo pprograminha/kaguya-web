@@ -68,6 +68,7 @@ export const theme = extendTheme({
         margin: '0',
         padding: '0',
         boxSizing: 'border-box',
+        letterSpacing:"wider",
 
         '&::-webkit-scrollbar': {
           width: '4px',
@@ -84,7 +85,7 @@ export const theme = extendTheme({
         '&::-webkit-scrollbar-thumb:hover': {
           background: 'pink.500'
         }
-      }
+      },
     },
   },
 });
