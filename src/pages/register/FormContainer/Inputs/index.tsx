@@ -1,9 +1,13 @@
 import { Input } from '@/components/Form/Input';
-import { VStack } from '@chakra-ui/react';
+import { useToken, VStack } from '@chakra-ui/react';
 import { FaLock, FaUser } from 'react-icons/fa';
 import { MdEmail } from 'react-icons/md';
 
 export function FormInputs() {
+  const [gray300]= useToken("colors", [
+    'gray.300', 
+  ]);
+
   return (
     <>
       <VStack
@@ -12,17 +16,17 @@ export function FormInputs() {
         <Input
           name="email"
           placeholder="E-mail"
-          icon={<MdEmail color="#9a9ea3"/>}
+          icon={<MdEmail color={`${gray300}`} />}
         />
         <Input
           name="username"
           placeholder="Username"
-          icon={<FaUser color="#9a9ea3"/>}
+          icon={<FaUser color={`${gray300}`} />}
         />
         <Input
           name="password"
           placeholder="Senha"
-          icon={<FaLock color="#9a9ea3"/>}
+          icon={<FaLock color={`${gray300}`} />}
         />
       </VStack>
     </>
