@@ -1,24 +1,11 @@
 import { 
-  Box, 
   Flex, 
   VStack, 
-  Link as ChakraLink,
-  Heading,
-  Text,
   ScaleFade,
 } from '@chakra-ui/react';
 import Head from 'next/head';
-import NextLink from 'next/link';
 
-import { FcGoogle } from 'react-icons/fc';
-import { AiFillGithub } from 'react-icons/ai';
-import { FaLock, FaUser } from 'react-icons/fa';
-import { MdEmail } from 'react-icons/md';
-
-import { Button } from '../../components/Button';
-import { Input } from '../../components/Form/Input';
 import { Header } from '../../components/Header';
-import { DividerLine } from '../../components/DividerLine';
 import { RegisterChangePageHeader } from './ChangePageHeader';
 import { FormContainer } from './FormContainer';
 
