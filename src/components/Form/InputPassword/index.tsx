@@ -6,24 +6,31 @@ import {
   Text,
   Box,
   FormLabel,
+  useToken,
 } from '@chakra-ui/react';
-import { forwardRef } from 'react';
+import { forwardRef, useState } from 'react';
 import { FieldError } from 'react-hook-form';
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
+import { ChangeInputTypeButton } from './ChangeInputTypeButton';
 
-export interface InputProps extends ChakraInputProps {
+export interface InputPasswordProps extends ChakraInputProps {
   name: string;
-  type?: React.HTMLInputTypeAttribute;
   icon?: React.ReactElement;
   error?: FieldError;
 }
 
-const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
+const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputPasswordProps> = ({
   name,
   icon,
-  type,
   error = null,
   ...rest
 }, ref) => {
+  const [gray300]= useToken("colors", [
+    'gray.300', 
+  ]);
+
+  const [inputType, setInputType] = useState<'text' | 'password'>('password');
+  
   return (
     <>
       <FormControl
@@ -47,7 +54,7 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
           <ChakraInput
             name={name}
             ref={ref}
-            type={type}
+            type={inputType}
 
             size="lg"
             bg="blackAlpha.600"
@@ -62,10 +69,27 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
             fontSize={["sm", "md"]}
             textColor="gray.300"
             color="gray.300"
-            border="0"
+            border="none"
         
             {...rest}
           />
+
+          {inputType === 'password' && (
+             <ChangeInputTypeButton
+              right="2"
+              onClick={() => setInputType('text')}
+            >
+              <AiFillEyeInvisible color={`${gray300}`} size={18} />
+            </ChangeInputTypeButton>
+          )}
+          {inputType === 'text' && (
+             <ChangeInputTypeButton
+              right="2"
+              onClick={() => setInputType('password')}
+            >
+              <AiFillEye color={`${gray300}`} size={18} />
+            </ChangeInputTypeButton>
+          )}
         </FormLabel>
 
         {!!error && (
@@ -80,4 +104,4 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
   );
 }
 
-export const Input = forwardRef(InputBase);
+export const InputPassword = forwardRef(InputPasswordBase);
