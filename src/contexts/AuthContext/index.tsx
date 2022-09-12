@@ -1,6 +1,6 @@
-import { setCookie, destroyCookie } from 'nookies';
+import { setCookie, destroyCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 import { kaguyaApi } from 'services/kaguya/api';
 
@@ -25,8 +25,8 @@ export const AuthContext = createContext({} as AuthContextData);
 export function signOut() {
   destroyCookie(undefined, tokenCookieKey);
 
-  Router.push('/');
-} 
+  Router.push('/login');
+}
 
 export function AuthProvider({
   children
@@ -37,10 +37,24 @@ export function AuthProvider({
 
   const isAuthenticated = !!user;
 
-  // useEffect(() => {
-  //   const { 'nextAuth.token': token } = parseCookies();
+  async function getUser() {
+    try {
+      const response = await kaguyaApi.get<User>('/profile');
+  
+      setUser(response.data);
+    } catch (error) {
+      signOut();
+    }
+  }
 
-  // }, []);
+  useEffect(() => {
+    const { tokenCookieKey: token } = parseCookies();
+
+    if(token) {
+      getUser();
+    }
+
+  }, []);
 
   async function signIn({ email, password }: SignInCredentials) {
     try {
