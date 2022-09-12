@@ -3,7 +3,7 @@ import { useSize } from "@chakra-ui/react-use-size";
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import { useRef } from 'react';
-import background from '../../public/assets/imgs/background.png';
+import background from '../../public/assets/svgs/background.svg';
 import { AppLogo } from '../components/AppLogo';
 import { Header } from '../components/Header';
 import Lordicon from '../components/ReactLordicon';
