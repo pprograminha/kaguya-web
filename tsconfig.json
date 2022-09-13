@@ -22,7 +22,19 @@
     "paths": {
       "@/components/*": [
         "components/*"
-      ]
+      ],
+      "@/hooks/*": [
+        "hooks/*"
+      ],
+      "@/contexts/*": [
+        "contexts/*"
+      ],
+      "@/utils/*": [
+        "utils/*"
+      ],
+      "@/services/*": [
+        "services/*"
+      ],
     }
   },
   "include": [
