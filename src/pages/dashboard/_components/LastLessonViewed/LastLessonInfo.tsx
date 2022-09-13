@@ -1,10 +1,17 @@
 import { Flex, HStack, Image, Text } from '@chakra-ui/react';
+import { UserHistoryShow } from './index';
 
-export function LastLessonInfo() {
+interface UserHistoryInfoProps {
+  info: UserHistoryShow | undefined;
+}
+
+export function LastLessonInfo({
+  info
+}: UserHistoryInfoProps) {
   return (
     <Flex>
       <Image
-        src="https://app-kaguya.s3.amazonaws.com/1096b9782cc48ca7b1b19422cfe39f-html5.png"
+        src={info?.trail.avatar_url}
         alt="html"
 
         w="16"
@@ -19,14 +26,14 @@ export function LastLessonInfo() {
           fontWeight="bold"
           fontSize={["sm", "md", "lg"]}
         >
-          O que é HTML
+          {info?.lesson.name}
         </Text>
         <Text
           ml="0 !important"
           color="gray.300"
           fontSize={["sm"]}
         >
-          Introdução ao HTML 5
+          {info?.playlist.name}
         </Text>
       </HStack>
     </Flex>
