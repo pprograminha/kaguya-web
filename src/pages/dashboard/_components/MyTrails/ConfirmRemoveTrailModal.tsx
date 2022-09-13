@@ -44,11 +44,14 @@ export function ConfirmRemoveTrailModal({
       });
 
       await queryClient.invalidateQueries('userTrails');
+      await queryClient.invalidateQueries('othersTrails');
+
+      modal.onClose();
 
       toast({
         title: 'Trilha removida',
         description: `Você removeu a trilha de ${trail.name} de sua conta.`,
-        status: 'success',
+        status: 'info',
         duration: 5000,
         isClosable: true,
         position: 'top-right',
