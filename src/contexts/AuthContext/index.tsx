@@ -2,11 +2,12 @@ import { setCookie, destroyCookie, parseCookies } from 'nookies';
 import Router from 'next/router';
 import { createContext, useEffect, useState } from 'react';
 
-import { kaguyaApi } from 'services/kaguya/api';
+import { kaguyaApi } from 'services/kaguya/apiClient';
 
 import { SignInCredentials, User, SignInResponse } from './types';
 import { useToast } from '@chakra-ui/react';
 import { apiError } from 'utils/apiFormatError';
+import { tokenCookieKey } from '@/services/kaguya/api';
 
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
@@ -17,8 +18,6 @@ type AuthContextData = {
 interface AuthProviderProps {
   children: React.ReactNode;
 }
-
-const tokenCookieKey = 'kaguyaApp.token';
 
 export const AuthContext = createContext({} as AuthContextData);
 
