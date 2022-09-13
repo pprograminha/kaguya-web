@@ -5,7 +5,7 @@ interface UserHistoryInfoProps {
   info: UserHistoryShow | undefined;
 }
 
-export function LastLessonInfo({
+export function LessonHistoryInfo({
   info
 }: UserHistoryInfoProps) {
   return (

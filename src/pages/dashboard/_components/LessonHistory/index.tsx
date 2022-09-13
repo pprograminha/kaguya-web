@@ -7,7 +7,7 @@ import NextLink from 'next/link';
 import { useQuery } from 'react-query';
 
 import { ContinueLessonText } from './ContinueLessonText';
-import { LastLessonInfo } from './LastLessonInfo';
+import { LessonHistoryInfo } from './LessonHistoryInfo';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 
@@ -26,13 +26,13 @@ export interface UserHistoryShow {
   auto_generated: boolean;
 }
 
-export function LastLessonViewed() {
+export function LessonHistory() {
   const [pink800, blackAlpha700]= useToken("colors", [
     'pink.800', 
     'blackAlpha.700'
   ]);
 
-  const { data, isFetching, isLoading } = useQuery<UserHistoryShow>('lastLessonViewed', async () => {
+  const { data, isFetching, isLoading } = useQuery<UserHistoryShow>('lessonHistory', async () => {
     const response = await kaguyaApi.get('/histories/show');
 
     return response.data;
@@ -71,7 +71,7 @@ export function LastLessonViewed() {
             />
           ) : (
             <>
-              <LastLessonInfo info={data} />
+              <LessonHistoryInfo info={data} />
               <ContinueLessonText info={data} />
             </>
           )}
