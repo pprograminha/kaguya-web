@@ -1,7 +1,9 @@
 import { 
   Flex, ScaleFade, VStack, 
 } from '@chakra-ui/react';
+import { GetServerSideProps } from 'next';
 import Head from 'next/head';
+import { withSSRGuest } from 'utils/withSSRGuest';
 
 import { Header } from '../../components/Header';
 import { LoginChangePageHeader } from './_components/ChangePageHeader';
@@ -52,3 +54,10 @@ export default function UserLogin() {
     </>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
+  return {
+    props: {
+    }
+  }
+})

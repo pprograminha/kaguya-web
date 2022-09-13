@@ -1,12 +1,14 @@
 import { Box, Flex, HStack, keyframes, useBreakpointValue } from '@chakra-ui/react';
 import Head from 'next/head';
+import { GetServerSideProps } from 'next';
 
 import { LastLessonViewed } from './_components/LastLessonViewed';
 import { MyTrails } from './_components/MyTrails';
 import { OthersTrails } from './_components/OthersTrails';
 import { Welcome } from './_components/Welcome';
 
-import { Header } from '../../components/Header';
+import { Header } from '@/components/Header';
+import { withSSRAuth } from '@/utils/withSSRAuth';
 
 const animate = keyframes`
   from {  
@@ -74,3 +76,9 @@ export default function Dashboard() {
     </>
   )
 }
+
+export const getServerSideProps: GetServerSideProps = withSSRAuth(async () => {
+  return {
+    props: {}
+  }
+})
