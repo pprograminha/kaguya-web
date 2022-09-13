@@ -7,7 +7,7 @@ export type ApiError = {
 export function apiError(error: any): ApiError {
   let err: ApiError;
 
-  if(error.response.data.message) {
+  if(error.response?.data.message) {
     const message = error.response.data.message;
 
     err = {
@@ -16,7 +16,7 @@ export function apiError(error: any): ApiError {
       statusCode: 400
     };
   } else {
-    const _error = error.response.data.error;
+    const _error = error.response?.data.error;
 
     err = _error;
   }
