@@ -44,7 +44,17 @@ export function ProfilePopover({
             display="flex"
             flexDirection="column"
             alignItems="flex-start"
+            outline="0"
           >
+            <ItemLink
+              nextLink={{
+                href: "/dashboard",
+                passHref: true,
+              }}
+            >
+              <AiOutlineUser size={18} />
+              Dashboard
+            </ItemLink>
             <ItemLink
               nextLink={{
                 href: "/user/profile",
@@ -55,7 +65,7 @@ export function ProfilePopover({
               Meu Perfil
             </ItemLink>
 
-            <DividerLine />
+            <DividerLine my="1"/>
 
             <ButtonItem
               onClick={onOpen}
