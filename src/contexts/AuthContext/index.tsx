@@ -39,7 +39,6 @@ export function AuthProvider({
   async function getUser() {
     try {
       const response = await kaguyaApi.get<User>('/profile');
-  
       setUser(response.data);
     } catch (error) {
       signOut();
@@ -47,12 +46,13 @@ export function AuthProvider({
   }
 
   useEffect(() => {
-    const { tokenCookieKey: token } = parseCookies();
-
+    const cookies = parseCookies();
+    
+    const token = cookies[tokenCookieKey];
+    
     if(token) {
       getUser();
     }
-
   }, []);
 
   async function signIn({ email, password }: SignInCredentials) {
