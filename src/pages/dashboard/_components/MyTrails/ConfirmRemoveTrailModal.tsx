@@ -82,34 +82,41 @@ export function ConfirmRemoveTrailModal({
         <ModalContent
           bg="blackAlpha.700"
           alignItems="flex-start"
-          pt="4"
-          pb="4"
+          py="4"
+          mx="4"
         >
-          <ModalHeader>Remoção de trilha</ModalHeader>
+          <ModalHeader fontSize={["md", "lg"]}>Remoção de trilha</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text>
+            <Text fontSize={["sm", "md"]}>
               A remoção desta trilha é totalmente reversível e a qualquer momento você poderá reativar e continuar estudando.
             </Text>
             <br/>
-            <Text>
+            <Text fontSize={["sm", "md"]}>
               Você tem certeza que quer remover a trilha de 
               <Text
                 color="pink.500"
                 display="inline"
                 fontWeight="bold"
+                fontSize={["sm", "md"]}
               > {trail.name} </Text> 
               da sua conta?
             </Text>
           </ModalBody>
 
           <ModalFooter>
-            <Button colorScheme='pink' mr={3} onClick={modal.onClose}>
+            <Button
+              colorScheme='pink'
+              mr={3}
+              onClick={modal.onClose}
+              fontSize={["sm", "md"]}
+            >
               Cancelar
             </Button>
             <Button
               colorScheme='ghost'
               onClick={removeUserTrail}
+              fontSize={["sm", "md"]}
             >
               Sim, quero remover
             </Button>
