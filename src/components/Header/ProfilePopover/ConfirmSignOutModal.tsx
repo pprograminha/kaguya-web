@@ -30,6 +30,7 @@ export function ConfirmSignOutModal({
   const { user } = useAuth();
   
   async function handleSignOut() {
+    modal.onClose();
     signOut();
 
     toast({
