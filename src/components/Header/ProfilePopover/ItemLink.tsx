@@ -24,7 +24,7 @@ export function ItemLink({
           gap="3"
           fontWeight="normal"
           bg="none"
-          px="8"
+          px="4"
           py="4"
           color="gray.300"
           _hover={{
@@ -36,7 +36,6 @@ export function ItemLink({
           }}
           {...chakraLink}
         >
-
           {children}
         </ChakraLink>
       </NextLink>

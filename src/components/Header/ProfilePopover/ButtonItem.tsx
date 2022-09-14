@@ -1,26 +1,26 @@
 import { 
-  Box,
+  Button,
+  ButtonProps as ChakraButtonProps
 } from '@chakra-ui/react';
 
-export interface ButtonItemProps {
+export interface ButtonItemProps extends ChakraButtonProps {
   children?: React.ReactNode;
 }
 
 export function ButtonItem({
-  children
+  children,
+  ...rest
 }: ButtonItemProps) {
   return (
     <>
-      <Box
-        as="button"
+      <Button
         display="flex"
-        alignItems="center"
-        justifyContent="flex-start"
         gap="3"
-        px="8"
         py="4"
+        px="4"
         fontWeight="normal"
         bg="none"
+        h="auto !important"
         color="gray.300"
         _hover={{
           bg:"none",
@@ -29,9 +29,10 @@ export function ButtonItem({
         _active={{
           bg:"none"
         }}
+        {...rest}
       >
         {children}
-      </Box>
+      </Button>
     </>
   );
 }
