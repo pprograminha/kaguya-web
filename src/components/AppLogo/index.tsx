@@ -4,7 +4,6 @@ import {
   Link as ChakraLink, Text, useToken
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import Lordicon from '../ReactLordicon';
 
 type AppLogoProps = ChakraProps & {
@@ -14,14 +13,13 @@ export function AppLogo({
   lordiconSize,
   fontSize
 }: AppLogoProps) {
-  const router = useRouter() 
   const [pink800, white]= useToken("colors", ['pink.800', 'white'])
   
   return (
     <>
        <NextLink href="/dashboard">
         <ChakraLink
-          cursor={router.pathname === '/dashboard' ? 'not-allowed' : undefined}
+          cursor="pointer"
           display="flex"
           alignItems="center"
           gap="2"
