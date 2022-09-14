@@ -8,8 +8,11 @@ import { AppLogo } from '../components/AppLogo';
 import { Header } from '../components/Header';
 import Lordicon from '../components/ReactLordicon';
 import Logo from '../../public/assets/imgs/logo.png';
+import { useAuth } from '@/hooks/useAuth';
 
-const Home: NextPage = () => {
+export default function HomePage() {
+  const { isAuthenticated } = useAuth();
+
   const [pink800, white] = useToken(
     'colors',
     ["pink.800", "white"]
@@ -26,7 +29,7 @@ const Home: NextPage = () => {
         <title>Kaguya - Home</title>
       </Head>
       <Header
-        headerType={'has-sign-log-buttons'}
+        headerType={isAuthenticated ? 'has-user-profile' : 'has-sign-log-buttons'}
       />
       <Box
         maxWidth={1480}
@@ -110,5 +113,3 @@ const Home: NextPage = () => {
     </>
   )
 }
-
-export default Home
