@@ -64,7 +64,7 @@ export function ConfirmSignOutModal({
             </Text>
             <br />
             <Text fontSize={["sm", "md"]}>
-              Esperamos que seu dia tenha sido incrível e que seus estudos aqui na plataforma tenha sido como o esperado. Estaremos contentes em recebe-lo de volta, 
+              Esperamos que seu dia tenha sido incrível e que seus estudos aqui na plataforma tenha sido como o esperado. Estaremos contentes em recebe-lo(a) de volta, 
               <Text
                 display="inline"
                 color="pink.500"
