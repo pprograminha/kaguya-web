@@ -1,6 +1,9 @@
+import { useAuth } from '@/hooks/useAuth';
 import { Heading, Text } from '@chakra-ui/react';
 
 export function Welcome() {
+  const { user } = useAuth();
+
   return (
     <>
       <Text
@@ -8,7 +11,7 @@ export function Welcome() {
         letterSpacing="wide"
         fontSize={["sx", "sm", "md"]}
       >
-        Olá, Tiago e Marcos
+        Olá, {user?.name || user?.username}
       </Text>
       <Heading
         fontSize={["sm", "md", "2xl"]}
