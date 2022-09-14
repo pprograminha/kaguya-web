@@ -1,14 +1,17 @@
-import { Flex, Text } from '@chakra-ui/react';
+import { Flex, Text, useMediaQuery } from '@chakra-ui/react';
 import Lordicon from '../../../../components/ReactLordicon';
 
 export function OthersTrailsNoContent() {
+  const [isLargerThan1536] = useMediaQuery('(min-width: 1536px)');
+
   return (
     <>
       <Flex
-        h="100vh"
         flexDirection="column"
         justifyContent="center"
         alignItems="center"
+        my="6"
+        h={!isLargerThan1536 ? "auto" : "100vh"}
       >
         <Lordicon
           size={80}
