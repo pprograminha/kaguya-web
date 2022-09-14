@@ -7,7 +7,7 @@ import {
 
 interface BreadCrumbItemProps extends ChakraBreadCrumbItemProps {
   link: string;
-  title: string;
+  title?: string;
 }
 
 export function BreadCrumbItem({

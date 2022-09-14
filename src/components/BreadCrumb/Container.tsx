@@ -4,7 +4,7 @@ import { BreadCrumbItem } from './Item';
 
 interface BreadCrumbItemData {
   link: string;
-  title: string;
+  title?: string;
 }
 
 export interface BreadCrumbContainerProps {
