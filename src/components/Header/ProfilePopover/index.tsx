@@ -3,12 +3,16 @@ import {
   PopoverBody, 
   PopoverContent, 
   PopoverTrigger,
+  Text,
+  useDisclosure,
 } from '@chakra-ui/react';
 import { FiLogOut } from 'react-icons/fi';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { ItemLink } from './ItemLink';
 import { DividerLine } from '../../DividerLine';
+import { ConfirmSignOutModal } from './ConfirmSignOutModal';
+import { ButtonItem } from './ButtonItem';
 
 export interface ProfilePopover {
   children?: React.ReactNode;
@@ -19,9 +23,13 @@ export function ProfilePopover({
   children,
   isWideVersion
 }: ProfilePopover) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
     <>
-      <Popover>
+      <Popover
+        placement='bottom-end'
+      >
         <PopoverTrigger>
           {children}
         </PopoverTrigger>
@@ -35,6 +43,7 @@ export function ProfilePopover({
             p="0"
             display="flex"
             flexDirection="column"
+            alignItems="flex-start"
           >
             <ItemLink
               nextLink={{
@@ -48,18 +57,21 @@ export function ProfilePopover({
 
             <DividerLine />
 
-            <ItemLink 
-              nextLink={{
-                href: "/login",
-                passHref: true,
-              }}>
+            <ButtonItem
+              onClick={onOpen}
+            >
               <FiLogOut size={18} />
               Sair da conta
-            </ItemLink>
+            </ButtonItem>
           </PopoverBody>
         </PopoverContent>
-
       </Popover>
+      <ConfirmSignOutModal
+        modal={{
+          isOpen,
+          onClose
+        }}
+      />
     </>
   );
 }
