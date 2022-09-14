@@ -26,6 +26,7 @@ export function ItemLink({
           bg="none"
           px="4"
           py="4"
+          w="100%"
           color="gray.300"
           _hover={{
             bg:"none",

@@ -18,9 +18,10 @@ export function ButtonItem({
         gap="3"
         py="4"
         px="4"
-        fontWeight="normal"
-        bg="none"
+        w="100%"
         h="auto !important"
+        bg="none"
+        fontWeight="normal"
         color="gray.300"
         _hover={{
           bg:"none",
