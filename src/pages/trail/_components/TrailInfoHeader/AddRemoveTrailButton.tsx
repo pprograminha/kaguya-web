@@ -1,5 +1,7 @@
+import { Tooltip } from '@/components/Tooltip';
 import {
-  Button as ChakraButton, ChakraProps,
+  Box,
+  Button as ChakraButton, ChakraProps
 } from '@chakra-ui/react';
 import Lordicon from '../../../../components/ReactLordicon';
 
@@ -53,6 +55,7 @@ export function AddRemoveTrailButton({
         color="white"
         transition="all 0.2s"
         fontWeight="normal"
+        position="relative"
         fontSize={["xs", "sm", "md"]}
         px="6"
         gap="2"
@@ -64,6 +67,20 @@ export function AddRemoveTrailButton({
       >
         <Lordicon icon="addCard" size={20}/>
         {isMdVersion && 'Adicionar trilha'}
+        <Box mb="10" mr="-8" p="1" bg="pink.800" borderRadius="full" borderColor="pink.800">
+          <Tooltip placement="right-start"  hasArrow label="Adicione esta trilha antes de acessar as playlists">
+            <Lordicon
+              icon="error"
+              size={50}
+              delay={1000}
+              trigger='loop'  
+              colors={{
+                primary: 'white',
+                secondary: 'white',
+              }}
+            />
+          </Tooltip>
+        </Box>
       </ChakraButton>
     </>
   )

@@ -17,7 +17,8 @@ export function PLaylistsContainer({
       <Box
         maxWidth={900}
         p={!is2xlVersion ? "4" : "8"}
-        pr={["4", "0"]}
+        pr="4"
+        pl="0"
         w="100%"
       >
         <Heading

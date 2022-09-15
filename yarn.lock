@@ -755,7 +755,7 @@
     "@chakra-ui/react-use-update-effect" "2.0.3"
     "@chakra-ui/theme" "2.1.11"
 
-"@chakra-ui/tooltip@2.0.10":
+"@chakra-ui/tooltip@2.0.10", "@chakra-ui/tooltip@^2.0.10":
   version "2.0.10"
   resolved "https://registry.yarnpkg.com/@chakra-ui/tooltip/-/tooltip-2.0.10.tgz#2166753f9f246dd217d3170fd85f95a86392d9b6"
   integrity sha512-pBILBdZoux2K3EW9V6JuyZYUWz2/Y7oYCVO6AwNOesiEBGAONyzoDwFV728EzPEHe9e+YBcKOSZ9tEpDdrzHMA==

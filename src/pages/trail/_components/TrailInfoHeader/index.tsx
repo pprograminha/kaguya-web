@@ -2,7 +2,6 @@ import {
   Flex, 
   useBreakpointValue
 } from '@chakra-ui/react';
-import { AddTrailAlert } from '../AddTrailAlert';
 import { TrailDescription } from '../TrailDescription';
 
 import { AddRemoveTrailButton } from './AddRemoveTrailButton';
@@ -36,8 +35,6 @@ export function TrailInfoHeader() {
         mx={["4"]}
         position="relative"
       >
-        <AddTrailAlert isSmVersion={isSmVersion}/>
-
 
         <Flex
           flexDirection="column"
