@@ -1,6 +1,18 @@
 import { Flex, Heading, Image } from '@chakra-ui/react';
 
-export function OtherInfoFromTrailHeader() {
+interface TrailData {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
+export interface OtherInfoFromTrailHeaderProps {
+  trail?: TrailData;
+}
+
+export function OtherInfoFromTrailHeader({
+  trail
+}: OtherInfoFromTrailHeaderProps) {
   return (
     <>
       <Flex
@@ -8,8 +20,8 @@ export function OtherInfoFromTrailHeader() {
         gap="4"
       >
         <Image 
-          src="https://app-kaguya.s3.amazonaws.com/1096b9782cc48ca7b1b19422cfe39f-html5.png"
-          alt="html"
+          src={trail?.avatar_url}
+          alt={`Avatar da trilha de ${trail?.name}`}
 
           w={["16", "20", "24"]}
           h={["16", "20", "24"]}
