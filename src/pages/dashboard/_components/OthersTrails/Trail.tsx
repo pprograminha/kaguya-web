@@ -12,6 +12,7 @@ import NextLink from 'next/link';
 import { Button } from '@/components/Button';
 import Lordicon from '@/components/ReactLordicon';
 import { TrailMenu } from './TrailMenu';
+import { trailCount } from '@/utils/format/trailCount';
 
 interface TrailData {
   id: string;
@@ -37,6 +38,9 @@ interface TrailProps {
 export function Trail({
   trail
 }: TrailProps) {
+
+  const trailCountTexts = trailCount(trail);
+
   return (
     <>
       <Box
@@ -79,31 +83,19 @@ export function Trail({
                     color="gray.300"
                     fontSize={["sm"]}
                   >
-                    {trail._count.playlists === 1 ? (
-                      <>{trail._count.lessons} playlist</>
-                    ) : (
-                      <>{trail._count.playlists} playlists</>
-                    )}
+                    {trailCountTexts.playlists}
                   </Text>
                   <Text
                     color="gray.300"
                     fontSize={["sm"]}
                   >
-                    {trail._count.lessons === 1 ? (
-                      <>{trail._count.lessons} aula</>
-                    ) : (
-                      <>{trail._count.lessons} aulas</>
-                    )}
+                    {trailCountTexts.lessons}
                   </Text>
                   <Text
                     color="gray.300"
                     fontSize={["sm"]}
                   >
-                    {trail._count.users === 1 ? (
-                      <>{trail._count.users} usuário</>
-                    ) : (
-                      <>{trail._count.users} usuários</>
-                    )}
+                    {trailCountTexts.users}
                   </Text>
                 </Box>
               </Stack>
