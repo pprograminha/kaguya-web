@@ -1,37 +1,56 @@
-import { Box, ChakraProps, Flex } from '@chakra-ui/react';
+import { AccordionItem } from '@chakra-ui/react';
+
 import { BlockInfo } from './BlockInfo';
 import { LessonListFromBlock } from '../LessonsListFromBlock';
+import { useRouter } from 'next/router';
 
-export interface BlockProps {
-  isActive?: boolean;
+interface Lesson {
+  id: string;
+  name: string;
+  slug: string;
 }
 
-const hiddenLessonsListStyle: ChakraProps = {
-  overflow: 'hidden',
-  height: '0'
-};
+interface Block {
+  id: string;
+  name: string;
+  slug: string;
+  
+  user_block: {
+    progress: number;
+  } | null;
 
-const showLessonsListStyle: ChakraProps = {
-  overflow: 'visible',
-  height: 'auto'
-};
+  lessons: Lesson[]
+}
+
+export interface BlockProps {
+  block: Block;
+}
 
 export function Block({
-  isActive = false
+  block
 }: BlockProps) {
-  const containerLessonsListStyle = isActive ? showLessonsListStyle : hiddenLessonsListStyle;
+  const router = useRouter();
+  const query = router.query;
+
+  const [
+    playlistSlug, 
+
+    blockText, 
+    blockSlug, 
+
+    lessonText, 
+    lessonSlug
+  ] = query?.slug || [] as string[];
 
   return (
     <>
-      <Flex
-        flexDirection="column"
-        w="100%"
-      >
-        <BlockInfo isCurrentBlock={isActive} />
-        <Box {...containerLessonsListStyle} >
-          <LessonListFromBlock />
-        </Box>
-      </Flex>
+      <AccordionItem border="none">
+        <BlockInfo block={block} />
+        <LessonListFromBlock
+          lessons={block.lessons}
+          currentLessonSlug={lessonSlug}
+        />
+      </AccordionItem>
     </>
   )
 }

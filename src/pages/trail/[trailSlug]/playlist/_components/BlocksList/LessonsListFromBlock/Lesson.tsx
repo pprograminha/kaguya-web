@@ -5,9 +5,17 @@ import {
 } from '@chakra-ui/react';
 import NextLink from 'next/link';
 import Lordicon from '@/components/ReactLordicon';
+import { useRouter } from 'next/router';
+
+interface Lesson {
+  id: string;
+  name: string;
+  slug: string;
+}
 
 export interface LessonProps {
   isCurrentLesson?: boolean;
+  lesson: Lesson;
 }
 
 const currentLessonStyle: ChakraProps = {
@@ -27,14 +35,29 @@ const defaultLessonStyle: ChakraProps = {
 }
 
 export function Lesson({
-  isCurrentLesson = false
+  isCurrentLesson = false,
+  lesson,
 }: LessonProps) {
   const lessonStyle = isCurrentLesson ? currentLessonStyle : defaultLessonStyle;
+
+  const router = useRouter();
+  const query = router.query;
+
+  const trailSlug = query?.trailSlug;
+  const [
+    playlistSlug, 
+
+    blockText,
+    blockSlug, 
+
+    lessonText, 
+    lessonSlug
+  ] = query?.slug || [] as string[];
 
   return (
     <>
       <Flex>
-        <NextLink href="#" passHref>
+        <NextLink href={`/trail/${trailSlug}/playlist/${playlistSlug}/block/${blockSlug}/lesson/${lessonSlug}`} passHref>
           <ChakraLink 
             cursor= "pointer"
             display="flex"
@@ -47,7 +70,7 @@ export function Lesson({
               trigger='morph'
               size={20}
             />
-            O que é HTML
+            {lesson.name}
           </ChakraLink>
         </NextLink>
       </Flex>

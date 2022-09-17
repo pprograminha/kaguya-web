@@ -1,28 +1,54 @@
 import { 
+  Accordion,
   Flex,
 } from '@chakra-ui/react';
 import { Block } from './Block';
 
+interface Lesson {
+  id: string;
+  name: string;
+  slug: string;
+}
+
+interface BlockData {
+  id: string;
+  name: string;
+  slug: string;
+
+  user_block: {
+    progress: number;
+  } | null;
+  
+  lessons: Lesson[]
+}
+
 export interface BlocksListProps {
-  blockSlug?: string;
+  blocks: BlockData[];
 }
 
 export function BlocksList({
-  blockSlug
+  blocks
 }: BlocksListProps) {
   return (
-    <>
-      <Flex
+    <Flex flexDirection="column" w="100%">
+      <Accordion
+        defaultIndex={[0]}
+        allowToggle
+
         w="100%"
         flexDirection="column"
+        display="flex"
         gap="4"
         maxH="600px"
         overflowY="auto"
-        position="relative"
       >
-        <Block isActive={blockSlug === 'introducao-html5'}/>
-        <Block isActive={blockSlug === 'introducao-html1'}/>
-      </Flex>
-    </>
+        {blocks?.length && blocks.map((block) => (
+          <Block
+            key={block.id}
+            block={block}
+          />
+        ))}
+      </Accordion>
+    </Flex>
   )
 }
