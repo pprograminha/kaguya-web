@@ -7,15 +7,22 @@ import { TrailDescription } from '../TrailDescription';
 import { AddRemoveTrailButton } from './AddRemoveTrailButton';
 import { TrailTitle } from './TrailTitle';
 
-export function TrailInfoHeader() {
+interface TrailData {
+  id: string;
+  name: string;
+  description: string;
+}
+
+interface TrailInfoHeaderProps {
+  trail?: TrailData;
+}
+
+export function TrailInfoHeader({
+  trail
+}: TrailInfoHeaderProps) {
   const isMdVersion = useBreakpointValue({ 
     base: false,
     "md": true
-  });
-
-  const isSmVersion = useBreakpointValue({ 
-    base: false,
-    "sm": true
   });
 
   return (
@@ -37,6 +44,7 @@ export function TrailInfoHeader() {
       >
 
         <Flex
+          w="100%"
           flexDirection="column"
         >
           <Flex
@@ -45,7 +53,7 @@ export function TrailInfoHeader() {
             mt="8"
           >
             <TrailTitle
-              trailName='HTML'
+              trailName={trail?.name || ''}
             />
             <AddRemoveTrailButton 
               isMdVersion={isMdVersion}
@@ -53,7 +61,7 @@ export function TrailInfoHeader() {
             />
           </Flex>
           <TrailDescription
-            description="Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima quidem atque quis doloremque earum odio eum nulla? Sit, error molestias aliquid pariatur soluta provident dolores repudiandae est dignissimos quo cupiditate."
+            description={trail?.description || ''}
           />
         </Flex>
       </Flex>

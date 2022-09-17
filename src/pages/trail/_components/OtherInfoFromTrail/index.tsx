@@ -4,7 +4,35 @@ import { DividerLine } from '../../../../components/DividerLine';
 import { OtherInfoFromTrailHeader } from './Header';
 import { TrailStudentsCount } from './TrailStudensCount';
 
-export function OtherInfoFromTrail() {
+interface TrailData {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  avatar_url: string;
+  
+  created_at: string;
+  updated_at: string;
+
+  _count: {
+    playlists: number;
+    users: number;
+    lessons: number;
+  };
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
+}
+
+export interface OtherTrailInfoProps {
+  trail?: TrailData;
+}
+
+export function OtherInfoFromTrail({
+  trail
+}: OtherTrailInfoProps) {
   const isWideVersion = useBreakpointValue({ 
     base: false,
     "lg": true
@@ -20,8 +48,8 @@ export function OtherInfoFromTrail() {
         maxW="max"
         h="max"
       >
-        <OtherInfoFromTrailHeader />
-        <TrailStudentsCount />
+        <OtherInfoFromTrailHeader trail={trail} />
+        <TrailStudentsCount trail={trail} />
 
         <DividerLine />
         

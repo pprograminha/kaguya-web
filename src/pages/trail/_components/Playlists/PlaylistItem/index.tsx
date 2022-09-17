@@ -7,10 +7,41 @@ import { PlaylistDescription } from './Description';
 import { PlaylistIndex } from './PlaylistIndex';
 import { PlaylistTitle } from './Title';
 
-export function PlaylistItem() {
+interface Playlist {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  avatar_url: null;
+  
+  created_at: string;
+  updated_at: string;
+  
+  user_playlist: {
+    progress: number;
+  } | null;
+
+  trail_id: string;
+}
+
+interface TrailData {
+  slug: string;
+}
+interface PlaylistItemProps {
+  playlist: Playlist;
+  index: number;
+
+  trail?: TrailData;
+}
+
+export function PlaylistItem({
+  playlist,
+  index,
+  trail,
+}: PlaylistItemProps) {
   return (
     <>
-      <NextLink href="#">
+      <NextLink href={`/trail/${trail?.slug}/playlist/${playlist.slug}`} passHref>
         <ChakraLink
           display="flex"
           flexDirection="column"
@@ -29,13 +60,15 @@ export function PlaylistItem() {
             borderColor: 'white',
           }}
         >
-          <PlaylistIndex value={1}/>
-          <PlaylistTitle title="Introdução ao HTML 5"/>
+          <PlaylistIndex value={index}/>
+          <PlaylistTitle title={playlist.name} />
           <PlaylistDescription
-            description="Nesta playlist, você começará a entender os primórdios da tecnologia HTML 5. Com esta introdução, esperamos que você saia daqui com conhecimento básico em estruturas, tags e conceitos sobre a tecnologia."
+            description={playlist.description}
           />
 
-          <Progress percent={28} mt="8"/>
+          {playlist.user_playlist && (
+            <Progress percent={playlist.user_playlist.progress} mt="8"/>
+          )}
         </ChakraLink>
       </NextLink>
     </>

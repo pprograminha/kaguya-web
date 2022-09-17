@@ -1,7 +1,39 @@
+import { trailCount } from '@/utils/format/trailCount';
 import { Box, Text } from '@chakra-ui/react';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 
-export function TrailStudentsCount() {
+interface TrailData {
+  id: string;
+  name: string;
+  slug: string;
+  description: string;
+  avatar_url: string;
+  
+  created_at: string;
+  updated_at: string;
+
+  _count: {
+    playlists: number;
+    users: number;
+    lessons: number;
+  };
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
+}
+
+export interface TrailStudentsCountProps {
+  trail?: TrailData;
+}
+
+export function TrailStudentsCount({
+  trail
+}: TrailStudentsCountProps) {
+
+  const trailCountTexts = trailCount(trail);
+
   return (
     <>
       <Box
@@ -15,8 +47,8 @@ export function TrailStudentsCount() {
           color="gray.300"
           fontSize={["sm", "md"]}
         >
-          <HiOutlineArrowNarrowRight /> 
-          Contém 1 playlist e 2 aulas no total.
+          <HiOutlineArrowNarrowRight />
+          Contém {trailCountTexts.playlists} e {trailCountTexts.lessons} aulas no total.
         </Text>
         <Text
           display="flex"
@@ -26,7 +58,7 @@ export function TrailStudentsCount() {
           fontSize={["sm", "md"]}
         >
           <HiOutlineArrowNarrowRight /> 
-          Atualmente 1 aluno faz esta trilha
+          Atualmente {trailCountTexts.users} faz esta trilha
         </Text>
       </Box>
     </>
