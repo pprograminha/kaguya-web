@@ -27,7 +27,7 @@ export function PlaylistIndex({
           borderColor: 'white'
         }}
       >
-        {value}
+        {value + 1}
       </Text>
     </>
   )
