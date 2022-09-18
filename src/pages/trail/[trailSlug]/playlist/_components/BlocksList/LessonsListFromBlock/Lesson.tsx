@@ -1,4 +1,5 @@
 import { 
+  Box,
   ChakraProps,
   Flex,
   Link as ChakraLink
@@ -6,6 +7,7 @@ import {
 import NextLink from 'next/link';
 import Lordicon from '@/components/ReactLordicon';
 import { useRouter } from 'next/router';
+import { ChangeCompleteLessonButton } from '@/components/ChangeCompleteLessonButton';
 
 interface Lesson {
   id: string;
@@ -16,6 +18,8 @@ interface Lesson {
 export interface LessonProps {
   isCurrentLesson?: boolean;
   lesson: Lesson;
+  hasNextLesson?: boolean;
+  isCompleted?: boolean;
 }
 
 const currentLessonStyle: ChakraProps = {
@@ -36,6 +40,8 @@ const defaultLessonStyle: ChakraProps = {
 
 export function Lesson({
   isCurrentLesson = false,
+  hasNextLesson = false,
+  isCompleted,
   lesson,
 }: LessonProps) {
   const lessonStyle = isCurrentLesson ? currentLessonStyle : defaultLessonStyle;
@@ -55,14 +61,29 @@ export function Lesson({
   ] = query?.slug || [] as string[];
 
   return (
-    <>
-      <Flex>
-        <NextLink href={`/trail/${trailSlug}/playlist/${playlistSlug}/block/${blockSlug}/lesson/${lessonSlug}`} passHref>
+    <Box
+      pb="4"
+      position="relative"
+    >
+      <Flex
+        as="li"
+      >
+        <ChangeCompleteLessonButton
+          isCurrent={isCurrentLesson}
+          hasNextItem={hasNextLesson}
+          isCompleted={isCompleted}
+          lesson={lesson}
+        />
+        <NextLink
+          href={`/trail/${trailSlug}/playlist/${playlistSlug}/block/${blockSlug}/lesson/${lessonSlug}`}
+          passHref
+        >
           <ChakraLink 
             cursor= "pointer"
             display="flex"
             alignItems="center"
             gap="1"
+            ml="4"
             {...lessonStyle}
           >
             <Lordicon
@@ -74,6 +95,6 @@ export function Lesson({
           </ChakraLink>
         </NextLink>
       </Flex>
-    </>
+    </Box>
   )
 }

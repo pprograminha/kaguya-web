@@ -5,6 +5,7 @@ interface LessonData {
   id: string;
   name: string;
   slug: string;
+  completed: boolean;
 }
 
 export interface LessonListFromBlocks {
@@ -19,17 +20,20 @@ export function LessonListFromBlock({
   return (
     <>
       <AccordionPanel
+        as="ul"
         py="4"
         px="6"
         display="flex"
         flexDirection="column"
-        gap="4"
       >
-        {lessons?.length && lessons.map((lesson) => (
+        {lessons && lessons.map((lesson, index) => (
           <Lesson
             key={lesson.id}
-            isCurrentLesson={lesson.slug === currentLessonSlug}
             lesson={lesson}
+
+            isCurrentLesson={index === 0}
+            hasNextLesson={index !== lessons?.length - 1}
+            isCompleted={lesson.completed}
           />
         ))}
       </AccordionPanel>
