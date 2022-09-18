@@ -8,6 +8,7 @@ interface Lesson {
   id: string;
   name: string;
   slug: string;
+  completed: boolean;
 }
 
 interface BlockData {
@@ -42,7 +43,7 @@ export function BlocksList({
         maxH="600px"
         overflowY="auto"
       >
-        {blocks?.length && blocks.map((block) => (
+        {blocks && blocks.map((block) => (
           <Block
             key={block.id}
             block={block}

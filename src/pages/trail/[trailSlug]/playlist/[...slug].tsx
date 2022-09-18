@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import { 
+  CircularProgress,
   Flex, 
   useToast, 
 } from '@chakra-ui/react';
@@ -157,7 +158,17 @@ export default function PlaylistPage() {
               <LessonVideo />
               <LessonInfo />
             </Flex>
-            <BlocksList blocks={blocks.data || []} />
+            {blocks.isLoading ? (
+              <>
+                <CircularProgress
+                  isIndeterminate
+                  color='pink.800'
+                  size={8}
+                />
+              </>
+            ) : (
+              <BlocksList blocks={blocks.data || []} />
+            )}
           </Flex>
         </Flex>
       </Flex>

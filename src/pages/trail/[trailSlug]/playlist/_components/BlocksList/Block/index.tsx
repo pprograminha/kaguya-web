@@ -8,6 +8,7 @@ interface Lesson {
   id: string;
   name: string;
   slug: string;
+  completed: boolean;
 }
 
 interface Block {
