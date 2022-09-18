@@ -1,6 +1,7 @@
 import type { AppProps } from 'next/app';
 import { ChakraProvider } from '@chakra-ui/react'
 import { QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { theme } from '../styles/theme';
 import { AuthProvider } from 'contexts/AuthContext';
@@ -15,6 +16,7 @@ function MyApp({ Component, pageProps }: AppProps) {
             <Component {...pageProps} />
           </ChakraProvider>
         </AuthProvider>
+        <ReactQueryDevtools />
       </QueryClientProvider>
     </>
   )
