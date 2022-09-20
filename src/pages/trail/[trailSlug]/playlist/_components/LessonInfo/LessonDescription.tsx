@@ -1,7 +1,21 @@
 import { DividerLine } from '@/components/DividerLine';
-import { Box, Text } from '@chakra-ui/react';
+import { Box, Skeleton, Text } from '@chakra-ui/react';
 
-export function LessonDescription() {
+type LessonDescriptionProps = {
+  description?: string
+  isLoadingLesson: boolean
+}
+
+
+export function LessonDescription({ description, isLoadingLesson }: LessonDescriptionProps) {
+  if(isLoadingLesson) return (
+    <>
+      <Skeleton mt="5" borderRadius="md" height="30px" maxWidth="lg" endColor="blackAlpha.700" startColor="blackAlpha.600" />
+      <Skeleton mt="3" borderRadius="md" height="30px" maxWidth="xxl" endColor="blackAlpha.700" startColor="blackAlpha.600" />
+      <Skeleton mt="3" borderRadius="md" height="30px" maxWidth="xl" endColor="blackAlpha.700" startColor="blackAlpha.600" />
+    </>
+  )
+
   return (
     <>
       <Box>
@@ -17,7 +31,7 @@ export function LessonDescription() {
           mt="4"
           color="gray.300"
         >
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor cum voluptatem fugit corporis explicabo. Nihil harum porro illo, aspernatur, tempora laudantium quasi qui sequi ullam, animi dolorem odio omnis rem?
+          {description}
         </Text>
       </Box>
     </>

@@ -1,9 +1,9 @@
-import { 
-  Box, 
-  CircularProgress, 
-  Flex, 
-  Heading,
- } from '@chakra-ui/react';
+import {
+  Box,
+  CircularProgress,
+  Flex,
+  Heading
+} from '@chakra-ui/react';
 import { PlaylistItem } from './PlaylistItem';
 import { PlaylistsNoContent } from './PlaylistsNoContent';
 
@@ -35,12 +35,13 @@ export interface PlaylistsContainerProps {
   trail?: TrailData;
 }
 
-export function PLaylistsContainer({
+export function PlaylistsContainer({
   is2xlVersion,
   playlists,
   trail,
   isFetching
 }: PlaylistsContainerProps) {
+
   return (
     <>
       <Box

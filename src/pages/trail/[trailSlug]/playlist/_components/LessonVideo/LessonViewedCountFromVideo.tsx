@@ -1,7 +1,11 @@
 import Lordicon from '@/components/ReactLordicon';
 import { Text } from '@chakra-ui/react';
 
-export function LessonViewedCountFromVideo() {
+interface LessonViewedCountFromVideoProps {
+  views: number
+}
+
+export function LessonViewedCountFromVideo({ views }: LessonViewedCountFromVideoProps) {
   return (
     <>
       <Text
@@ -21,7 +25,7 @@ export function LessonViewedCountFromVideo() {
             secondary: "#9a9ea3"
           }}
         />
-        8 visualizações
+        {views} visualizações
       </Text>
     </>
   )

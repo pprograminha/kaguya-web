@@ -8,13 +8,33 @@ interface LessonData {
   completed: boolean;
 }
 
+interface Lesson {
+  id: string;
+  name: string;
+  slug: string;
+  completed: boolean;
+}
+interface Block {
+  id: string;
+  name: string;
+  slug: string;
+  
+  user_block: {
+    progress: number;
+  } | null;
+
+  lessons: Lesson[]
+}
+
 export interface LessonListFromBlocks {
   lessons?: LessonData[];
+  block: Block;
   currentLessonSlug?: string;
 }
 
 export function LessonListFromBlock({
   lessons,
+  block,
   currentLessonSlug
 }: LessonListFromBlocks) {
   return (
@@ -29,11 +49,10 @@ export function LessonListFromBlock({
         {lessons && lessons.map((lesson, index) => (
           <Lesson
             key={lesson.id}
+            block={block}
             lesson={lesson}
-
-            isCurrentLesson={index === 0}
+            isCurrentLesson={lesson.slug === currentLessonSlug}
             hasNextLesson={index !== lessons?.length - 1}
-            isCompleted={lesson.completed}
           />
         ))}
       </AccordionPanel>

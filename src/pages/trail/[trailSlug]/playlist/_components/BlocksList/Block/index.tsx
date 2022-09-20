@@ -1,8 +1,8 @@
 import { AccordionItem } from '@chakra-ui/react';
 
-import { BlockInfo } from './BlockInfo';
-import { LessonListFromBlock } from '../LessonsListFromBlock';
 import { useRouter } from 'next/router';
+import { LessonListFromBlock } from '../LessonsListFromBlock';
+import { BlockInfo } from './BlockInfo';
 
 interface Lesson {
   id: string;
@@ -48,6 +48,7 @@ export function Block({
       <AccordionItem border="none">
         <BlockInfo block={block} />
         <LessonListFromBlock
+          block={block}
           lessons={block.lessons}
           currentLessonSlug={lessonSlug}
         />

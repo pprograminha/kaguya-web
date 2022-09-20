@@ -2,7 +2,15 @@ import { Button } from '@/components/Button';
 import { Flex, Text } from '@chakra-ui/react';
 import { AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
 
-export function LessonVideoLikesDislikes() {
+type LessonVideoLikesDislikesProps = {
+  likes: number
+  dislikes: number
+}
+
+export function LessonVideoLikesDislikes({
+  dislikes,
+  likes
+}: LessonVideoLikesDislikesProps) {
   return (
     <>
       <Flex>
@@ -16,7 +24,7 @@ export function LessonVideoLikesDislikes() {
           p="0"
         >
           <AiOutlineLike size={20}/>
-          <Text>10</Text>
+          <Text>{likes}</Text>
         </Button>
         
         <Button
@@ -29,7 +37,7 @@ export function LessonVideoLikesDislikes() {
           p="0"
         >
           <AiOutlineDislike size={20}/>
-          <Text>5</Text>
+          <Text>{dislikes}</Text>
         </Button>
       </Flex>
     </>

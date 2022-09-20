@@ -18,8 +18,8 @@ interface Lesson {
 export interface LessonProps {
   isCurrentLesson?: boolean;
   lesson: Lesson;
+  block: Block;
   hasNextLesson?: boolean;
-  isCompleted?: boolean;
 }
 
 const currentLessonStyle: ChakraProps = {
@@ -38,11 +38,28 @@ const defaultLessonStyle: ChakraProps = {
   },
 }
 
+interface Lesson {
+  id: string;
+  name: string;
+  slug: string;
+  completed: boolean;
+}
+interface Block {
+  id: string;
+  name: string;
+  slug: string;
+  user_block: {
+    progress: number;
+  } | null;
+
+  lessons: Lesson[]
+}
+
 export function Lesson({
   isCurrentLesson = false,
   hasNextLesson = false,
-  isCompleted,
   lesson,
+  block,
 }: LessonProps) {
   const lessonStyle = isCurrentLesson ? currentLessonStyle : defaultLessonStyle;
 
@@ -71,11 +88,10 @@ export function Lesson({
         <ChangeCompleteLessonButton
           isCurrent={isCurrentLesson}
           hasNextItem={hasNextLesson}
-          isCompleted={isCompleted}
           lesson={lesson}
         />
         <NextLink
-          href={`/trail/${trailSlug}/playlist/${playlistSlug}/block/${blockSlug}/lesson/${lessonSlug}`}
+          href={`/trail/${trailSlug}/playlist/${playlistSlug}/block/${block.slug}/lesson/${lesson.slug}`}
           passHref
         >
           <ChakraLink 
