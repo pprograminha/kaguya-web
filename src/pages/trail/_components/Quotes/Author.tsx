@@ -21,6 +21,7 @@ export function Author({
         letterSpacing="wider"
         display="flex"
         alignItems="center"
+        isExternal
         gap="1"
         _hover={{
           textDecoration:"none"

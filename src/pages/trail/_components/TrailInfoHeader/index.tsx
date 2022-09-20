@@ -1,6 +1,7 @@
 import { 
   Flex, 
-  useBreakpointValue
+  useBreakpointValue,
+  useToken
 } from '@chakra-ui/react';
 import { TrailDescription } from '../TrailDescription';
 
@@ -20,6 +21,7 @@ interface TrailInfoHeaderProps {
 export function TrailInfoHeader({
   trail
 }: TrailInfoHeaderProps) {
+  const [blackAlpha900, blackAlpha700, pink800] = useToken("colors", ['blackAlpha.900', 'blackAlpha.700', 'pink.800'])
   const isMdVersion = useBreakpointValue({ 
     base: false,
     "md": true
@@ -28,13 +30,14 @@ export function TrailInfoHeader({
   return (
     <>
       <Flex
+        borderRadius="md"
         flexDirection="column"
         alignItems="center"
-        bg="linear-gradient(90deg, 
-          #0d0e12 0%, 
-          #181a2159 32%, 
-          #a90f64 300%
-        )"
+        bg={`linear-gradient(90deg, 
+          ${blackAlpha900} 0%, 
+          ${blackAlpha700} 32%, 
+          ${pink800} 300%
+        )`}
         pt={["4", "6", "8"]}
         px={["4", "6", "8"]}
         pb={["10", "16"]}
