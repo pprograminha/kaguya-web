@@ -1,23 +1,22 @@
 import { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
-import Head from 'next/head';
 
-import { 
-  CircularProgress,
-  Flex, useBreakpointValue, useToast, 
+import {
+  Flex, useBreakpointValue, useToast
 } from '@chakra-ui/react';
 
-import { TrailInfoHeader } from '../_components/TrailInfoHeader';
-import { Quotes } from '../_components/Quotes';
-import { PLaylistsContainer } from '../_components/Playlists';
 import { OtherInfoFromTrail } from '../_components/OtherInfoFromTrail';
+import { PlaylistsContainer } from '../_components/Playlists';
+import { Quotes } from '../_components/Quotes';
+import { TrailInfoHeader } from '../_components/TrailInfoHeader';
 
+import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
 import { DividerLine } from '@/components/DividerLine';
 import { Header } from '@/components/Header';
-import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
-import { AppLogo } from '@/components/AppLogo';
 
+import { Loading } from '@/components/Loading';
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { withSSRAuth } from '@/utils/withSSRAuth';
 
@@ -110,32 +109,7 @@ export default function Trail() {
   });
 
   if(trail.isLoading || trail.isFetching) {
-    return (
-      <>
-        <Head>
-          <title>Kaguya | Carregando...</title>
-        </Head>
-
-        <Flex
-          h="100vh"
-          alignItems="center"
-          justifyContent="center"
-          flexDirection="column"
-        >
-          <AppLogo 
-            lordiconSize={["20", "24"]}
-            fontSize={["3xl", "4xl"]}
-          />
-          <CircularProgress
-            isIndeterminate
-            color='pink.800'
-            size={8}
-            opacity="0.6"
-            mt="4"
-          />
-        </Flex>
-      </>
-    )
+    return <Loading /> 
   }
 
   if(!trail.isLoading && !trail.isFetching && !trail.data) {
@@ -188,7 +162,7 @@ export default function Trail() {
             justifyContent="space-between"
             flexDirection={is2xlVersion ? "row" : "column-reverse"}
           >
-            <PLaylistsContainer
+            <PlaylistsContainer
               is2xlVersion={is2xlVersion}
               playlists={playlists.data}
               trail={trail.data}
