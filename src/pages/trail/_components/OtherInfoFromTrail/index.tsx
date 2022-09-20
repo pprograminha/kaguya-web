@@ -43,6 +43,7 @@ export function OtherInfoFromTrail({
       <Box
         bg="blackAlpha.800"
         p={["4", "6", "8"]}
+        borderRadius="md"
         mt={["0", "8"]}
         mb={isWideVersion ? "12": "0"}
         maxW="max"
