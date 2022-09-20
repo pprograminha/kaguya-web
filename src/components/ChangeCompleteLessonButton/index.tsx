@@ -7,19 +7,18 @@ import { ChangeCompleteLessonButtonLineSeparator } from './LineSeparate';
 interface Lesson {
   id: string;
   name: string;
+  completed: boolean;
 }
 
 export interface ChangeCompleteLessonButtonProps {
   isCurrent?: boolean;
   hasNextItem?: boolean;
-  isCompleted?: boolean;
   lesson: Lesson;
 }
 
 export function ChangeCompleteLessonButton({
   isCurrent = false,
   hasNextItem = false,
-  isCompleted = false,
   lesson,
 }: ChangeCompleteLessonButtonProps) {
   // const [completedLesson, setCompletedLesson] = useState(isCompleted);
@@ -32,13 +31,13 @@ export function ChangeCompleteLessonButton({
           height="100%"
         >
           <IsCurrentLessonItem
-            isCompleted={isCompleted}
+            isCompleted={lesson.completed}
             // setCompletedLesson={setCompletedLesson}
             lesson={lesson}
           />
           <ChangeCompleteLessonButtonLineSeparator
             isShow={hasNextItem}
-            isCompleted={isCompleted}
+            isCompleted={lesson.completed}
           />
         </Box>
       </>
@@ -52,13 +51,13 @@ export function ChangeCompleteLessonButton({
         height="100%"
       >
         <IsNotCurrentLessonItem
-          isCompleted={isCompleted}
+          isCompleted={lesson.completed}
           lesson={lesson}
           // setCompletedLesson={setCompletedLesson}
         />
         <ChangeCompleteLessonButtonLineSeparator
           isShow={hasNextItem}
-          isCompleted={isCompleted}
+          isCompleted={lesson.completed}
         />
       </Box>
     </>

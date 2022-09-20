@@ -24,17 +24,19 @@ export const theme = extendTheme({
     }
   },
   fonts: {
-    heading: 'Roboto, sans-serif',
-    body: 'Roboto, sans-serif',
+    heading: 'Roboto Condensed, sans-serif',
+    body: 'Roboto Condensed, sans-serif',
   },
   styles: {
     global: {
       '#__next': {
         height: '100%',
       },
+
       html: {
         height: '100%',
       },
+    
       body: {
         height: '100%',
         bg: 'blackAlpha.900',
@@ -43,6 +45,7 @@ export const theme = extendTheme({
       a: {
         color: 'inherit',
         textDecoration: 'none',
+        letterSpacing: 'wider'
       },
       input: {
         color: 'gray.300',
@@ -68,7 +71,6 @@ export const theme = extendTheme({
         margin: '0',
         padding: '0',
         boxSizing: 'border-box',
-        letterSpacing:"wider",
 
         '&::-webkit-scrollbar': {
           width: '4px',

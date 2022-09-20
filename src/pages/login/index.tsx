@@ -43,6 +43,7 @@ export default function UserLogin() {
               bg="blackAlpha.700"
               maxW={460}
               w="100%"
+              
               borderRadius="md"
             >
               <LoginChangePageHeader />
