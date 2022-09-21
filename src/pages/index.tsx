@@ -9,14 +9,14 @@ import {
   Text,
   Link as ChakraLink,
   useToken,
-  Divider
+  Divider,
+  useMediaQuery
 } from '@chakra-ui/react';
 import { useSize } from "@chakra-ui/react-use-size";
 import Head from 'next/head';
 import NextLink from 'next/link';
 import { useRef } from 'react';
 
-import { Button } from '@/components/Button';
 import { DividerLine } from '@/components/DividerLine';
 import Lordicon from '@/components/ReactLordicon';
 import { Header } from '@/components/Header';
@@ -34,11 +34,19 @@ export default function HomePage() {
   const size = useSize(ref);
 
   const height = (size?.width || 0) * 0.42;
+
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+  const [isLargerThan1480] = useMediaQuery('(min-width: 1480px)');
   
   return (
     <>
       <Head>
         <title>Kaguya - Home</title>
+        <meta
+          name="description"
+          content="Plataforma de ensino gratuito de programação"
+        />
       </Head>
 
       <Header
@@ -51,16 +59,15 @@ export default function HomePage() {
 
           position="relative"
           ref={ref}
-          mt={["4", "8", "32"]}
           w="100%"
           minH={height}
           _before={{
             content: '""',
             position: 'absolute',
-            opacity: 0.3,
+            opacity: 0.4,
             width: '100%',
             height: '100%',
-            backgroundSize: ['cover', "cover", 'contain'],
+            backgroundSize: ['cover'],
             backgroundRepeat: 'no-repeat',
             backgroundImage: `url(assets/svgs/background.svg)`,
             backgroundPositionX: "center",
@@ -70,9 +77,10 @@ export default function HomePage() {
             position="relative"
             zIndex={2}
             maxWidth={1480}
-            mx="auto"
+            mx={["6", "auto"]}
             justifyContent="center"
             alignItems="center"
+            mt={["12", "16", "32"]}
           >
             <Flex
               alignItems="center"
@@ -80,7 +88,7 @@ export default function HomePage() {
             >
               <Heading
                 as="h1"
-                fontSize={["md", "3xl" ,"5xl"]}
+                fontSize={["2xl", "3xl" ,"5xl", "6xl"]}
                 maxWidth={'2xl'}
                 fontWeight="bold"
                 textAlign="center"
@@ -91,26 +99,33 @@ export default function HomePage() {
                 color="gray.300"
                 as="strong"
                 textAlign="center"
+                fontSize={["sm", "md", "lg"]}
 
                 mt="4"
-                maxWidth={480}
                 mx="auto"
+                maxWidth={480}
                 display="block"
               >
                 Entruturada com conteúdos de forma legal e de fácil acesso para otimizar seus estudos na programação.
               </Text>
-              <Button
-                bg="pink.500"
-                color="white"
-                mt="4"
-                w={240}
-                _hover={{
-                  bg:"normal",
-                  opacity: '0.9'
-                }}
-              >
-                Começar agora
-              </Button>
+              <NextLink href="/login" passHref>
+                <ChakraLink
+                  bg="pink.500"
+                  color="white"
+                  size={["sm", "md", "lg",]}
+                  mt="4"
+                  py="3"
+                  borderRadius="md"
+                  textAlign="center"
+                  w={240}
+                  _hover={{
+                    bg:"normal",
+                    opacity: '0.9'
+                  }}
+                >
+                  Começar agora
+                </ChakraLink>
+              </NextLink>
             </Flex>
           </Flex>
         </Box>
@@ -120,21 +135,24 @@ export default function HomePage() {
 
           mt="8"
           pt="4"
-          pb="32"
+          pb={["8", "32"]}
+          mx={["4"]}
         >
           <Flex
             maxW={1480}
             mx="auto"
             alignItems="center"
             justifyContent="center"
-            gap="32"
+            flexDirection={!isLargerThan1024 ? "column": "row"}
+            gap={!isLargerThan1480 ? "6" : "32"}
           >
             <Box mt="8">
               <Flex
-                alignItems="center"
+                alignItems={!isLargerThan768 ? "flex-start" : "center"}
                 gap="4"
+                flexDirection={!isLargerThan768 ? "column" : "row"}
               >
-                <Box w="24">
+                <Box w={["16", "24"]}>
                   <Lordicon
                     icon="book"
                     size={'100%'}
@@ -145,25 +163,34 @@ export default function HomePage() {
                     }}
                   />
                 </Box>
-                <Heading>
+                <Heading
+                  fontSize={["2xl" ,"3xl", "4xl"]}
+                >
                   O que é a plataforma?
                 </Heading>
               </Flex>
               <Text
                 maxW={540}
-                fontSize="xl"
+                fontSize={["md" ,"lg", "xl"]}
                 color="gray.300"
                 mt="4"
               >
-                A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade da programação tenha uma maior facilidade de começar ou continuar seus estudos podendo evoluir junto e de forma coordenada com outros alunos.
+                <Highlight
+                  query={["organiza", "maior facilidade", "podendo evoluir"]}
+                  styles={{
+                    color:"pink.500",
+                  }}
+                >
+                  A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade da programação tenha uma maior facilidade de começar ou continuar seus estudos podendo evoluir junto e de forma coordenada com outros alunos.
+                </Highlight>
               </Text>
             </Box>
             <Image 
               src="/assets/svgs/online-learning.svg"
               alt="a"
 
-              w={480}
-              h={480}
+              w={!isLargerThan1024 ? 400 : 480}
+              maxH={480}
             />
           </Flex>
         </Box>
@@ -174,28 +201,31 @@ export default function HomePage() {
           as="section"
 
           py="4"
-          pb="32"
+          pb={["8", "32"]}
+          mx={["4"]}
         >
           <Flex
             maxW={1480}
             mx="auto"
             alignItems="center"
             justifyContent="center"
-            gap="32"
+            gap={!isLargerThan1024 ? "6" : "32"}
+            flexDirection={!isLargerThan1024 ? "column-reverse" : "row"}
           >
             <Image 
               src="/assets/svgs/success-factors.svg"
               alt="a"
 
-              w={480}
-              h={480}
+              w={!isLargerThan1024 ? 400 : 480}
+              maxH={480}
             />
             <Box mt="8">
               <Flex
-                alignItems="center"
+                alignItems={!isLargerThan768 ? "flex-start" : "center"}
                 gap="4"
+                flexDirection={!isLargerThan768 ? "column" : "row"}
               >
-                <Box w="24">
+                <Box w={["16", "24"]}>
                   <Lordicon
                     icon="book"
                     size={'100%'}
@@ -207,16 +237,20 @@ export default function HomePage() {
                   />
                   
                 </Box>
-                <Heading maxW={540} mx="auto">
+                <Heading
+                  fontSize={["2xl" ,"3xl", "4xl"]}
+                  
+                  maxW={!isLargerThan768 ? 320 : 540}
+                >
                   Como organizamos os conteúdos
                 </Heading>
               </Flex>
               <Box>
                 <Text
                   maxW={540}
-                  fontSize="xl"
                   color="gray.300"
                   mt="4"
+                  fontSize={["md" ,"lg", "xl"]}
                 >
                   <Highlight
                     query={["trilha", "simples", "intuitiva"]}
@@ -229,9 +263,9 @@ export default function HomePage() {
                 </Text>
                 <Text
                   maxW={540}
-                  fontSize="xl"
                   color="gray.300"
                   mt="4"
+                  fontSize={["md" ,"lg", "xl"]}
                 >
                   <Highlight
                     query={["playlists", "organização mais precisa"]}
@@ -244,9 +278,9 @@ export default function HomePage() {
                 </Text>
                 <Text
                   maxW={540}
-                  fontSize="xl"
                   color="gray.300"
                   mt="4"
+                  fontSize={["md" ,"lg", "xl"]}
                 >
                   Ao acessar uma playlist, poderá ver uma lista de blocos que contém as aulas.
                 </Text>
@@ -264,17 +298,19 @@ export default function HomePage() {
         >
           <Flex
             maxW={1480}
-            mx="auto"
-            alignItems="center"
+            alignItems={!isLargerThan768 ? "flex-start" : "center"}
             justifyContent="center"
             gap="32"
+            mx={!isLargerThan768 ? "4" : "auto"}
           >
-            <Box mt="24">
+            <Box 
+              mt={["12", "24"]}
+            >
               <Heading
-                maxW={540}
-                mx="auto"
-                fontSize={["5xl"]}
+                maxW={!isLargerThan768 ? 480 : 540}
+                fontSize={["3xl" ,"4xl", "6xl"]}
                 textAlign="center"
+                mx="auto"
               >
                 <Highlight
                   query={["Kaguya"]}
@@ -287,9 +323,9 @@ export default function HomePage() {
               </Heading>
 
               <Grid
-                gridTemplateColumns="repeat(3, 1fr)"
+                gridTemplateColumns={["1fr", "repeat(2, 1fr)", "repeat(2, 1fr)", "repeat(3, 1fr)"]}
                 gap="4"
-                mt="16"
+                mt={["8", "16"]}
               >
                 <GridItem
                   flexDirection="column"
@@ -297,9 +333,8 @@ export default function HomePage() {
                   justifyContent="center"
                   pt="0"
                   pb="6"
-                  px="6"
                 >
-                  <Box w="16">
+                  <Box w={["12", "16"]}>
                     <Lordicon
                       icon="book"
                       size={'100%'}
@@ -313,7 +348,7 @@ export default function HomePage() {
                   </Box>
                   <Heading
                     as="h2"
-                    fontSize={["3xl"]}
+                    fontSize={["lg", "2xl", "3xl"]}
                     mt="4"
                     mb="4"
                     w="max"
@@ -333,9 +368,8 @@ export default function HomePage() {
                   justifyContent="center"
                   pt="0"
                   pb="6"
-                  px="6"
                 >
-                  <Box w="16">
+                  <Box w={["12", "16"]}>
                     <Lordicon
                       icon="book"
                       size={'100%'}
@@ -349,7 +383,7 @@ export default function HomePage() {
                   </Box>
                   <Heading
                     as="h2"
-                    fontSize={["3xl"]}
+                    fontSize={["lg", "2xl", "3xl"]}
                     mt="4"
                     mb="4"
                     w="max"
@@ -369,9 +403,8 @@ export default function HomePage() {
                   justifyContent="center"
                   pt="0"
                   pb="6"
-                  px="6"
                 >
-                  <Box w="16">
+                  <Box w={["12", "16"]}>
                     <Lordicon
                       icon="book"
                       size={'100%'}
@@ -385,7 +418,7 @@ export default function HomePage() {
                   </Box>
                   <Heading
                     as="h2"
-                    fontSize={["3xl"]}
+                    fontSize={["lg", "2xl", "3xl"]}
                     mt="4"
                     mb="4"
                     w="max"
@@ -415,6 +448,8 @@ export default function HomePage() {
           maxW={1480}
           mx="auto"
           justifyContent="space-between"
+          flexDirection={!isLargerThan768 ? "column" : "row"}
+          gap={["4", "0"]}
         >
           <Box>
             <Text
@@ -430,7 +465,8 @@ export default function HomePage() {
           </Box>
 
           <Flex
-            gap="4"
+            gap={["0.5", "0.5", "4"]}
+            flexDirection={!isLargerThan768 ? "column" : "row"}
           >
             <NextLink href="/terms" passHref>
               <ChakraLink
