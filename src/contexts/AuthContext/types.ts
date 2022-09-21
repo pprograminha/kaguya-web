@@ -28,3 +28,14 @@ export interface SignInResponse {
   user: User;
   token: string;
 }
+
+export type RegisterUserCredentials = {
+  email: string;
+  password: string;
+  username: string;
+}
+
+export interface RegisterUserResponse {
+  user: User;
+  token: string;
+}

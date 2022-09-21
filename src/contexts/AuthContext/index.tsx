@@ -4,13 +4,20 @@ import { createContext, useEffect, useState } from 'react';
 
 import { kaguyaApi } from 'services/kaguya/apiClient';
 
-import { SignInCredentials, User, SignInResponse } from './types';
+import { 
+  SignInCredentials, 
+  User, 
+  SignInResponse, 
+  RegisterUserCredentials,
+  RegisterUserResponse
+} from './types';
 import { useToast } from '@chakra-ui/react';
 import { apiError } from 'utils/apiFormatError';
 import { tokenCookieKey } from '@/services/kaguya/api';
 
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
+  signUp(data: RegisterUserCredentials): Promise<void>;
   isAuthenticated: boolean;
   user: User | null;
 }
@@ -98,6 +105,51 @@ export function AuthProvider({
       })
     }
   }
+
+  async function signUp({ email, password, username }: RegisterUserCredentials) {
+    try {
+      const response = await kaguyaApi.post<RegisterUserResponse>('/users', {
+        email,
+        password,
+        username
+      });
+  
+      const { token, user } = response.data;
+
+      setCookie(undefined, tokenCookieKey, token, {
+        maxAge: 60 * 60 * 24 * 30, // 30 days
+        path: '/'
+      });
+
+      setUser(user);
+
+      kaguyaApi.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+      toast({
+        title: 'Registro feito com sucesso',
+        description: "Bem vindo a kaguya. Esperamos que seu ensino aqui seja excelente.",
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
+
+      Router.push('/dashboard');
+    } catch (error) {
+      const errors = apiError(error);
+
+      errors.messages.forEach(messageError => {
+        toast({
+          title: 'Erro na criação de conta',
+          description: messageError,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      })
+    }
+  }
   
   return (
     <>
@@ -106,6 +158,7 @@ export function AuthProvider({
           user,
           isAuthenticated,
           signIn,
+          signUp,
         }}
       >
         {children}
