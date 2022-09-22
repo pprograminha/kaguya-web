@@ -10,6 +10,7 @@ interface Lesson {
   slug: string;
 
   completed: boolean;
+  state: 'none' | 'liked' | 'disliked';
 
   _count: {
 		dislikes: number;

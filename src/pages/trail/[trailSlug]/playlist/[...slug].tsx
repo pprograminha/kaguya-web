@@ -42,6 +42,7 @@ interface Lesson {
   slug: string;
 
   completed: boolean;
+  state: 'none' | 'liked' | 'disliked';
 
   _count: {
 		dislikes: number;
@@ -149,7 +150,6 @@ export default function PlaylistPage() {
 
   const isFetching = playlist.isFetching || trail.isFetching;
   const isLoading = playlist.isLoading || trail.isLoading || isFetching;
-  const isLoadingLesson = lesson.isFetching || lesson.isLoading || lesson.isStale;
 
   useEffect(() => {
     function getCurrentLesson() {
@@ -230,8 +230,8 @@ export default function PlaylistPage() {
               maxWidth={880}
               w="100%"
             >
-              <LessonVideo isLoadingLesson={isLoadingLesson}  lesson={lesson.data} />
-              <LessonInfo isLoadingLesson={isLoadingLesson} lesson={lesson.data} />
+              <LessonVideo isLoadingLesson={lesson.isLoading} lesson={lesson.data} />
+              <LessonInfo isLoadingLesson={lesson.isLoading} lesson={lesson.data} />
             </Flex>
             {blocks.isLoading ? (
               <BlocksSkeletonLoading />

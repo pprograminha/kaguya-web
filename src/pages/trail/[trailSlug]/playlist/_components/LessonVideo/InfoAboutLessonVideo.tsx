@@ -7,6 +7,7 @@ interface Lesson {
   name: string;
   description: string;
   slug: string;
+  state: 'none' | 'liked' | 'disliked';
 
   completed: boolean;
 
@@ -27,7 +28,7 @@ export function InfoAboutLessonVideo({ lesson }: InfoAboutLessonVideoProps) {
     <>
       <Flex 
         p="8"
-        py="6"
+        py="4"
         width= "max(240px, min(850px, 50vw))"
         bg="blackAlpha.800"
         justifyContent="space-between"
@@ -36,9 +37,8 @@ export function InfoAboutLessonVideo({ lesson }: InfoAboutLessonVideoProps) {
         <LessonViewedCountFromVideo 
           views={lesson?._count.views || 0} 
         />
-        <LessonVideoLikesDislikes 
-          likes={lesson?._count.likes || 0} 
-          dislikes={lesson?._count.dislikes || 0} 
+        <LessonVideoLikesDislikes
+          lesson={lesson}
         />
       </Flex>
     </>
