@@ -28,7 +28,7 @@ export interface BlockProps {
 }
 
 export function Block({
-  block
+  block,
 }: BlockProps) {
   const router = useRouter();
   const query = router.query;

@@ -1,5 +1,4 @@
 import { Box } from '@chakra-ui/react';
-// import { useState } from 'react';
 import { IsCurrentLessonItem } from './IsCurrentLessonItem';
 import { IsNotCurrentLessonItem } from './IsNotCurrentLessonItem';
 import { ChangeCompleteLessonButtonLineSeparator } from './LineSeparate';
@@ -7,7 +6,19 @@ import { ChangeCompleteLessonButtonLineSeparator } from './LineSeparate';
 interface Lesson {
   id: string;
   name: string;
+  slug: string;
   completed: boolean;
+}
+
+export interface Block {
+  id: string;
+  name: string;
+  slug: string;
+  user_block: {
+    progress: number;
+  } | null;
+
+  lessons: Lesson[]
 }
 
 export interface ChangeCompleteLessonButtonProps {
@@ -21,8 +32,6 @@ export function ChangeCompleteLessonButton({
   hasNextItem = false,
   lesson,
 }: ChangeCompleteLessonButtonProps) {
-  // const [completedLesson, setCompletedLesson] = useState(isCompleted);
-
   if(isCurrent) {
     return (
       <>
@@ -32,7 +41,6 @@ export function ChangeCompleteLessonButton({
         >
           <IsCurrentLessonItem
             isCompleted={lesson.completed}
-            // setCompletedLesson={setCompletedLesson}
             lesson={lesson}
           />
           <ChangeCompleteLessonButtonLineSeparator

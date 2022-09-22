@@ -5,6 +5,7 @@ import { apiError } from '@/utils/apiFormatError';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { queryClient } from '@/services/reactQueryClient';
+import { Block } from '.';
 
 interface Lesson {
   id: string;
@@ -13,14 +14,12 @@ interface Lesson {
 
 export interface IsCurrentLessonItemProps {
   isCompleted?: boolean;
-  // setCompletedLesson: (fn: () => boolean | boolean) => void;
   lesson: Lesson;
 }
 
 export function IsCurrentLessonItem({
   isCompleted = false,
   lesson,
-  // setCompletedLesson,
 }: IsCurrentLessonItemProps) {
   const toast = useToast();
 
@@ -36,8 +35,6 @@ export function IsCurrentLessonItem({
       });
 
       const completed = response.data.completed;
-
-      // setCompletedLesson(completed);
 
       await queryClient.invalidateQueries(['blocksFromPlaylist', playlistSlug]);
 

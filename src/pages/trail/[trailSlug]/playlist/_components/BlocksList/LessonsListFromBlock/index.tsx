@@ -8,7 +8,7 @@ interface LessonData {
   completed: boolean;
 }
 
-interface Lesson {
+interface LessonData {
   id: string;
   name: string;
   slug: string;
@@ -23,7 +23,7 @@ interface Block {
     progress: number;
   } | null;
 
-  lessons: Lesson[]
+  lessons: LessonData[]
 }
 
 export interface LessonListFromBlocks {
@@ -35,7 +35,7 @@ export interface LessonListFromBlocks {
 export function LessonListFromBlock({
   lessons,
   block,
-  currentLessonSlug
+  currentLessonSlug,
 }: LessonListFromBlocks) {
   return (
     <>

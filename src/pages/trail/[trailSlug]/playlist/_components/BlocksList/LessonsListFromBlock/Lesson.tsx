@@ -9,19 +9,6 @@ import Lordicon from '@/components/ReactLordicon';
 import { useRouter } from 'next/router';
 import { ChangeCompleteLessonButton } from '@/components/ChangeCompleteLessonButton';
 
-interface Lesson {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-export interface LessonProps {
-  isCurrentLesson?: boolean;
-  lesson: Lesson;
-  block: Block;
-  hasNextLesson?: boolean;
-}
-
 const currentLessonStyle: ChakraProps = {
   fontWeight: "bold",
   _hover: {
@@ -44,7 +31,8 @@ interface Lesson {
   slug: string;
   completed: boolean;
 }
-interface Block {
+
+export interface Block {
   id: string;
   name: string;
   slug: string;
@@ -53,6 +41,13 @@ interface Block {
   } | null;
 
   lessons: Lesson[]
+}
+
+export interface LessonProps {
+  isCurrentLesson?: boolean;
+  lesson: Lesson;
+  block: Block;
+  hasNextLesson?: boolean;
 }
 
 export function Lesson({

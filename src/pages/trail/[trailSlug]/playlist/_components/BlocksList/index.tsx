@@ -30,6 +30,7 @@ export interface BlocksListProps {
 export function BlocksList({
   blocks
 }: BlocksListProps) {
+
   return (
     <Flex flexDirection="column" w="100%">
       <Accordion
