@@ -1,24 +1,28 @@
 import {
+  Box,
   CircularProgress,
   Flex,
+  Skeleton,
   useToast
 } from '@chakra-ui/react';
 import Head from 'next/head';
+import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import { useQuery } from 'react-query';
+import { useEffect } from 'react';
 
 import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
 import { Header } from '@/components/Header';
 
-import { kaguyaApi } from '@/services/kaguya/apiClient';
-import { findLastIndex } from '@/utils/findLastIndex';
-import { withSSRAuth } from '@/utils/withSSRAuth';
-import { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
 import { BlocksList } from './_components/BlocksList';
 import { LessonInfo } from './_components/LessonInfo';
 import { LessonVideo } from './_components/LessonVideo';
-import { Loading } from '@/components/Loading';
+import { BlocksSkeletonLoading } from './_components/BlocksListSkeletonLoading';
+
+import { kaguyaApi } from '@/services/kaguya/apiClient';
+
+import { findLastIndex } from '@/utils/findLastIndex';
+import { withSSRAuth } from '@/utils/withSSRAuth';
 
 interface TrailData {
   id: string;
@@ -46,7 +50,6 @@ interface Lesson {
 	},
   block_id: string;
 }
-
 
 interface Block {
   id: string;
@@ -144,9 +147,9 @@ export default function PlaylistPage() {
     enabled: !!lessonSlug && !!blockSlug
   });
 
-  const isFetching = blocks.isFetching || playlist.isFetching || trail.isFetching
-  const isLoading = blocks.isLoading || playlist.isLoading || trail.isLoading || isFetching
-  const isLoadingLesson = lesson.isFetching || lesson.isLoading || lesson.isStale
+  const isFetching = playlist.isFetching || trail.isFetching;
+  const isLoading = playlist.isLoading || trail.isLoading || isFetching;
+  const isLoadingLesson = lesson.isFetching || lesson.isLoading || lesson.isStale;
 
   useEffect(() => {
     function getCurrentLesson() {
@@ -174,10 +177,6 @@ export default function PlaylistPage() {
     getCurrentLesson()
   }, [])
 
-
-  if(isLoading) return <Loading />
-
-
   if(!isLoading && !lesson) {
     router.push('/dashboard')
 
@@ -187,7 +186,7 @@ export default function PlaylistPage() {
   return (
     <>
       <Head>
-        <title>Kaguya - Playlist Introdução ao HTML 5</title>
+        <title>Kaguya - {isLoading ? '...Carregando' : lesson.data?.name} </title>
       </Head>
 
       <Flex
@@ -203,13 +202,24 @@ export default function PlaylistPage() {
           mt="16"
           mx={["0", "auto"]}
         >
-          <BreadCrumbContainer 
-            items={[
-              {link: '/dashboard', title: 'Dashboard'},
-              {link: `/trail/${trail.data?.slug}`, title: trail.data?.name},
-            ]}
-            currentItem={{ link: `/trail/${trailSlug}/playlist/${playlistSlug}`, title: playlist.data?.name}}
-          />
+          {isLoading ? (
+            <Skeleton  
+              borderRadius="md"                    
+              height= "16px"
+              maxW="md"
+              endColor="blackAlpha.700" 
+              startColor="blackAlpha.600" 
+            />
+          ) : (
+            <BreadCrumbContainer 
+              items={[
+                {link: '/dashboard', title: 'Dashboard'},
+                {link: `/trail/${trail.data?.slug}`, title: trail.data?.name},
+              ]}
+              currentItem={{ link: `/trail/${trailSlug}/playlist/${playlistSlug}`, title: playlist.data?.name}}
+            />
+          )}
+
 
           <Flex
             gap="8"
@@ -224,13 +234,7 @@ export default function PlaylistPage() {
               <LessonInfo isLoadingLesson={isLoadingLesson} lesson={lesson.data} />
             </Flex>
             {blocks.isLoading ? (
-              <>
-                <CircularProgress
-                  isIndeterminate
-                  color='pink.800'
-                  size={8}
-                />
-              </>
+              <BlocksSkeletonLoading />
             ) : (
               <BlocksList blocks={blocks.data || []} />
             )}
