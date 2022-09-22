@@ -1,18 +1,41 @@
-import { Tooltip } from '@/components/Tooltip';
 import {
   Box,
-  Button as ChakraButton, ChakraProps
+  Button as ChakraButton, 
+  ChakraProps, 
+  useDisclosure, 
+  useToast,
 } from '@chakra-ui/react';
-import Lordicon from '../../../../components/ReactLordicon';
+import { useState } from 'react';
+
+import Lordicon from '@/components/ReactLordicon';
+import { Tooltip } from '@/components/Tooltip';
+
+import { ConfirmRemoveTrailModal } from './ConfirmRemoveTrailModal';
+
+import { apiError } from '@/utils/apiFormatError';
+
+import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { queryClient } from '@/services/reactQueryClient';
+
+interface TrailData {
+  id: string;
+  name: string;
+  slug: string;
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
+}
 
 export interface AddRemoveTrailButtonProps {
   isMdVersion?: boolean;
-  trailActived: boolean;
+  trail: TrailData | undefined;
 }
 
 export function AddRemoveTrailButton({
   isMdVersion,
-  trailActived
+  trail
 }: AddRemoveTrailButtonProps) {
   const propsEquals: ChakraProps = !isMdVersion ? {
     position: 'absolute',
@@ -20,7 +43,53 @@ export function AddRemoveTrailButton({
     right: "0",
   } : {};
 
-  if(trailActived) {
+  const [loading, setLoading] = useState(false);
+
+  const toast = useToast();
+  const confirmRemoveTrailModal = useDisclosure();
+
+  async function addUserTrail() {
+    setLoading(true);
+
+    try {
+      await kaguyaApi.post('/user-trails', {
+        trail_id: trail?.id
+      });
+
+      await queryClient.invalidateQueries(['uniqueTrail', trail?.slug]);
+      await queryClient.invalidateQueries(['playlistsFromTrail', trail?.slug]);
+
+      toast({
+        title: 'Trilha adicionada',
+        description: `Você adicionou a trilha de ${trail?.name} na sua conta.`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
+    } catch (error: any) {
+      const errors = apiError(error);
+
+      errors.messages.forEach(messageError => {
+        toast({
+          title: 'Erro na adição da trilha na conta',
+          description: messageError,
+          status: 'error',
+          duration: 6000,
+          isClosable: true,
+          position: 'top-right',
+        });
+      })
+    }
+
+    setLoading(false);
+  }
+
+  async function handleRemoveUserTrail() {
+    confirmRemoveTrailModal.onOpen();    
+  }
+
+  if(trail?.user_trail) {
     return (
       <>
         <ChakraButton
@@ -35,6 +104,8 @@ export function AddRemoveTrailButton({
             bg:"normal",
             filter: "brightness(120%)"
           }}
+          disabled={loading}
+          onClick={handleRemoveUserTrail}
           {...propsEquals}
         >
           <Lordicon 
@@ -44,6 +115,12 @@ export function AddRemoveTrailButton({
           />
           {isMdVersion && 'Remover trilha'}
         </ChakraButton>
+
+        <ConfirmRemoveTrailModal 
+          modal={confirmRemoveTrailModal} 
+          trail={trail}
+          setLoading={setLoading}
+        />
       </>
     )
   }
@@ -63,12 +140,25 @@ export function AddRemoveTrailButton({
           bg:"normal",
           filter: "brightness(120%)"
         }}
+        disabled={loading}
+        onClick={addUserTrail}
         {...propsEquals}
       >
         <Lordicon icon="addCard" size={20}/>
         {isMdVersion && 'Adicionar trilha'}
-        <Box mb="10" mr="-8" p="1" bg="pink.800" borderRadius="full" borderColor="pink.800">
-          <Tooltip placement="right-start"  hasArrow label="Adicione esta trilha antes de acessar as playlists">
+        <Box
+          mb="10"
+          mr="-8"
+          p="1"
+          bg="pink.800"
+          borderRadius="full"
+          borderColor="pink.800"
+        >
+          <Tooltip
+            placement="right-start"
+            hasArrow
+            label="Adicione esta trilha antes de acessar as playlists"
+          >
             <Lordicon
               icon="error"
               size={50}

@@ -1,4 +1,5 @@
 import { 
+  CircularProgress,
   Flex, 
   useBreakpointValue,
   useToken
@@ -12,14 +13,22 @@ interface TrailData {
   id: string;
   name: string;
   description: string;
+  slug: string;
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
 }
 
 interface TrailInfoHeaderProps {
-  trail?: TrailData;
+  trail: TrailData | undefined;
+  isFetching?: boolean;
 }
 
 export function TrailInfoHeader({
-  trail
+  trail,
+  isFetching
 }: TrailInfoHeaderProps) {
   const [blackAlpha900, blackAlpha700, pink800] = useToken("colors", ['blackAlpha.900', 'blackAlpha.700', 'pink.800'])
   const isMdVersion = useBreakpointValue({ 
@@ -32,7 +41,7 @@ export function TrailInfoHeader({
       <Flex
         borderRadius="md"
         flexDirection="column"
-        alignItems="center"
+        alignItems="flex-start"
         bg={`linear-gradient(90deg, 
           ${blackAlpha900} 0%, 
           ${blackAlpha700} 32%, 
@@ -45,27 +54,40 @@ export function TrailInfoHeader({
         mx={["4"]}
         position="relative"
       >
-
+        {isFetching && (
+          <CircularProgress
+            isIndeterminate
+            color='pink.800'
+            size={6}
+            position="absolute"
+            top="4"
+          />
+        )}
         <Flex
-          w="100%"
           flexDirection="column"
+          alignItems="center"
         >
           <Flex
-            justifyContent="space-between"
-            alignItems="center"
-            mt="8"
+            w="100%"
+            flexDirection="column"
           >
-            <TrailTitle
-              trailName={trail?.name || ''}
-            />
-            <AddRemoveTrailButton 
-              isMdVersion={isMdVersion}
-              trailActived={false}
+            <Flex
+              justifyContent="space-between"
+              alignItems="center"
+              mt="8"
+            >
+              <TrailTitle
+                trailName={trail?.name || ''}
+              />
+              <AddRemoveTrailButton 
+                isMdVersion={isMdVersion}
+                trail={trail}
+              />
+            </Flex>
+            <TrailDescription
+              description={trail?.description || ''}
             />
           </Flex>
-          <TrailDescription
-            description={trail?.description || ''}
-          />
         </Flex>
       </Flex>
     </>

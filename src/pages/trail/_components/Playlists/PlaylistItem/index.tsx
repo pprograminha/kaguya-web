@@ -49,7 +49,7 @@ export function PlaylistItem({
 
           pt="12"
           px={["4", "8"]}
-          pb={["8"]}
+          pb={playlist.user_playlist ? "8" : "12"}
 
           position="relative"
           transition="all 0.3s"
@@ -67,7 +67,7 @@ export function PlaylistItem({
           />
 
           {playlist.user_playlist && (
-            <Progress percent={playlist.user_playlist.progress} mt="8"/>
+            <Progress percent={playlist.user_playlist.progress} mt="12"/>
           )}
         </ChakraLink>
       </NextLink>

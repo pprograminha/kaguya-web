@@ -108,7 +108,7 @@ export default function Trail() {
     enabled: !!trail.data
   });
 
-  if(trail.isLoading || trail.isFetching) {
+  if(trail.isLoading) {
     return <Loading /> 
   }
 
@@ -150,7 +150,7 @@ export default function Trail() {
             ]}
           />
 
-          <TrailInfoHeader trail={trail.data}/>
+          <TrailInfoHeader trail={trail.data} isFetching={trail.isFetching} />
           <Quotes />
 
           <DividerLine />

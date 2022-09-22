@@ -48,7 +48,7 @@ export function TrailStudentsCount({
           fontSize={["sm", "md"]}
         >
           <HiOutlineArrowNarrowRight />
-          Contém {trailCountTexts.playlists} e {trailCountTexts.lessons} aulas no total.
+          Contém {trailCountTexts.playlists} e {trailCountTexts.lessons} no total.
         </Text>
         <Text
           display="flex"
@@ -58,7 +58,7 @@ export function TrailStudentsCount({
           fontSize={["sm", "md"]}
         >
           <HiOutlineArrowNarrowRight /> 
-          Atualmente {trailCountTexts.users} faz esta trilha
+          Atualmente {trailCountTexts.users} {trail?._count.users === 1 ? 'faz' : 'fazem'} esta trilha
         </Text>
       </Box>
     </>
