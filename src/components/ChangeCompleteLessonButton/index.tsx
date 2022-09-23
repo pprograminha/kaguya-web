@@ -8,17 +8,7 @@ interface Lesson {
   name: string;
   slug: string;
   completed: boolean;
-}
-
-export interface Block {
-  id: string;
-  name: string;
-  slug: string;
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: Lesson[]
+  block_id: string;
 }
 
 export interface ChangeCompleteLessonButtonProps {
@@ -61,7 +51,6 @@ export function ChangeCompleteLessonButton({
         <IsNotCurrentLessonItem
           isCompleted={lesson.completed}
           lesson={lesson}
-          // setCompletedLesson={setCompletedLesson}
         />
         <ChangeCompleteLessonButtonLineSeparator
           isShow={hasNextItem}

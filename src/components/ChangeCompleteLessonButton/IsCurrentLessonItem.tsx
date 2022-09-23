@@ -5,11 +5,23 @@ import { apiError } from '@/utils/apiFormatError';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { queryClient } from '@/services/reactQueryClient';
-import { Block } from '.';
+
+export interface BlockData {
+  id: string;
+  name: string;
+  slug: string;
+  user_block: {
+    progress: number;
+  } | null;
+
+  lessons: Lesson[]
+}
 
 interface Lesson {
   id: string;
   name: string;
+  completed: boolean;
+  block_id: string;
 }
 
 export interface IsCurrentLessonItemProps {
@@ -36,7 +48,42 @@ export function IsCurrentLessonItem({
 
       const completed = response.data.completed;
 
-      await queryClient.invalidateQueries(['blocksFromPlaylist', playlistSlug]);
+      queryClient.setQueryData<BlockData[] | undefined>(['blocksFromPlaylist', playlistSlug], (data) => {
+        if(data) {
+          return data.map(block => {
+            if(block.id === lesson.block_id) {
+              const blockUpdated = {
+                ...block,
+                lessons: block.lessons.map(prevLesson => {
+                  if(prevLesson.id === lesson.id) {
+                    return {
+                      ...prevLesson,
+                      completed,
+                    }
+                  }
+
+                  return prevLesson;
+                })
+              };
+
+              const userLessonsCompleted = blockUpdated.lessons.filter(
+                user_lesson => user_lesson.completed,
+              );
+        
+              const userBlockProgressPercentage = (userLessonsCompleted.length / blockUpdated.lessons.length) * 100
+        
+              return {
+                ...blockUpdated,
+                user_block: {
+                  progress: Number(userBlockProgressPercentage.toFixed(0))
+                },
+              }
+            }
+
+            return block;
+          })
+        }
+      });
 
       if(completed) {
         toast({

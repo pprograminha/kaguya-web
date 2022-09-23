@@ -17,6 +17,9 @@ import { apiError } from '@/utils/apiFormatError';
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { queryClient } from '@/services/reactQueryClient';
 
+import { PlaylistData } from '../Playlists';
+import { TrailData } from 'pages/trail/[trailSlug]';
+
 interface UserTrail {
   id: string;
   name: string;
@@ -49,8 +52,29 @@ export function ConfirmRemoveTrailModal({
         }
       });
 
-      await queryClient.invalidateQueries(['uniqueTrail', trail?.slug]);
-      await queryClient.invalidateQueries(['playlistsFromTrail', trail?.slug]);
+      queryClient.setQueryData<TrailData | undefined>(['uniqueTrail', trail?.slug], (data) => {
+        if(data) {
+          return {
+            ...data,
+            user_trail: null,
+            _count: {
+              ...data._count,
+              users: data._count.users - 1,
+            },
+          }
+        }
+      });
+
+      queryClient.setQueryData<PlaylistData[] | undefined>(['playlistsFromTrail', trail?.slug], (data) => {
+        if(data) {
+          return data.map(playlist => {
+            return {
+              ...playlist,
+              user_playlist: null,
+            }
+          })
+        }
+      });
 
       toast({
         title: 'Trilha removida',

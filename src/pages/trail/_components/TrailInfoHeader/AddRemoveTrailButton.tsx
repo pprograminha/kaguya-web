@@ -16,11 +16,18 @@ import { apiError } from '@/utils/apiFormatError';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { queryClient } from '@/services/reactQueryClient';
+import { PlaylistData } from '../Playlists';
 
 interface TrailData {
   id: string;
   name: string;
   slug: string;
+
+  _count: {
+    lessons: number;
+    playlists: number;
+    users: number;
+  };
 
   user_trail: {
     progress: number;
@@ -56,8 +63,31 @@ export function AddRemoveTrailButton({
         trail_id: trail?.id
       });
 
-      await queryClient.invalidateQueries(['uniqueTrail', trail?.slug]);
-      await queryClient.invalidateQueries(['playlistsFromTrail', trail?.slug]);
+      queryClient.setQueryData<TrailData | undefined>(['uniqueTrail', trail?.slug], (data) => {
+        if(data) {
+          return {
+            ...data,
+            user_trail: {
+              progress: data?.user_trail?.progress as number,
+              enabled: true,
+            },
+            _count: {
+              ...data._count,
+              users: data._count.users + 1,
+            },
+          }
+        }
+      });
+
+      queryClient.setQueryData<PlaylistData[] | undefined>(['playlistsFromTrail', trail?.slug], (data) => {
+        if(data) {
+          return data.map(playlist => {
+            return {
+              ...playlist,
+            }
+          })
+        }
+      });
 
       toast({
         title: 'Trilha adicionada',
