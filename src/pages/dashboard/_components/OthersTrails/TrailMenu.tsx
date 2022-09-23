@@ -1,6 +1,4 @@
-import { kaguyaApi } from '@/services/kaguya/apiClient';
-import { queryClient } from '@/services/reactQueryClient';
-import { apiError } from '@/utils/apiFormatError';
+
 import { 
   Menu, 
   MenuButton, 
@@ -9,11 +7,29 @@ import {
   useMediaQuery,
   useToast,
 } from '@chakra-ui/react';
-import Lordicon from '../../../../components/ReactLordicon';
+
+import Lordicon from '@/components/ReactLordicon';
+
+import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { queryClient } from '@/services/reactQueryClient';
+
+import { apiError } from '@/utils/apiFormatError';
 
 interface TrailData {
   id: string;
   name: string;
+  slug: string;
+
+  _count: {
+    lessons: number;
+    playlists: number;
+    users: number;
+  };
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
 }
 
 interface TrailMenuProps {
