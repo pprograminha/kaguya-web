@@ -14,6 +14,12 @@ interface TrailData {
   name: string;
   description: string;
   slug: string;
+  
+  _count: {
+    lessons: number;
+    playlists: number;
+    users: number;
+  };
 
   user_trail: {
     progress: number;
