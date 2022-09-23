@@ -2,11 +2,11 @@ import NextLink from 'next/link';
 import { 
   BreadcrumbItem,
   BreadcrumbItemProps as ChakraBreadCrumbItemProps, 
-  BreadcrumbLink 
+  BreadcrumbLink, 
 } from '@chakra-ui/react';
 
 interface BreadCrumbItemProps extends ChakraBreadCrumbItemProps {
-  link: string;
+  link: string | undefined;
   title?: string;
 }
 
@@ -22,7 +22,7 @@ export function BreadCrumbItem({
         fontSize={["sm", "md"]}
         {...rest}
       >
-        <NextLink href={link} passHref>
+        <NextLink href={link || '#'} passHref>
           <BreadcrumbLink>{title}</BreadcrumbLink>
         </NextLink>
       </BreadcrumbItem>

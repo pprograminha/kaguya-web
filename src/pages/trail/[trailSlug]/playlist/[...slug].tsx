@@ -50,6 +50,7 @@ interface Lesson {
 
 export default function PlaylistPage() {
   const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
 
   const toast = useToast();
 
@@ -153,17 +154,32 @@ export default function PlaylistPage() {
               borderRadius="md"                    
               height= "16px"
               maxW="md"
+              ml="4"
               endColor="blackAlpha.700" 
               startColor="blackAlpha.600" 
             />
           ) : (
-            <BreadCrumbContainer 
-              items={[
-                {link: '/dashboard', title: 'Dashboard'},
-                {link: `/trail/${trail.data?.slug}`, title: trail.data?.name},
-              ]}
-              currentItem={{ link: `/trail/${trailSlug}/playlist/${playlistSlug}`, title: playlist.data?.name}}
-            />
+            <>
+              {!isLargerThan768 ? (
+                <BreadCrumbContainer
+                  separator=" "
+                  items={[
+                    {
+                      link: `/trail/${trail?.data?.slug}`,
+                      title: `Voltar para ${trail?.data?.name}`,
+                    }
+                  ]}
+                />
+              ) : (
+              <BreadCrumbContainer 
+                items={[
+                  {link: '/dashboard', title: 'Dashboard'},
+                  {link: `/trail/${trail.data?.slug}`, title: trail.data?.name},
+                ]}
+                currentItem={{ link: `/trail/${trailSlug}/playlist/${playlistSlug}`, title: playlist.data?.name}}
+              />
+              )}
+            </>
           )}
 
           <Flex
