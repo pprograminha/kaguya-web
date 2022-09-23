@@ -63,6 +63,15 @@ export function AddRemoveTrailButton({
         trail_id: trail?.id
       });
 
+      toast({
+        title: 'Trilha adicionada',
+        description: `Você adicionou a trilha de ${trail?.name} na sua conta.`,
+        status: 'success',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
+
       queryClient.setQueryData<TrailData | undefined>(['uniqueTrail', trail?.slug], (data) => {
         if(data) {
           return {
@@ -77,6 +86,8 @@ export function AddRemoveTrailButton({
             },
           }
         }
+
+        return data;
       });
 
       queryClient.setQueryData<PlaylistData[] | undefined>(['playlistsFromTrail', trail?.slug], (data) => {
@@ -89,14 +100,16 @@ export function AddRemoveTrailButton({
         }
       });
 
-      toast({
-        title: 'Trilha adicionada',
-        description: `Você adicionou a trilha de ${trail?.name} na sua conta.`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-        position: 'top-right',
+      queryClient.setQueryData<TrailData[] | undefined>('othersTrails', (data) => {
+        if(data) {
+          return data.filter(where => where.id !== trail?.id);
+        }
+
+        return data;
       });
+
+      await queryClient.invalidateQueries('othersTrails');
+      await queryClient.invalidateQueries('userTrails');
     } catch (error: any) {
       const errors = apiError(error);
 

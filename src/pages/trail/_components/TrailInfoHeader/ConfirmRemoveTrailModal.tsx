@@ -51,6 +51,15 @@ export function ConfirmRemoveTrailModal({
           trail_id: trail?.id
         }
       });
+      
+      toast({
+        title: 'Trilha removida',
+        description: `Você removeu a trilha de ${trail?.name} de sua conta.`,
+        status: 'info',
+        duration: 5000,
+        isClosable: true,
+        position: 'top-right',
+      });
 
       queryClient.setQueryData<TrailData | undefined>(['uniqueTrail', trail?.slug], (data) => {
         if(data) {
@@ -76,16 +85,10 @@ export function ConfirmRemoveTrailModal({
         }
       });
 
-      toast({
-        title: 'Trilha removida',
-        description: `Você removeu a trilha de ${trail?.name} de sua conta.`,
-        status: 'info',
-        duration: 5000,
-        isClosable: true,
-        position: 'top-right',
-      });
-
       setLoading(false);
+
+      await queryClient.invalidateQueries('othersTrails');
+      await queryClient.invalidateQueries('userTrails');
     } catch (error: any) {
       const errors = apiError(error);
 
