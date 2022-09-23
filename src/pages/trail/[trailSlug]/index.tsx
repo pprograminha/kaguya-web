@@ -16,11 +16,11 @@ import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
 import { DividerLine } from '@/components/DividerLine';
 import { Header } from '@/components/Header';
 
-import { Loading } from '@/components/Loading';
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { withSSRAuth } from '@/utils/withSSRAuth';
+import { TrailSkeletonLoading } from '../_components/TrailSkeletonLoading';
 
-interface TrailData {
+export interface TrailData {
   id: string;
   name: string;
   slug: string;
@@ -40,23 +40,6 @@ interface TrailData {
     progress: number;
     enabled: boolean;
   } | null;
-}
-
-interface Playlist {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: null;
-  
-  created_at: string;
-  updated_at: string;
-  
-  user_playlist: {
-    progress: number;
-  } | null;
-
-  trail_id: string;
 }
 
 export default function Trail() {
@@ -94,27 +77,17 @@ export default function Trail() {
     staleTime: 1000 * 60 * 10, // 60 minutes
     enabled: !!trailSlug,
   });
-  
-  const playlists = useQuery<Playlist[] | undefined>(['playlistsFromTrail', trailSlug], async () => {
-    const response = await kaguyaApi.get<Playlist[]>('/playlists/trail-list-all', {
-      params: {
-        trail_id: trail?.data?.id,
-      }
-    });
-
-    return response.data;
-  }, {
-    staleTime: 1000 * 60 * 10, // 60 minutes
-    enabled: !!trail.data
-  });
 
   if(trail.isLoading) {
-    return <Loading /> 
-  }
+    return (
+      <>
+        <Head>
+          <title>Kaguya | ...Carregando</title>
+        </Head>
 
-  if(!trail.isLoading && !trail.isFetching && !trail.data) {
-    router.push('/dashboard');
-    return;
+        <TrailSkeletonLoading />
+      </>
+    )
   }
 
   return (
@@ -164,7 +137,6 @@ export default function Trail() {
           >
             <PlaylistsContainer
               is2xlVersion={is2xlVersion}
-              playlists={playlists.data}
               trail={trail.data}
             />
             <OtherInfoFromTrail trail={trail?.data} />
