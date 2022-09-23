@@ -29,6 +29,11 @@ interface TrailData {
     users: number;
     lessons: number;
   };
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  } | null;
 }
 
 interface TrailProps {

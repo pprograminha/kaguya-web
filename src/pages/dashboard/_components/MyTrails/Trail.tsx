@@ -80,7 +80,7 @@ export function Trail({
             >
               {trail.name}
             </Text>
-            {trail.user_trail.enabled && (
+            {trail?.user_trail?.enabled && (
               <Progress percent={trail.user_trail.progress} />
             )}
           </GridItem>
