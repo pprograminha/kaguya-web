@@ -92,7 +92,11 @@ export function BlocksList({
   }
 
   return (
-    <Flex flexDirection="column" w="100%">
+    <Flex
+      flexDirection="column"
+      w="100%"
+      mb="8"
+    >
       <Accordion
         defaultIndex={0}
         allowToggle

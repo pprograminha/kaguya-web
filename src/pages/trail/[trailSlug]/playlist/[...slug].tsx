@@ -1,6 +1,7 @@
 import {
   Flex,
   Skeleton,
+  useMediaQuery,
   useToast
 } from '@chakra-ui/react';
 import Head from 'next/head';
@@ -48,6 +49,8 @@ interface Lesson {
 }
 
 export default function PlaylistPage() {
+  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+
   const toast = useToast();
 
   const router = useRouter();
@@ -163,14 +166,15 @@ export default function PlaylistPage() {
             />
           )}
 
-
           <Flex
             gap="8"
             mt="8"
+            mx="4"
+            flexDirection={isLargerThan1024 ? "row" : "column"}
           >
             <Flex
               flexDirection="column"
-              maxWidth={880}
+              maxWidth={!isLargerThan1024 ? '100%' : 880}
               w="100%"
             >
               <LessonVideo isLoadingLesson={lesson.isLoading} lesson={lesson.data} />

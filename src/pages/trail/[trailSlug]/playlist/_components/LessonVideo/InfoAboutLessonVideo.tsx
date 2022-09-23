@@ -1,4 +1,4 @@
-import { Flex } from '@chakra-ui/react';
+import { Flex, useMediaQuery } from '@chakra-ui/react';
 import { LessonVideoLikesDislikes } from './LessonVideoLikesDislikes';
 import { LessonViewedCountFromVideo } from './LessonViewedCountFromVideo';
 
@@ -24,12 +24,17 @@ interface InfoAboutLessonVideoProps {
 }
 
 export function InfoAboutLessonVideo({ lesson }: InfoAboutLessonVideoProps) {
+  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+  
   return (
     <>
       <Flex 
-        p="8"
+        p={!isLargerThan1024 ? "2": "8"}
         py="4"
-        width= "max(240px, min(850px, 50vw))"
+        width={isLargerThan1024 
+          ? "max(240px, min(850px, 50vw))"
+          : "max(100%, min(850px, 50vw))"
+        }
         bg="blackAlpha.800"
         justifyContent="space-between"
         alignItems="center"

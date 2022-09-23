@@ -10,7 +10,7 @@ export function LessonViewedCountFromVideo({ views }: LessonViewedCountFromVideo
     <>
       <Text
         display="flex"
-        gap="2"
+        gap="0.5"
         alignItems="center"
 
         color="white"

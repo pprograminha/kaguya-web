@@ -4,8 +4,11 @@ import {
   AccordionButton,
   AccordionIcon,
   CircularProgressLabel,
-  CircularProgress
+  CircularProgress,
+  useMediaQuery,
+  useToken
 } from '@chakra-ui/react';
+import { BsCheckLg } from 'react-icons/bs';
 
 interface Lesson {
   id: string;
@@ -32,14 +35,19 @@ export interface BlockProps {
 export function BlockInfo({
   block
 }: BlockProps) {
+  const [pink500] = useToken('colors', ['pink.500']);
+  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+
   const lessonsCount = block?.lessons.length;
   const lessonsCountText = lessonsCount === 1 ? `${lessonsCount} aulas` : `${lessonsCount} aulas`;
+
+  const blockPercentage = block?.user_block?.progress;
 
   return (
     <>
       <AccordionButton
         bg="blackAlpha.800"
-        p="6"
+        p={!isLargerThan768 ? "4" : "6"}
         borderRadius="md"
         display="flex"
         justifyContent="space-between"
@@ -55,13 +63,24 @@ export function BlockInfo({
         >
           {block?.user_block && (
             <CircularProgress
-              value={block.user_block?.progress}
+              value={blockPercentage}
               thickness="8"
               color="pink.500"
               trackColor="blackAlpha.600"
-              size="16"
+              size={!isLargerThan768 ? "12": "16"}
             >
-              <CircularProgressLabel fontSize={["sm"]}>{block.user_block?.progress}%</CircularProgressLabel>
+              <CircularProgressLabel
+                w="auto"
+                fontSize={!isLargerThan768 ? "xs" : "sm"}
+              >
+                {blockPercentage === 100 ? (
+                  <>
+                    <BsCheckLg color={pink500} />
+                  </>
+                ): (
+                  <>{blockPercentage}%</>
+                )}
+              </CircularProgressLabel>
             </CircularProgress>
           )}
 
@@ -69,10 +88,12 @@ export function BlockInfo({
             flexDirection="column"
             alignItems="flex-start"
             gap="1"
+            mr="3"
           >
             <Text
               fontWeight="bold"
               fontSize={["sm", "md", "lg"]}
+              textAlign="left"
             >
               {block?.name}
             </Text>

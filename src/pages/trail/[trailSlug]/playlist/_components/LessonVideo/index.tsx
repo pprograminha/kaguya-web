@@ -1,5 +1,5 @@
 import { modifyYoutubeUrl } from '@/utils/modifyYoutubeUrl';
-import { Flex, Skeleton } from '@chakra-ui/react';
+import { Flex, Skeleton, useMediaQuery } from '@chakra-ui/react';
 import { InfoAboutLessonVideo } from './InfoAboutLessonVideo';
 
 interface Lesson {
@@ -26,6 +26,8 @@ interface LessonVideoProps {
 }
 
 export function LessonVideo({ lesson, isLoadingLesson }: LessonVideoProps) {
+  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+
   if(isLoadingLesson) {
     return <Skeleton  
       borderRadius="md"
@@ -41,13 +43,15 @@ export function LessonVideo({ lesson, isLoadingLesson }: LessonVideoProps) {
       <Flex 
         borderRadius="md"
         overflow="hidden"
-        width= "max(240px, min(850px, 50vw))"
+        width={!isLargerThan1024 ? '100%' : "max(240px, min(850px, 50vw))"}
         flexDirection="column"
       >
         <Flex 
-          width= "max(240px, min(850px, 50vw))"
-          height= "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(50vw * 0.5625)))"
-      
+          maxWidth={"max(100%, min(850px, 50vw))"}
+          height={!isLargerThan1024
+            ? "max(calc(360px * 0.5625), min(calc(360px), calc(50vw)))" // mobile
+            : "max(calc(360px * 0.5625), min(calc(850px * 0.5625), calc(50vw)))"
+          }
         >
           <iframe
             width="100%"
@@ -58,7 +62,7 @@ export function LessonVideo({ lesson, isLoadingLesson }: LessonVideoProps) {
             allowFullScreen
           />
         </Flex>
-          <InfoAboutLessonVideo lesson={lesson} />
+        <InfoAboutLessonVideo lesson={lesson} />
       </Flex>
     </>
   )
