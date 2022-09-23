@@ -13,7 +13,9 @@ interface LessonData {
   name: string;
   slug: string;
   completed: boolean;
+  block_id: string;
 }
+
 interface Block {
   id: string;
   name: string;

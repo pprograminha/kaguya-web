@@ -9,6 +9,7 @@ interface Lesson {
   name: string;
   slug: string;
   completed: boolean;
+  block_id: string;
 }
 
 interface Block {
