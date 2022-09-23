@@ -1,7 +1,14 @@
+import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { findLastIndex } from '@/utils/findLastIndex';
 import { 
   Accordion,
   Flex,
 } from '@chakra-ui/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import { useQuery } from 'react-query';
+import { BlocksSkeletonLoading } from '../BlocksListSkeletonLoading';
+
 import { Block } from './Block';
 
 interface Lesson {
@@ -9,6 +16,8 @@ interface Lesson {
   name: string;
   slug: string;
   completed: boolean;
+
+  block_id: string;
 }
 
 interface BlockData {
@@ -20,16 +29,62 @@ interface BlockData {
     progress: number;
   } | null;
   
-  lessons: Lesson[]
+  lessons: Lesson[];
 }
 
 export interface BlocksListProps {
-  blocks: BlockData[];
+  playlistSlug: string;
+  trailSlug: string;
 }
 
 export function BlocksList({
-  blocks
+  playlistSlug,
+  trailSlug
 }: BlocksListProps) {
+  const router = useRouter();
+
+  const blocks = useQuery<BlockData[]>(['blocksFromPlaylist', playlistSlug], async () => {
+    const response = await kaguyaApi.get<BlockData[]>('/blocks/playlist-list-all', {
+      params: {
+        playlist_slug: playlistSlug,
+        trail_slug: trailSlug,
+      }
+    });
+
+    return response.data;
+  }, {
+    staleTime: 1000 * 60 * 10, // 60 minutes,
+    enabled: !!playlistSlug && !!trailSlug
+  });
+
+  useEffect(() => {
+    function getCurrentLesson() {
+      const blocksData = blocks.data
+    
+      if(blocksData && blocksData.length && trailSlug && playlistSlug) {
+        const lessons = blocksData.map(block => block.lessons).flat();
+
+        if(lessons) {
+          const lastLessonIndex = findLastIndex(lessons, lesson => lesson.completed);
+          
+          const lastLesson = lessons[lastLessonIndex + 1] || lessons[lastLessonIndex];
+          
+          if(lastLesson) {
+            const lastBlock = blocksData.find((block) => block.id === lastLesson.block_id);
+            
+            if(lastBlock) {
+              router.push(`/trail/${trailSlug}/playlist/${playlistSlug}/block/${lastBlock.slug}/lesson/${lastLesson.slug}`);
+            }
+          }
+        }
+      }
+    }
+    getCurrentLesson()
+  }, [blocks.isFetched]);
+
+  if(blocks.isLoading) {
+    return <BlocksSkeletonLoading />
+  }
 
   return (
     <Flex flexDirection="column" w="100%">
@@ -44,7 +99,7 @@ export function BlocksList({
         maxH="600px"
         overflowY="auto"
       >
-        {blocks && blocks.map((block) => (
+        {blocks.data && blocks.data.map((block) => (
           <Block
             key={block.id}
             block={block}
