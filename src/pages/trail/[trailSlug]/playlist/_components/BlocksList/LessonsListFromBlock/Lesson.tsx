@@ -61,17 +61,10 @@ export function Lesson({
 
   const router = useRouter();
   const query = router.query;
+  const slugs = query?.slug || [] as string[];
 
   const trailSlug = query?.trailSlug;
-  const [
-    playlistSlug, 
-
-    blockText,
-    blockSlug, 
-
-    lessonText, 
-    lessonSlug
-  ] = query?.slug || [] as string[];
+  const playlistSlug = slugs[0] as string;
 
   return (
     <Box

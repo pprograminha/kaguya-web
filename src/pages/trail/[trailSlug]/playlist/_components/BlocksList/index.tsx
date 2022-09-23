@@ -43,6 +43,10 @@ export function BlocksList({
 }: BlocksListProps) {
   const router = useRouter();
 
+  // const query = router.query;
+  // const slugs = query?.slug || [] as string[];
+  // const currentBlockSlug = slugs[2] as string;
+
   const blocks = useQuery<BlockData[]>(['blocksFromPlaylist', playlistSlug], async () => {
     const response = await kaguyaApi.get<BlockData[]>('/blocks/playlist-list-all', {
       params: {
@@ -59,7 +63,7 @@ export function BlocksList({
 
   useEffect(() => {
     function getCurrentLesson() {
-      const blocksData = blocks.data
+      const blocksData = blocks?.data;
     
       if(blocksData && blocksData.length && trailSlug && playlistSlug) {
         const lessons = blocksData.map(block => block.lessons).flat();
@@ -77,9 +81,10 @@ export function BlocksList({
             }
           }
         }
+
       }
     }
-    getCurrentLesson()
+    getCurrentLesson();
   }, [blocks.isFetched]);
 
   if(blocks.isLoading) {
@@ -89,7 +94,7 @@ export function BlocksList({
   return (
     <Flex flexDirection="column" w="100%">
       <Accordion
-        defaultIndex={[0]}
+        defaultIndex={0}
         allowToggle
 
         w="100%"
@@ -99,7 +104,7 @@ export function BlocksList({
         maxH="600px"
         overflowY="auto"
       >
-        {blocks.data && blocks.data.map((block) => (
+        {blocks?.data && blocks.data.map((block) => (
           <Block
             key={block.id}
             block={block}

@@ -34,15 +34,8 @@ export function Block({
   const router = useRouter();
   const query = router.query;
 
-  const [
-    playlistSlug, 
-
-    blockText, 
-    blockSlug, 
-
-    lessonText, 
-    lessonSlug
-  ] = query?.slug || [] as string[];
+  const slugs = query?.slug || [] as string[];
+  const lessonSlug = slugs[4] as string;
 
   return (
     <>
