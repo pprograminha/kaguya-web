@@ -28,7 +28,7 @@ export function PageHeading() {
         />
         <Heading
           fontSize={["3xl", "4xl", "4xl", "6xl"]}
-          maxW="sm"
+          maxW="xs"
           mt={!isLargerThan880 ? "4" : "8"}
           color="gray.300"
           textAlign={!isLargerThan880 ? "center" : "left"}
