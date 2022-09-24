@@ -1,7 +1,14 @@
 import { Footer } from '@/components/Footer';
 import { Header } from '@/components/Header';
 import { useAuth } from '@/hooks/useAuth';
-import { Box, Flex, Heading, Highlight, Link, Text } from '@chakra-ui/react';
+import { 
+  Box, 
+  Flex, 
+  Heading, 
+  Highlight, 
+  Link as ChakraLink, 
+  Text
+} from '@chakra-ui/react';
 import Head from 'next/head';
 import NextLink from 'next/link';
 
@@ -81,9 +88,9 @@ export default function TermsPage() {
             </Highlight>
             <br />
             Veja como você pode desativar sua conta 
-              <Link color="pink.500">
-                <NextLink href="/help/desactive-account"> clicando aqui</NextLink>
-              </Link>. <br />
+              <NextLink href="/help/desactive-account" passHref>
+                <ChakraLink color="pink.500"> clicando aqui</ChakraLink>
+              </NextLink>. <br />
           </Text>
         </Box>
 
