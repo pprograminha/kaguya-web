@@ -6,12 +6,14 @@ import {
 import NextLink from 'next/link';
 import Lordicon from '../ReactLordicon';
 
-type AppLogoProps = ChakraProps & {
-  lordiconSize?: string[]
+interface AppLogoProps {
+  iconprops?: ChakraProps;
+  textProps?: ChakraProps;
 }
+
 export function AppLogo({
-  lordiconSize,
-  fontSize
+  iconprops,
+  textProps
 }: AppLogoProps) {
   const [pink800, white]= useToken("colors", ['pink.800', 'white'])
   
@@ -28,7 +30,8 @@ export function AppLogo({
           }}
         >
           <Box
-            w={lordiconSize || ["8", "12"]}
+            w={["8", "12"]}
+            {...iconprops}
           >
             <Lordicon
               size={"100%"}
@@ -43,7 +46,8 @@ export function AppLogo({
           </Box>
           <Text
             fontWeight="bold"
-            fontSize={fontSize || ["md", "2xl"]}
+            fontSize={["md", "2xl"]}
+            {...textProps}
           >
             Kaguya
           </Text>

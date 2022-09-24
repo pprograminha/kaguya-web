@@ -1,4 +1,6 @@
-import { Box, Flex, Text, useToken, VStack } from '@chakra-ui/react';
+import { Box, Flex, Text, useToken, VStack, Link as ChakraLink, } from '@chakra-ui/react';
+import NextLink from 'next/link';
+
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -9,7 +11,6 @@ import { MdEmail } from 'react-icons/md';
 import { SignInWithGithubButton } from '../SignInButtons/SignInWithGithubButton';
 import { SignInWithGoogleButton } from '../SignInButtons/SignInWithGoogleButton';
 import { ForgotPasswordLink } from './ForgotPasswordLink';
-import { FormHeader } from './FormHeader';
 
 import { Button } from '@/components/Button';
 import { DividerLine } from '@/components/DividerLine';
@@ -59,11 +60,14 @@ export function FormContainer() {
       <Box
         px={["4", "8"]}
         w="100%"
-        pb="12"
+        py="6"
         as="form"
+        bg="blackAlpha.700"
+        maxW={460}
+        borderRadius="md"
+
         onSubmit={handleSubmit(handleSignIn)}
       >
-        <FormHeader />
         <VStack
           spacing="3"
         >
@@ -97,15 +101,27 @@ export function FormContainer() {
           />
         </VStack>
         <ForgotPasswordLink />
-        
+
         <Button
-          mt="2"
           w="100%"
           isLoading={formState.isSubmitting}
           type="submit"
         >
           Entrar
         </Button>
+
+        <Text
+          color="gray.300"
+          opacity="0.9"
+          mt="4"
+          textAlign="left"
+          fontSize={["sm", "md"]}
+        >
+          Não tem uma conta? &nbsp;
+          <NextLink href="/register" passHref>
+            <ChakraLink color="pink.500">Crie agora</ChakraLink>
+          </NextLink>
+        </Text>
       </Box>
     </>
   )

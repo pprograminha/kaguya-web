@@ -14,19 +14,17 @@ export function ForgotPasswordLink() {
         fontSize={["sm", "md"]}
         pt="3"
       >
-        <Text as="span" mr="1">
-          Esqueceu sua senha?
-        </Text>
         <NextLink href="/recover-password" passHref>
           <ChakraLink
             color="gray.300"
+            opacity="0.8"
             fontSize={["sm", "md"]}
             _hover={{
               color: "pink.500",
               textDecoration: "underline"
             }}
           >
-            Redefinir agora
+            Esqueci minha senha
           </ChakraLink>
         </NextLink>
       </Text>
