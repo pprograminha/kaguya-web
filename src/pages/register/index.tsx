@@ -1,15 +1,18 @@
+import { Footer } from '@/components/Footer';
 import { 
   Flex, 
   VStack, 
   ScaleFade,
+  useMediaQuery,
 } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { Header } from '../../components/Header';
-import { RegisterChangePageHeader } from './ChangePageHeader';
 import { FormContainer } from './FormContainer';
+import { PageHeading } from './PageHeading';
 
 export default function RegisterUser() {
+  const [ isLargerThan880 ] = useMediaQuery('(min-width: 880px)');
+
   return (
     <>
       <Head>
@@ -17,41 +20,47 @@ export default function RegisterUser() {
       </Head>
 
       <Flex
-        w="100vw"
         h="100vh"
         flexDirection="column"
       >
-        <Header />
-
         <Flex
-          w="100vw"
-          h="100vh"
+          as="main"
+          alignItems="center"
+          justifyContent="center"
+          flex="1 1 0%"
           px="4"
+          my="16"
+          mx="4"
         >
-          <ScaleFade 
-            style={{
-              width: '100%',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              flexDirection: 'column',
-              height: '100%'
-            }}
-            initialScale={0.9} 
-            in
+          <Flex
+            alignItems={!isLargerThan880 ? "center" : "flex-start"}
+            justifyContent="center"
+            gap={!isLargerThan880 ? "4" : "12"}
+            flexDirection={!isLargerThan880 ? "column-reverse" : "row"}
+            width="100%"
+            maxW="1280px"
           >
-            <VStack
-              bg="blackAlpha.700"
-              maxW={460}
-              w="100%"
-              borderRadius="md"
+            <ScaleFade 
+              style={{
+                maxWidth: 460,
+                width: '100%',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexDirection: 'column',
+                height: '100%'
+              }}
+              initialScale={0.9} 
+              in
             >
-              <RegisterChangePageHeader />
-
               <FormContainer />
-            </VStack>
-          </ScaleFade>
+            </ScaleFade>
+
+            <PageHeading />
+          </Flex>
         </Flex>
+
+        <Footer />
       </Flex>
     </>
   );

@@ -1,4 +1,13 @@
-import { Box, Flex, Text, useToken, VStack } from '@chakra-ui/react';
+import { 
+  Box, 
+  Flex, 
+  Text, 
+  useToken, 
+  VStack, 
+  Link as ChakraLink
+} from '@chakra-ui/react';
+import NextLink from 'next/link';
+
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -7,7 +16,6 @@ import { FaLock, FaUser } from 'react-icons/fa';
 
 import { SignInWithGithubButton } from '../SignInButtons/SignInWithGithubButton';
 import { SignInWithGoogleButton } from '../SignInButtons/SignInWithGoogleButton';
-import { FormHeader } from './FormHeader';
 
 import { Button } from '@/components/Button';
 import { DividerLine } from '@/components/DividerLine';
@@ -63,12 +71,14 @@ export function FormContainer() {
     <>
       <Box
         px={["4", "8"]}
+        bg="blackAlpha.700"
+        maxW={460}
         w="100%"
-        pb="12"
+        borderRadius="md"
+        py="6"
         as="form"
         onSubmit={handleSubmit(handleRegisterUser)}
       >
-        <FormHeader />
         <VStack
           spacing="3"
         >
@@ -116,6 +126,19 @@ export function FormContainer() {
         >
           Registrar
         </Button>
+
+        <Text
+          color="gray.300"
+          opacity="0.9"
+          mt="4"
+          textAlign="left"
+          fontSize={["sm", "md"]}
+        >
+          Já tem uma conta? &nbsp;
+          <NextLink href="/login" passHref>
+            <ChakraLink color="pink.500">Faça login</ChakraLink>
+          </NextLink>
+        </Text>
       </Box>
     </>
   )
