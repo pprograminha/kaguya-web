@@ -19,6 +19,7 @@ import { Header } from '@/components/Header';
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { withSSRAuth } from '@/utils/withSSRAuth';
 import { TrailSkeletonLoading } from '../_components/TrailSkeletonLoading';
+import { Quote, quotes } from '@/services/quotes';
 
 export interface TrailData {
   id: string;
@@ -42,7 +43,11 @@ export interface TrailData {
   } | null;
 }
 
-export default function Trail() {
+type TrailProps = {
+  quote: Quote
+}
+
+export default function Trail({ quote }: TrailProps) {
   const toast = useToast();
 
   const is2xlVersion = useBreakpointValue({ 
@@ -124,7 +129,7 @@ export default function Trail() {
           />
 
           <TrailInfoHeader trail={trail.data} isFetching={trail.isFetching} />
-          <Quotes />
+          <Quotes quote={quote} />
 
           <DividerLine />
 
@@ -150,8 +155,16 @@ export default function Trail() {
 
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(async (ctx) => {
+  const min = 0;
+  const max = quotes.length - 1;
+  
+  const quoteIndex = Math.floor(min + (Math.random() * (max - min)));
+
+  const quote = quotes[quoteIndex]
+
   return {
-    props: {},
-    
+    props: {
+      quote
+    },
   }
 });

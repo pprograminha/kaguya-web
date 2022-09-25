@@ -60,8 +60,6 @@ export default function UserLogin() {
             </ScaleFade>
           </Flex>
         </Flex>
-        
-        <Footer />
       </Flex>
     </>
   );
@@ -69,7 +67,6 @@ export default function UserLogin() {
 
 export const getServerSideProps: GetServerSideProps = withSSRGuest(async () => {
   return {
-    props: {
-    }
+    props: {}
   }
 })

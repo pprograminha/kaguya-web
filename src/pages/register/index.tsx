@@ -59,8 +59,6 @@ export default function RegisterUser() {
             <PageHeading />
           </Flex>
         </Flex>
-
-        <Footer />
       </Flex>
     </>
   );

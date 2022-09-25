@@ -118,6 +118,13 @@ export function FormContainer() {
           />
         </VStack>
         
+        <Text fontSize="14px" mt="4" opacity="0.6">
+            Ao criar sua conta você concorda com os&nbsp;
+            <NextLink href="/terms" passHref>
+              <ChakraLink target="_blank" color="pink.500">termos</ChakraLink>
+            </NextLink> da plataforma
+        </Text>
+        
         <Button
           mt="6"
           w="100%"
