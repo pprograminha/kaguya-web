@@ -49,7 +49,7 @@ export function TrailInfoHeader({
         flexDirection="column"
         alignItems="flex-start"
         bg={`linear-gradient(90deg, 
-          ${blackAlpha900} 0%, 
+          ${blackAlpha700} 0%, 
           ${blackAlpha700} 32%, 
           ${pink800} 300%
         )`}

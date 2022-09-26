@@ -57,7 +57,7 @@ export function PlaylistItem({
           borderRadius="md"
           _hover={{
             border: '1px solid',
-            borderColor: 'white',
+            borderColor: 'pink.500',
           }}
         >
           <PlaylistIndex value={index}/>

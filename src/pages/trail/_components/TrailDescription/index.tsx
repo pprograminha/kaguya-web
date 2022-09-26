@@ -10,7 +10,7 @@ export function TrailDescription({
   return (
     <>
       <Text
-        color="gray.300"
+        color="white"
         mt={["2", "6"]}
         lineHeight="1.8"
         fontSize={["12", "sm", "md"]}

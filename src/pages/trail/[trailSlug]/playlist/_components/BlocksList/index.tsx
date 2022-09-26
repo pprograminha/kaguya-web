@@ -5,7 +5,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
 import { BlocksSkeletonLoading } from '../BlocksListSkeletonLoading';
 
@@ -42,6 +42,7 @@ export function BlocksList({
   trailSlug
 }: BlocksListProps) {
   const router = useRouter();
+  const [lastBlockIndex, setLastBlockIndex] = useState<number | null>(null);
 
   // const query = router.query;
   // const slugs = query?.slug || [] as string[];
@@ -75,6 +76,11 @@ export function BlocksList({
           
           if(lastLesson) {
             const lastBlock = blocksData.find((block) => block.id === lastLesson.block_id);
+            const lastBlockIndex = blocksData.findIndex((block) => block.id === lastLesson.block_id);
+
+            if(lastBlockIndex !== -1) {
+              setLastBlockIndex(lastBlockIndex)
+            }
             
             if(lastBlock) {
               router.push(`/trail/${trailSlug}/playlist/${playlistSlug}/block/${lastBlock.slug}/lesson/${lastLesson.slug}`);
@@ -97,24 +103,26 @@ export function BlocksList({
       w="100%"
       mb="8"
     >
-      <Accordion
-        defaultIndex={0}
-        allowToggle
+      {lastBlockIndex !== null ? (
+        <Accordion
+          defaultIndex={lastBlockIndex}
+          allowToggle
 
-        w="100%"
-        flexDirection="column"
-        display="flex"
-        gap="4"
-        maxH="600px"
-        overflowY="auto"
-      >
-        {blocks?.data && blocks.data.map((block) => (
-          <Block
-            key={block.id}
-            block={block}
-          />
-        ))}
-      </Accordion>
+          w="100%"
+          flexDirection="column"
+          display="flex"
+          gap="4"
+          maxH="600px"
+          overflowY="auto"
+        >
+          {blocks?.data && blocks.data.map((block) => (
+            <Block
+              key={block.id}
+              block={block}
+            />
+          ))}
+        </Accordion>
+      ) : <BlocksSkeletonLoading />}
     </Flex>
   )
 }
