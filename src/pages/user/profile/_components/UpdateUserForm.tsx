@@ -28,6 +28,8 @@ const updateUserFormSchema = yup.object().shape({
     .min(2, 'Mínimo de 2 caracteres no username')
     .max(100, 'Máximo de 100 caracteres no username'),
   name: yup.string()
+    .required('O nome não pode ficar vazio')
+    .min(2, 'Máximo de 2 caracteres no nome')
     .max(100, 'Máximo de 100 caracteres no nome'),
 });
 
