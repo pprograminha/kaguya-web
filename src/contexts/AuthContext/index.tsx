@@ -18,6 +18,7 @@ import { tokenCookieKey } from '@/services/kaguya/api';
 type AuthContextData = {
   signIn(credentials: SignInCredentials): Promise<void>;
   signUp(data: RegisterUserCredentials): Promise<void>;
+  setUser(fn: (user: User | null) => User | null): void;
   isAuthenticated: boolean;
   user: User | null;
 }
@@ -159,6 +160,8 @@ export function AuthProvider({
           isAuthenticated,
           signIn,
           signUp,
+
+          setUser,
         }}
       >
         {children}
