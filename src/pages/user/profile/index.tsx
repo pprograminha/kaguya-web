@@ -19,7 +19,7 @@ import { Loading } from '@/components/Loading';
 export default function UserProfile() {
   const { user } = useAuth();
 
-  if(!user) {
+  if(!user || !user.enabled) {
     return (
       <>
         <Loading />
@@ -71,7 +71,6 @@ export default function UserProfile() {
           </Flex>
         </Flex>
       </Flex>
-      {/* <UserAvatarModal modal={userAvatarModal} /> */}
     </>
   )
 }

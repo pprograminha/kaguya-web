@@ -17,7 +17,7 @@ import {
 
 import { useAuth } from '@/hooks/useAuth';
 
-// import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { kaguyaApi } from '@/services/kaguya/apiClient';
 
 import { apiError } from '@/utils/apiFormatError';
 import { signOut } from '@/contexts/AuthContext';
@@ -38,9 +38,7 @@ export function ConfirmDisableAccountModal({
 
   async function handleDisableUserAccount() {
     try {
-      // await kaguyaApi.patch('/users/avatar', {
-      //   avatar: null
-      // });
+      await kaguyaApi.patch('/users/disable');
 
       setUser((prevState) => {
         if(prevState) {

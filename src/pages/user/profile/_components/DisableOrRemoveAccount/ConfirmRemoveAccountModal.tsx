@@ -17,10 +17,9 @@ import {
 
 import { useAuth } from '@/hooks/useAuth';
 
-// import { kaguyaApi } from '@/services/kaguya/apiClient';
-
 import { apiError } from '@/utils/apiFormatError';
 import { signOut } from '@/contexts/AuthContext';
+import { kaguyaApi } from '@/services/kaguya/apiClient';
 
 interface UserAvatarModalProps {
   modal: {
@@ -38,21 +37,9 @@ export function ConfirmRemoveAccountModal({
 
   async function handleRemoveUserAccount() {
     try {
-      // await kaguyaApi.patch('/users/avatar', {
-      //   avatar: null
-      // });
+      await kaguyaApi.delete('/users/remove');
 
-      setUser((prevState) => {
-        if(prevState) {
-          return {
-            ...prevState,   
-            enabled: false
-          }
-        }
-
-        return prevState;
-      });
-
+      setUser(null);
       signOut();
       
       toast({
