@@ -47,6 +47,10 @@ export const theme = extendTheme({
         textDecoration: 'none',
         letterSpacing: 'wider'
       },
+      button: {
+        letterSpacing: 'wider',
+        color: 'inherit',
+      },
       input: {
         color: 'gray.300',
 
