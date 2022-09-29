@@ -46,10 +46,8 @@ export function ConfirmRemoveTrailModal({
     try {
       setLoading(true);
 
-      await kaguyaApi.delete('/user-trails', {
-        params: {
-          trail_id: trail?.id
-        }
+      await kaguyaApi.patch('/user-trails/change-enabled', {
+        trail_id: trail?.id
       });
       
       toast({
