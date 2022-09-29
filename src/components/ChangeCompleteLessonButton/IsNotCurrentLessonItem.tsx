@@ -39,6 +39,7 @@ export function IsNotCurrentLessonItem({
   const query = router.query;
 
   const [ playlistSlug ] = query?.slug || [] as string[];
+  const trailSlug = query.trailSlug as string;
 
   async function changeCompletedLesson() {
     try {
@@ -95,6 +96,8 @@ export function IsNotCurrentLessonItem({
           position: 'top-right',
         });
       }
+
+      await queryClient.invalidateQueries(['playlistsFromTrail', trailSlug]);
     } catch (error: any) {
       const errors = apiError(error);
 
