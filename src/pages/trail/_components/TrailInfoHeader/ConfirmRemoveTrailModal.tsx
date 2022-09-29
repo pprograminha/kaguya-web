@@ -117,7 +117,7 @@ export function ConfirmRemoveTrailModal({
           opacity="0.6 !important"
         />
         <ModalContent
-          bg="blackAlpha.700"
+          bg="blackAlpha.600"
           alignItems="flex-start"
           py="4"
           mx="4"
