@@ -22,9 +22,10 @@ export function UserProfile({
         )}
         <ProfilePopover isWideVersion={isWideVersion}>
           <Avatar
-            src={user?.avatar_url || 'logo.png'}
+            src={user?.avatar_url || '/assets/gifs/defaultAvatar.gif'}
             name={user?.name || user?.username}
-            bg="pink.500"
+            bg="blackAlpha.600"
+            p="1"
 
             size={["sm", "md"]}
             cursor="pointer"
