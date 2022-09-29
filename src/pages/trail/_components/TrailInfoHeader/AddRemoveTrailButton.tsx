@@ -90,24 +90,7 @@ export function AddRemoveTrailButton({
         return data;
       });
 
-      queryClient.setQueryData<PlaylistData[] | undefined>(['playlistsFromTrail', trail?.slug], (data) => {
-        if(data) {
-          return data.map(playlist => {
-            return {
-              ...playlist,
-            }
-          })
-        }
-      });
-
-      queryClient.setQueryData<TrailData[] | undefined>('othersTrails', (data) => {
-        if(data) {
-          return data.filter(where => where.id !== trail?.id);
-        }
-
-        return data;
-      });
-
+      await queryClient.invalidateQueries(['playlistsFromTrail', trail?.slug]);
       await queryClient.invalidateQueries('othersTrails');
       await queryClient.invalidateQueries('userTrails');
     } catch (error: any) {
