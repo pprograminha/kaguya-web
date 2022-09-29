@@ -54,8 +54,7 @@ export function UserAvatarModal({
       formData.append('avatar', avatar);
 
       const response = await kaguyaApi.patch('/users/avatar', formData);
-
-      console.log(response.data);
+      
       setUser((prevState) => {
         if(prevState) {
           return {
@@ -65,7 +64,18 @@ export function UserAvatarModal({
         }
 
         return prevState;
-      })
+      });
+
+      toast({
+        title: 'Atualização da foto de perfil',
+        description: 'Foto de perfil atualizada com sucesso.',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+        position: 'top-right',
+      });
+
+      modal.onClose();
     } catch (error: any) {
       if(error instanceof Error) {
         return toast({
@@ -97,11 +107,10 @@ export function UserAvatarModal({
 
   async function handleRemoveUserAvatar() {
     try {
-      const response = await kaguyaApi.patch('/users/avatar', {
+      await kaguyaApi.patch('/users/avatar', {
         avatar: null
       });
 
-      console.log(response.data);
       setUser((prevState) => {
         if(prevState) {
           return {
@@ -111,7 +120,18 @@ export function UserAvatarModal({
         }
 
         return prevState;
-      })
+      });
+
+      toast({
+        title: 'Remoção da foto de perfil',
+        description: 'Foto de perfil removida com sucesso.',
+        status: 'success',
+        duration: 6000,
+        isClosable: true,
+        position: 'top-right',
+      });
+
+      modal.onClose();
     } catch (error: any) {
       if(error instanceof Error) {
         return toast({
@@ -147,34 +167,58 @@ export function UserAvatarModal({
           opacity="0.6 !important"
         />
         <ModalContent
-          bg="blackAlpha.700"
+          bg="blackAlpha.600"
           alignItems="flex-start"
           py="4"
           mx="4"
         >
-          <ModalHeader fontSize={["md", "lg"]}>Remoção ou atualização de foto de perfil</ModalHeader>
+          <ModalHeader fontSize={["md", "lg"]}>
+            {user?.avatar_url ? (
+              <>
+                Remoção ou atualização de foto de perfil
+              </>
+            ) : (
+              <>
+                Atualização de foto de perfil
+              </>
+            )}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody
-            mt="6"
+            mt="4"
             alignItems="center"
             display="flex"
             flexDirection="column"
             w="100%"
           >
             <Box
-              h={180}
-              w={180}
+              border="3px solid"
+              borderColor="pink.500"
+              borderRadius="50%"
+              p="2"
             >
-              <Avatar
-                w="100%"
-                h="100%"
-                bg="blackAlpha.600"
-                src={user?.avatar_url || '/assets/gifs/defaultAvatar.gif'}
-              />
+              <Box
+                h={180}
+                w={180}
+              >
+                <Avatar
+                  w="100%"
+                  h="100%"
+                  bg="blackAlpha.600"
+                  src={user?.avatar_url || '/assets/gifs/defaultAvatar.gif'}
+                />
+              </Box>
             </Box>
-            <Text fontSize={["sm", "md"]} mt="8">
-              Você deseja remover ou trocar sua foto de perfil?
-            </Text>
+
+            {user?.avatar_url ? (
+              <Text fontSize={["sm", "md"]} mt="8">
+                Você deseja remover ou trocar sua foto de perfil?
+              </Text>
+            ) : (
+              <Text fontSize={["sm", "md"]} mt="8">
+                Você deseja trocar sua foto de perfil?
+              </Text>
+            )}
           </ModalBody>
 
           <ModalFooter
@@ -184,14 +228,16 @@ export function UserAvatarModal({
               justifyContent="center"
               w="100%"
             >
-              <Button
-                colorScheme='ghost'
-                mr={3}
-                onClick={handleRemoveUserAvatar}
-                fontSize={["sm", "md"]}
-              >
-                Remover foto de perfil
-              </Button>
+              {user?.avatar_url && (
+                <Button
+                  colorScheme='ghost'
+                  mr={3}
+                  onClick={handleRemoveUserAvatar}
+                  fontSize={["sm", "md"]}
+                >
+                  Remover foto de perfil
+                </Button>
+              )} 
               <Box
                 as="label"
                 
