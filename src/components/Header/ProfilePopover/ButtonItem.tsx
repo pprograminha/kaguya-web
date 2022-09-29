@@ -18,6 +18,7 @@ export function ButtonItem({
         gap="3"
         py="4"
         px="4"
+        pr="12"
         w="100%"
         h="auto !important"
         bg="none"

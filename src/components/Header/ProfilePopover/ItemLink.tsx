@@ -25,6 +25,7 @@ export function ItemLink({
           fontWeight="normal"
           bg="none"
           px="4"
+          pr="12"
           py="4"
           w="100%"
           color="gray.300"

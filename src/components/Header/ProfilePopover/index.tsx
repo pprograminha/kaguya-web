@@ -3,14 +3,14 @@ import {
   PopoverBody, 
   PopoverContent, 
   PopoverTrigger,
-  Text,
   useDisclosure,
 } from '@chakra-ui/react';
 import { FiLogOut } from 'react-icons/fi';
+import { MdDashboard } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import { ItemLink } from './ItemLink';
-import { DividerLine } from '../../DividerLine';
+import { DividerLine } from '@/components/DividerLine';
 import { ConfirmSignOutModal } from './ConfirmSignOutModal';
 import { ButtonItem } from './ButtonItem';
 
@@ -52,7 +52,7 @@ export function ProfilePopover({
                 passHref: true,
               }}
             >
-              <AiOutlineUser size={18} />
+              <MdDashboard size={18} />
               Dashboard
             </ItemLink>
             <ItemLink
