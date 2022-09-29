@@ -86,11 +86,16 @@ export default function TermsPage() {
             >
               Ao desativar sua conta, seu perfil de usuário não será mais exibido na plataforma. Se, no futuro, você quiser reabrir uma conta desativada, precisará entrar em contato conosco via e-mail(me@kaguya.com.br).
             </Highlight>
-            <br />
-            Veja como você pode desativar sua conta 
-              <NextLink href="/help/desactive-account" passHref>
-                <ChakraLink color="pink.500"> clicando aqui</ChakraLink>
-              </NextLink>. <br />
+          </Text>
+          <Text
+            color="gray.300"
+            fontSize={["xs", "sm", "md"]}
+            mt="2"
+          >
+            Você poderá desativar seu perfil seguindo algumas etapas a seguir: <br />
+              1- Acessar a tela de <ChakraLink href="/login" color="pink.500">login</ChakraLink> e entrar em sua conta. <br />
+              2- Acessar a aba de perfil. <br />
+              3- Clicar no botão de desativar conta e confirmar a desativação. <br />
           </Text>
         </Box>
 
@@ -131,7 +136,10 @@ export default function TermsPage() {
             fontSize={["xs", "sm", "md"]}
             mt="2"
           >
-            Você pode excluir sua conta e seus dados [em breve].
+            Você poderá excluir seu perfil seguindo algumas etapas a seguir: <br />
+            1- Acessar a tela de <ChakraLink href="/login" color="pink.500">login</ChakraLink> e entrar em sua conta. <br />
+            2- Acessar a aba de perfil. <br />
+            3- Clicar no botão de excluir conta e confirmar a exclusão. <br />
           </Text>
         </Box>
 
