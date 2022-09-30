@@ -7,10 +7,7 @@ import {
   Flex, useBreakpointValue, useToast
 } from '@chakra-ui/react';
 
-import { OtherInfoFromTrail } from '../_components/OtherInfoFromTrail';
-import { PlaylistsContainer } from '../_components/Playlists';
-import { Quotes } from '../_components/Quotes';
-import { TrailInfoHeader } from '../_components/TrailInfoHeader';
+import { OtherInfoFromTrail, PlaylistsContainer, Quotes, TrailInfoHeader, TrailSkeletonLoading } from '@/modules/trail/components';
 
 import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
 import { DividerLine } from '@/components/DividerLine';
@@ -18,7 +15,6 @@ import { Header } from '@/components/Header';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 import { withSSRAuth } from '@/utils/withSSRAuth';
-import { TrailSkeletonLoading } from '../_components/TrailSkeletonLoading';
 import { Quote, quotes } from '@/services/quotes';
 
 export interface TrailData {

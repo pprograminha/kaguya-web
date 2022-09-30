@@ -44,10 +44,6 @@ export function BlocksList({
   const router = useRouter();
   const [lastBlockIndex, setLastBlockIndex] = useState<number | null>(null);
 
-  // const query = router.query;
-  // const slugs = query?.slug || [] as string[];
-  // const currentBlockSlug = slugs[2] as string;
-
   const blocks = useQuery<BlockData[]>(['blocksFromPlaylist', playlistSlug], async () => {
     const response = await kaguyaApi.get<BlockData[]>('/blocks/playlist-list-all', {
       params: {

@@ -2,10 +2,7 @@ import { Box, Flex, HStack, keyframes, useBreakpointValue } from '@chakra-ui/rea
 import Head from 'next/head';
 import { GetServerSideProps } from 'next';
 
-import { LessonHistory } from './_components/LessonHistory';
-import { MyTrails } from './_components/MyTrails';
-import { OthersTrails } from './_components/OthersTrails';
-import { Welcome } from './_components/Welcome';
+import { LessonHistory, MyTrails, OthersTrails, Welcome } from '../../modules/dashboard/components';
 
 import { Header } from '@/components/Header';
 import { withSSRAuth } from '@/utils/withSSRAuth';

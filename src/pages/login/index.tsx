@@ -1,4 +1,3 @@
-import { Footer } from '@/components/Footer';
 import { 
   Flex, 
   ScaleFade, 
@@ -9,8 +8,7 @@ import Head from 'next/head';
 
 import { withSSRGuest } from 'utils/withSSRGuest';
 
-import { FormContainer } from './_components/FormContainer';
-import { PageHeading } from './_components/PageHeading';
+import { FormContainer, PageHeading } from '@/modules/login/components';
 
 export default function UserLogin() {
   const [ isLargerThan880 ] = useMediaQuery('(min-width: 880px)');

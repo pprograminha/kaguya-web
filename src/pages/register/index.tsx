@@ -1,4 +1,3 @@
-import { Footer } from '@/components/Footer';
 import { 
   Flex, 
   VStack, 
@@ -7,8 +6,10 @@ import {
 } from '@chakra-ui/react';
 import Head from 'next/head';
 
-import { FormContainer } from './FormContainer';
-import { PageHeading } from './PageHeading';
+import {
+  FormContainer,
+  PageHeading,
+} from '@/modules/register/components';
 
 export default function RegisterUser() {
   const [ isLargerThan880 ] = useMediaQuery('(min-width: 880px)');

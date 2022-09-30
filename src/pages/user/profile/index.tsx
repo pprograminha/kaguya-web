@@ -4,8 +4,7 @@ import {
 } from '@chakra-ui/react';
 import { GetServerSideProps } from 'next';
 
-import { UserAvatar } from './_components/UserAvatar';
-import { UpdateUserForm } from './_components/UpdateUserForm';
+import { UserAvatar, UpdateUserForm, DisableOrRemoveAccount } from '@/modules/user/profile/components';
 
 import { Header } from '@/components/Header';
 
@@ -13,7 +12,6 @@ import { useAuth } from '@/hooks/useAuth';
 
 import { withSSRAuth } from '@/utils/withSSRAuth';
 import { DividerLine } from '@/components/DividerLine';
-import { DisableOrRemoveAccount } from './_components/DisableOrRemoveAccount';
 import { Loading } from '@/components/Loading';
 
 export default function UserProfile() {

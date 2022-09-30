@@ -14,8 +14,8 @@ import * as yup from 'yup';
 import { MdEmail } from 'react-icons/md';
 import { FaLock, FaUser } from 'react-icons/fa';
 
-import { SignInWithGithubButton } from '../SignInButtons/SignInWithGithubButton';
 import { SignInWithGoogleButton } from '../SignInButtons/SignInWithGoogleButton';
+import { SignInWithGithubButton } from '../SignInButtons/SignInWithGithubButton';
 
 import { Button } from '@/components/Button';
 import { DividerLine } from '@/components/DividerLine';

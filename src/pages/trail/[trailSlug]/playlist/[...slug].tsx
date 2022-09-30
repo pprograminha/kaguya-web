@@ -12,9 +12,7 @@ import { useQuery } from 'react-query';
 import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
 import { Header } from '@/components/Header';
 
-import { BlocksList } from './_components/BlocksList';
-import { LessonInfo } from './_components/LessonInfo';
-import { LessonVideo } from './_components/LessonVideo';
+import { BlocksList, LessonInfo, LessonVideo } from '@/modules/playlist/components';
 
 import { kaguyaApi } from '@/services/kaguya/apiClient';
 
@@ -122,7 +120,7 @@ export default function PlaylistPage() {
   });
 
   const isFetching = playlist.isFetching || trail.isFetching;
-  const isLoading = playlist.isLoading || trail.isLoading || isFetching;
+  const isLoading = lesson.isLoading || playlist.isLoading || trail.isLoading || isFetching;
 
   if(!isLoading && !lesson) {
     router.push('/dashboard');
