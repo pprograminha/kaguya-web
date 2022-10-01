@@ -181,7 +181,7 @@ export default function HomePage() {
                     color:"pink.500",
                   }}
                 >
-                  A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade da programação tenha uma maior facilidade de começar ou continuar seus estudos podendo evoluir junto e de forma coordenada com outros alunos.
+                  A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade da programação tenha uma maior facilidade de começar ou continuar seus estudos, podendo evoluir junto e de forma coordenada com outros alunos.
                 </Highlight>
               </Text>
             </Box>
