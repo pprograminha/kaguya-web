@@ -154,7 +154,7 @@ export default function HomePage() {
               >
                 <Box w={["16", "24"]}>
                   <Lordicon
-                    icon="book"
+                    icon="ruins"
                     size={'100%'}
                     delay={7000}
                     colors={{
@@ -227,7 +227,7 @@ export default function HomePage() {
               >
                 <Box w={["16", "24"]}>
                   <Lordicon
-                    icon="book"
+                    icon="folder"
                     size={'100%'}
                     delay={7000}
                     colors={{
@@ -371,7 +371,7 @@ export default function HomePage() {
                 >
                   <Box w={["12", "16"]}>
                     <Lordicon
-                      icon="book"
+                      icon="consultation"
                       size={'100%'}
                       delay={7000}
                       colors={{
@@ -406,7 +406,7 @@ export default function HomePage() {
                 >
                   <Box w={["12", "16"]}>
                     <Lordicon
-                      icon="book"
+                      icon="editDocument"
                       size={'100%'}
                       delay={7000}
                       colors={{
@@ -429,7 +429,7 @@ export default function HomePage() {
                     maxW={320}
                     color="gray.300"
                   >
-                    Tenha acesso a aulas iniciante e avançado de qualidade e grátis
+                    Tenha acesso a aulas para juniors e seniors, tudo de qualidade e grátis
                   </Text>
                 </GridItem>
               </Grid>

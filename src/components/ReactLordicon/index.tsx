@@ -20,11 +20,14 @@ export type LordiconIcons =
   | 'history'
   | 'trash'
   | 'play'
+  | 'editDocument'
   | 'confetti'
   | 'addCard'
+  | 'folder'
   | 'thumbsUpDown'
   | 'cross'
   | 'nightSky'
+  | 'consultation'
   | 'spaFlower'
   | 'book'
   | 'share'
@@ -109,11 +112,14 @@ export const Lordicon: React.FC<LordiconProps> = ({
     spaFlower: 'dqunxaob',
     snake: 'jlkaerma',
     ruins: 'uixzulhh',
+    editDocument: 'puvaffet',
     privacyPolicy: 'yyecauzv',
     edit: 'wloilxuq',
     bin: 'gsqxdxog',
     flatArrow: 'iifryyua',
-    camera: 'vixtkkbk'
+    camera: 'vixtkkbk',
+    consultation: 'zpxybbhl',
+    folder: 'bbnkwdur',
   }
 
   const lordiconIcon = `${lordiconIcons[icon]}.json`
