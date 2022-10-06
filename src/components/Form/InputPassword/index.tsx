@@ -56,12 +56,14 @@ const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputP
           w="100%"
           mt="1"
         >
-          <Flex
-            alignItems="center"
-            pl="4"
-          >
-            {icon}
-          </Flex>
+          {icon && (
+            <Flex
+              alignItems="center"
+              pl="4"
+              >
+              {icon}
+            </Flex>
+          )}
 
           <ChakraInput
             name={name}

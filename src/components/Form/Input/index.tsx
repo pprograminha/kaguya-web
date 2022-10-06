@@ -8,6 +8,7 @@ import {
   FormLabel,
   Flex,
   useToken,
+  FormLabelProps,
 } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
@@ -18,6 +19,7 @@ export interface InputProps extends ChakraInputProps {
   icon?: React.ReactElement;
   error?: FieldError;
   labelText?: string;
+  labelProps?: FormLabelProps;
 }
 
 const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
@@ -26,6 +28,7 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
   type,
   error = null,
   labelText,
+  labelProps,
   ...rest
 }, ref) => {
   const [red600] = useToken('colors', ['red.600']);
@@ -35,6 +38,7 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
       <FormLabel
         w="100%"
         m="0"
+        {...labelProps}
       >
         <Text 
           as="span"
@@ -51,12 +55,14 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
           w="100%"
           mt="1"
         >
-          <Flex
-            alignItems="center"
-            pl="4"
-          >
-            {icon}
-          </Flex>
+          {icon && (
+            <Flex
+              alignItems="center"
+              pl="4"
+              >
+              {icon}
+            </Flex>
+          )}
 
           <ChakraInput
             name={name}
@@ -73,7 +79,7 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
             textColor="gray.300"
             color="gray.300"
             border="0"
-        
+
             {...rest}
           />
 
