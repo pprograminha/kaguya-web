@@ -6,6 +6,8 @@ import {
   Text,
   Box,
   FormLabel,
+  Flex,
+  useToken,
 } from '@chakra-ui/react';
 import { forwardRef } from 'react';
 import { FieldError } from 'react-hook-form';
@@ -15,6 +17,7 @@ export interface InputProps extends ChakraInputProps {
   type?: React.HTMLInputTypeAttribute;
   icon?: React.ReactElement;
   error?: FieldError;
+  labelText?: string;
 }
 
 const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = ({
@@ -22,27 +25,38 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
   icon,
   type,
   error = null,
+  labelText,
   ...rest
 }, ref) => {
+  const [red600] = useToken('colors', ['red.600']);
+
   return (
     <>
-      <FormControl
-        flexDirection="column"
-        isInvalid={!!error}
+      <FormLabel
+        w="100%"
+        m="0"
       >
-        <FormLabel
-          position="relative"
-          m="0"
+        <Text 
+          as="span"
+          color="gray.300"
         >
-          <Box
-            position="absolute"
-            zIndex="10"
-            left="4"
-            top="50%"
-            transform="translateY(-50%)"
+          {labelText}
+        </Text>
+        <FormControl
+          display="flex"
+          flexDirection="row"
+          border={!!error ? `1px solid ${red600}` : "1px solid transparent"}
+          bg="blackAlpha.600"
+          borderRadius="md"
+          w="100%"
+          mt="1"
+        >
+          <Flex
+            alignItems="center"
+            pl="4"
           >
             {icon}
-          </Box>
+          </Flex>
 
           <ChakraInput
             name={name}
@@ -50,14 +64,10 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
             type={type}
 
             size="lg"
-            bg="blackAlpha.600"
 
             display="block"
             py={["sm", "md", "1"]}
-            w="100%"
-            borderRadius="md"
             outline="0"
-            pl="12"
 
             fontSize={["sm", "md"]}
             textColor="gray.300"
@@ -66,16 +76,14 @@ const InputBase: React.ForwardRefRenderFunction<HTMLInputElement, InputProps> = 
         
             {...rest}
           />
-        </FormLabel>
 
+        </FormControl>
         {!!error && (
-          <FormErrorMessage>
-            <Text color="red.300" >
-              {error.message}
-            </Text>
-          </FormErrorMessage>
+          <Text color="red.300" mt="1">
+            {error.message}
+          </Text>
         )}
-      </FormControl>
+      </FormLabel>
     </>
   );
 }

@@ -7,6 +7,7 @@ import {
   Box,
   FormLabel,
   useToken,
+  Flex,
 } from '@chakra-ui/react';
 import { forwardRef, useState } from 'react';
 import { FieldError } from 'react-hook-form';
@@ -17,59 +18,65 @@ export interface InputPasswordProps extends ChakraInputProps {
   name: string;
   icon?: React.ReactElement;
   error?: FieldError;
+  labelText?: string;
 }
 
 const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputPasswordProps> = ({
   name,
   icon,
   error = null,
+  labelText,
   ...rest
 }, ref) => {
-  const [gray300]= useToken("colors", [
+  const [gray300, red600]= useToken("colors", [
     'gray.300', 
+    'red.600',
   ]);
 
   const [inputType, setInputType] = useState<'text' | 'password'>('password');
   
   return (
     <>
-      <FormControl
-        flexDirection="column"
-        isInvalid={!!error}
+      <FormLabel
+        w="100%"
+        m="0"
       >
-        <FormLabel
-          position="relative"
-          m="0"
+        <Text 
+          as="span"
+          color="gray.300"
         >
-          <Box
-            position="absolute"
-            zIndex="10"
-            left="4"
-            top="50%"
-            transform="translateY(-50%)"
+          {labelText}
+        </Text>
+        <FormControl
+          display="flex"
+          flexDirection="row"
+          border={!!error ? `1px solid ${red600}` : "1px solid transparent"}
+          bg="blackAlpha.600"
+          borderRadius="md"
+          w="100%"
+          mt="1"
+        >
+          <Flex
+            alignItems="center"
+            pl="4"
           >
             {icon}
-          </Box>
+          </Flex>
 
           <ChakraInput
             name={name}
             ref={ref}
-            type={inputType}
 
             size="lg"
-            bg="blackAlpha.600"
 
             display="block"
             py={["sm", "md", "1"]}
-            w="100%"
-            borderRadius="md"
             outline="0"
-            pl="12"
 
             fontSize={["sm", "md"]}
             textColor="gray.300"
             color="gray.300"
-            border="none"
+            border="0"
         
             {...rest}
           />
@@ -90,16 +97,14 @@ const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputP
               <AiFillEye color={`${gray300}`} size={18} />
             </ChangeInputTypeButton>
           )}
-        </FormLabel>
+        </FormControl>
 
         {!!error && (
-          <FormErrorMessage>
-            <Text color="red.300" >
-              {error.message}
-            </Text>
-          </FormErrorMessage>
+          <Text color="red.300" mt="1">
+            {error.message}
+          </Text>
         )}
-      </FormControl>
+      </FormLabel>
     </>
   );
 }
