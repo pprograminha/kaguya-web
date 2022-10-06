@@ -88,13 +88,15 @@ export function FormContainer() {
           spacing="3"
         >
           <Input
-            placeholder="E-mail"
+            placeholder="Digite seu e-mail"
+            labelText='E-mail'
             icon={<MdEmail color={`${gray300}`} />}
             error={signInErrors.email}
             {...register('email')}
           />
           <InputPassword
-            placeholder="Senha"
+            placeholder="Digite sua senha"
+            labelText='Senha'
             icon={<FaLock color={`${gray300}`} />}
             error={signInErrors.password}
             {...register('password')}

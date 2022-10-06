@@ -103,14 +103,16 @@ export function UpdateUserForm() {
           spacing="3"
         >
           <Input
-            placeholder="Username"
+            placeholder="Digite um username"
+            labelText="Username"
             icon={<FaUser color={`${gray300}`} />}
             error={updateUserErrors.username}
             {...register('username')}
             defaultValue={user?.username}
           />
           <Input
-            placeholder="Nome"
+            placeholder="Digite um nome"
+            labelText="Nome"
             icon={<MdEmail color={`${gray300}`} />}
             error={updateUserErrors.name}
             {...register('name')}
