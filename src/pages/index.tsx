@@ -181,7 +181,7 @@ export default function HomePage() {
                     color:"pink.500",
                   }}
                 >
-                  A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade da programação tenha uma maior facilidade de começar ou continuar seus estudos, podendo evoluir junto e de forma coordenada com outros alunos.
+                  A plataforma organiza os diversos conteúdos espalhados pela internet para que a comunidade de programação tenha uma maior facilidade de começar ou continuar seus estudos, podendo evoluir junto e de forma coordenada com outros alunos.
                 </Highlight>
               </Text>
             </Box>
@@ -359,7 +359,7 @@ export default function HomePage() {
                     maxW={320}
                     color="gray.300"
                   >
-                    Telas fácil de usar deixando a experiência agradável.
+                    Nosso objetivo é tornar a experiência o mais agradável possível para nossos alunos.
                   </Text>
                 </GridItem>
                 <GridItem
