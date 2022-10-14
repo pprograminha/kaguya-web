@@ -1,8 +1,7 @@
-import { 
-  Button, 
+import {
+  Button,
   Text,
-  useToast, 
-
+  useToast,
   Modal,
   ModalOverlay,
   ModalContent,
@@ -13,16 +12,16 @@ import {
   Box,
   Avatar,
   Flex,
-} from '@chakra-ui/react';
-import { AxiosError } from 'axios';
+} from "@chakra-ui/react";
+import { AxiosError } from "axios";
 
-import { Input } from '@/components/Form/Input';
+import { Input } from "@/components/Form/Input";
 
-import { useAuth } from '@/hooks/useAuth';
+import { useAuth } from "@/hooks/useAuth";
 
-import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { kaguyaApi } from "@/services/kaguya/apiClient";
 
-import { apiError } from '@/utils/apiFormatError';
+import { apiError } from "@/utils/apiFormatError";
 
 interface UserAvatarModalProps {
   modal: {
@@ -31,156 +30,149 @@ interface UserAvatarModalProps {
   };
 }
 
-export function UserAvatarModal({
-  modal,
-}: UserAvatarModalProps) {
+export function UserAvatarModal({ modal }: UserAvatarModalProps) {
   const { user, setUser } = useAuth();
 
   const toast = useToast();
 
   async function handleUpdateUserAvatar(avatar: File | null | undefined) {
     try {
-      const fileTypeAccepted = ['image/png', 'image/svg' ,'image/jpeg', 'image/gif'];
+      const fileTypeAccepted = [
+        "image/png",
+        "image/svg",
+        "image/jpeg",
+        "image/gif",
+      ];
 
-      if(!avatar) {
-        throw new Error('Escolha uma avatar para atualiza-lo.')
+      if (!avatar) {
+        throw new Error("Escolha uma avatar para atualiza-lo.");
       }
-      
-      if(!fileTypeAccepted.includes(avatar.type)) {
-        throw new Error('Tipos de arquivo válido são: .png | .gif | .svg | .jpeg')
+
+      if (!fileTypeAccepted.includes(avatar.type)) {
+        throw new Error(
+          "Tipos de arquivo válido são: .png | .gif | .svg | .jpeg"
+        );
       }
 
       const formData = new FormData();
-      formData.append('avatar', avatar);
+      formData.append("avatar", avatar);
 
-      const response = await kaguyaApi.patch('/users/avatar', formData);
-      
+      const response = await kaguyaApi.patch("/users/avatar", formData);
+
       setUser((prevState) => {
-        if(prevState) {
+        if (prevState) {
           return {
-            ...prevState,   
-            avatar_url: response.data.avatar_url
-          }
+            ...prevState,
+            avatar_url: response.data.avatar_url,
+          };
         }
 
         return prevState;
       });
 
       toast({
-        title: 'Atualização da foto de perfil',
-        description: 'Foto de perfil atualizada com sucesso.',
-        status: 'success',
+        title: "Atualização da foto de perfil",
+        description: "Foto de perfil atualizada com sucesso.",
+        status: "success",
         duration: 6000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
 
       modal.onClose();
     } catch (error: any) {
-      if(error instanceof Error) {
+      if (error instanceof Error) {
         return toast({
-          title: 'Erro na atualização do avatar',
+          title: "Erro na atualização do avatar",
           description: error.message,
-          status: 'error',
+          status: "error",
           duration: 6000,
           isClosable: true,
-          position: 'top-right',
+          position: "top-right",
         });
       }
 
-      if(error instanceof AxiosError) {
+      if (error instanceof AxiosError) {
         const errors = apiError(error);
 
-        errors.messages.forEach(messageError => {
+        errors.messages.forEach((messageError) => {
           toast({
-            title: 'Erro na atualização do avatar',
+            title: "Erro na atualização do avatar",
             description: messageError,
-            status: 'error',
+            status: "error",
             duration: 6000,
             isClosable: true,
-            position: 'top-right',
+            position: "top-right",
           });
         });
       }
     }
-  };
+  }
 
   async function handleRemoveUserAvatar() {
     try {
-      await kaguyaApi.patch('/users/avatar', {
-        avatar: null
+      await kaguyaApi.patch("/users/avatar", {
+        avatar: null,
       });
 
       setUser((prevState) => {
-        if(prevState) {
+        if (prevState) {
           return {
-            ...prevState,   
-            avatar_url: null
-          }
+            ...prevState,
+            avatar_url: null,
+          };
         }
 
         return prevState;
       });
 
       toast({
-        title: 'Remoção da foto de perfil',
-        description: 'Foto de perfil removida com sucesso.',
-        status: 'success',
+        title: "Remoção da foto de perfil",
+        description: "Foto de perfil removida com sucesso.",
+        status: "success",
         duration: 6000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
 
       modal.onClose();
     } catch (error: any) {
-      if(error instanceof Error) {
+      if (error instanceof Error) {
         return toast({
-          title: 'Erro na remoção do avatar',
+          title: "Erro na remoção do avatar",
           description: error.message,
-          status: 'error',
+          status: "error",
           duration: 6000,
           isClosable: true,
-          position: 'top-right',
+          position: "top-right",
         });
       }
 
       const errors = apiError(error);
 
-      errors.messages.forEach(messageError => {
+      errors.messages.forEach((messageError) => {
         toast({
-          title: 'Erro na remoção do avatar',
+          title: "Erro na remoção do avatar",
           description: messageError,
-          status: 'error',
+          status: "error",
           duration: 6000,
           isClosable: true,
-          position: 'top-right',
+          position: "top-right",
         });
       });
     }
-  };
+  }
 
   return (
     <>
       <Modal isOpen={modal.isOpen} onClose={modal.onClose} isCentered>
-        <ModalOverlay
-          bg="blackAlpha.700"
-          opacity="0.6 !important"
-        />
-        <ModalContent
-          bg="blackAlpha.600"
-          alignItems="flex-start"
-          py="4"
-          mx="4"
-        >
+        <ModalOverlay bg="blackAlpha.700" opacity="0.6 !important" />
+        <ModalContent bg="blackAlpha.600" alignItems="flex-start" py="4" mx="4">
           <ModalHeader fontSize={["md", "lg"]}>
             {user?.avatar_url ? (
-              <>
-                Remoção ou atualização de foto de perfil
-              </>
+              <>Remoção ou atualização de foto de perfil</>
             ) : (
-              <>
-                Atualização de foto de perfil
-              </>
+              <>Atualização de foto de perfil</>
             )}
           </ModalHeader>
           <ModalCloseButton />
@@ -197,15 +189,12 @@ export function UserAvatarModal({
               borderRadius="50%"
               p="2"
             >
-              <Box
-                h={180}
-                w={180}
-              >
+              <Box h={180} w={180}>
                 <Avatar
                   w="100%"
                   h="100%"
                   bg="blackAlpha.600"
-                  src={user?.avatar_url || '/assets/gifs/defaultAvatar.gif'}
+                  src={user?.avatar_url || "/assets/gifs/defaultAvatar.gif"}
                 />
               </Box>
             </Box>
@@ -221,26 +210,20 @@ export function UserAvatarModal({
             )}
           </ModalBody>
 
-          <ModalFooter
-            w="100%"
-          >
-            <Flex
-              justifyContent="center"
-              w="100%"
-            >
+          <ModalFooter w="100%">
+            <Flex justifyContent="center" w="100%">
               {user?.avatar_url && (
                 <Button
-                  colorScheme='ghost'
+                  colorScheme="ghost"
                   mr={3}
                   onClick={handleRemoveUserAvatar}
                   fontSize={["sm", "md"]}
                 >
                   Remover foto de perfil
                 </Button>
-              )} 
+              )}
               <Box
                 as="label"
-                
                 cursor="pointer"
                 position="relative"
                 bg="pink.500"
@@ -248,20 +231,23 @@ export function UserAvatarModal({
                 px="4"
                 borderRadius="md"
                 transition="all 0.2s"
-
                 _hover={{
-                  filter: 'brightness(110%)'
+                  filter: "brightness(110%)",
                 }}
               >
-                <Input
+                <input
                   type="file"
                   name="avatar"
-                  display="none"
-                  position="absolute"
-                  zIndex="10"
-                  w="100%"
-                  h="100%"
-                  onChange={(e) => handleUpdateUserAvatar(e.target.files?.item(0))}
+                  style={{
+                    position: "absolute",
+                    zIndex: "10",
+                    width: "100%",
+                    height: "100%",
+                    display: "none",
+                  }}
+                  onChange={(e) =>
+                    handleUpdateUserAvatar(e.target.files?.item(0))
+                  }
                 />
                 Atualizar foto de perfil
               </Box>
@@ -270,6 +256,5 @@ export function UserAvatarModal({
         </ModalContent>
       </Modal>
     </>
-  )
+  );
 }
-

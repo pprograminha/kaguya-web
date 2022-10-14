@@ -1,6 +1,6 @@
-import { 
-  Input as ChakraInput, 
-  InputProps as ChakraInputProps, 
+import {
+  Input as ChakraInput,
+  InputProps as ChakraInputProps,
   FormControl,
   FormErrorMessage,
   Text,
@@ -8,11 +8,11 @@ import {
   FormLabel,
   useToken,
   Flex,
-} from '@chakra-ui/react';
-import { forwardRef, useState } from 'react';
-import { FieldError } from 'react-hook-form';
-import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai';
-import { ChangeInputTypeButton } from './ChangeInputTypeButton';
+} from "@chakra-ui/react";
+import { forwardRef, useState } from "react";
+import { FieldError } from "react-hook-form";
+import { AiFillEye, AiFillEyeInvisible } from "react-icons/ai";
+import { ChangeInputTypeButton } from "./ChangeInputTypeButton";
 
 export interface InputPasswordProps extends ChakraInputProps {
   name: string;
@@ -21,30 +21,18 @@ export interface InputPasswordProps extends ChakraInputProps {
   labelText?: string;
 }
 
-const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputPasswordProps> = ({
-  name,
-  icon,
-  error = null,
-  labelText,
-  ...rest
-}, ref) => {
-  const [gray300, red600]= useToken("colors", [
-    'gray.300', 
-    'red.600',
-  ]);
+const InputPasswordBase: React.ForwardRefRenderFunction<
+  HTMLInputElement,
+  InputPasswordProps
+> = ({ name, icon, error = null, labelText, ...rest }, ref) => {
+  const [gray300, red600] = useToken("colors", ["gray.300", "red.600"]);
 
-  const [inputType, setInputType] = useState<'text' | 'password'>('password');
-  
+  const [inputType, setInputType] = useState<"text" | "password">("password");
+
   return (
     <>
-      <FormLabel
-        w="100%"
-        m="0"
-      >
-        <Text 
-          as="span"
-          color="gray.300"
-        >
+      <FormLabel w="100%" m="0">
+        <Text as="span" color="gray.300">
           {labelText}
         </Text>
         <FormControl
@@ -57,10 +45,7 @@ const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputP
           mt="1"
         >
           {icon && (
-            <Flex
-              alignItems="center"
-              pl="4"
-              >
+            <Flex alignItems="center" pl="4">
               {icon}
             </Flex>
           )}
@@ -68,33 +53,30 @@ const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputP
           <ChakraInput
             name={name}
             ref={ref}
-
+            type={inputType}
             size="lg"
-
             display="block"
             py={["sm", "md", "1"]}
             outline="0"
-
             fontSize={["sm", "md"]}
             textColor="gray.300"
             color="gray.300"
             border="0"
-        
             {...rest}
           />
 
-          {inputType === 'password' && (
-             <ChangeInputTypeButton
+          {inputType === "password" && (
+            <ChangeInputTypeButton
               right="2"
-              onClick={() => setInputType('text')}
+              onClick={() => setInputType("text")}
             >
               <AiFillEyeInvisible color={`${gray300}`} size={18} />
             </ChangeInputTypeButton>
           )}
-          {inputType === 'text' && (
-             <ChangeInputTypeButton
+          {inputType === "text" && (
+            <ChangeInputTypeButton
               right="2"
-              onClick={() => setInputType('password')}
+              onClick={() => setInputType("password")}
             >
               <AiFillEye color={`${gray300}`} size={18} />
             </ChangeInputTypeButton>
@@ -109,6 +91,6 @@ const InputPasswordBase: React.ForwardRefRenderFunction<HTMLInputElement, InputP
       </FormLabel>
     </>
   );
-}
+};
 
 export const InputPassword = forwardRef(InputPasswordBase);
