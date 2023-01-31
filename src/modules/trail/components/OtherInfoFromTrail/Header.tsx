@@ -1,4 +1,4 @@
-import { Flex, Heading, Image } from '@chakra-ui/react';
+import { Flex, Heading, Image } from "@chakra-ui/react";
 
 interface TrailData {
   id: string;
@@ -11,25 +11,18 @@ export interface OtherInfoFromTrailHeaderProps {
 }
 
 export function OtherInfoFromTrailHeader({
-  trail
+  trail,
 }: OtherInfoFromTrailHeaderProps) {
   return (
     <>
-      <Flex
-        alignItems="center"
-        gap="4"
-      >
-        <Image 
-          src={trail?.avatar_url}
+      <Flex alignItems="center" gap="4">
+        <Image
+          src={trail?.avatar_url || "/assets/gifs/defaultAvatar.gif"}
           alt={`Avatar da trilha de ${trail?.name}`}
-
           w={["16", "20", "24"]}
           h={["16", "20", "24"]}
         />
-        <Heading
-          fontSize={["md", "lg", "2xl"]}
-          letterSpacing="wider"
-        >
+        <Heading fontSize={["md", "lg", "2xl"]} letterSpacing="wider">
           Informações da trilha
         </Heading>
       </Flex>

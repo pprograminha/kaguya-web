@@ -1,6 +1,6 @@
-import { modifyYoutubeUrl } from '@/utils/modifyYoutubeUrl';
-import { Flex, Skeleton, useMediaQuery } from '@chakra-ui/react';
-import { InfoAboutLessonVideo } from './InfoAboutLessonVideo';
+import { modifyYoutubeUrl } from "@/utils/modifyYoutubeUrl";
+import { Flex, Skeleton, useMediaQuery } from "@chakra-ui/react";
+import { InfoAboutLessonVideo } from "./InfoAboutLessonVideo";
 
 interface Lesson {
   id: string;
@@ -10,61 +10,72 @@ interface Lesson {
   slug: string;
 
   completed: boolean;
-  state: 'none' | 'liked' | 'disliked';
+  state: "none" | "liked" | "disliked";
 
   _count: {
-		dislikes: number;
-		likes: number;
-		views: number;
-	},
+    dislikes: number;
+    likes: number;
+    views: number;
+  };
   block_id: string;
 }
 
 interface LessonVideoProps {
-  lesson?: Lesson
-  isLoadingLesson: boolean
+  lesson?: Lesson;
+  isLoadingLesson?: boolean;
 }
 
 export function LessonVideo({ lesson, isLoadingLesson }: LessonVideoProps) {
-  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
+  const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
 
-  if(isLoadingLesson) {
-    return <Skeleton  
-      borderRadius="md"
-      {...(isLargerThan1024 ? {
-        width: "max(240px, min(850px, 50vw))",
-        height: "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(50vw * 0.5625)))",
-      } : {
-        width:"max(240px, min(850px, calc(100vw - 32px)))",
-        height:"max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(calc(100vw - 32px) * 0.5625)))",
-      })}
-      endColor="blackAlpha.700" 
-      startColor="blackAlpha.600" 
-    />
+  if (isLoadingLesson) {
+    return (
+      <Skeleton
+        borderRadius="md"
+        {...(isLargerThan1024
+          ? {
+              width: "max(240px, min(850px, 50vw))",
+              height:
+                "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(50vw * 0.5625)))",
+            }
+          : {
+              width: "max(240px, min(850px, calc(100vw - 32px)))",
+              height:
+                "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(calc(100vw - 32px) * 0.5625)))",
+            })}
+        endColor="blackAlpha.700"
+        startColor="blackAlpha.600"
+      />
+    );
   }
 
   return (
     <>
-      <Flex 
+      <Flex
         borderRadius="md"
         mx="auto"
         overflow="hidden"
-        {...(isLargerThan1024 ? {
-          width: "max(240px, min(850px, 50vw))",
-        } : {
-          width:"max(240px, min(850px, calc(100vw - 32px)))",
-        })}
+        {...(isLargerThan1024
+          ? {
+              width: "max(240px, min(850px, 50vw))",
+            }
+          : {
+              width: "max(240px, min(850px, calc(100vw - 32px)))",
+            })}
         flexDirection="column"
       >
-        <Flex 
-          {...(isLargerThan1024 ? {
-            width: "max(240px, min(850px, 50vw))",
-            height: "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(50vw * 0.5625)))",
-          } : {
-            width:"max(240px, min(850px, calc(100vw - 32px)))",
-            height:"max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(calc(100vw - 32px) * 0.5625)))",
-          })}
-          
+        <Flex
+          {...(isLargerThan1024
+            ? {
+                width: "max(240px, min(850px, 50vw))",
+                height:
+                  "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(50vw * 0.5625)))",
+              }
+            : {
+                width: "max(240px, min(850px, calc(100vw - 32px)))",
+                height:
+                  "max(calc(240px * 0.5625), min(calc(850px * 0.5625), calc(calc(100vw - 32px) * 0.5625)))",
+              })}
         >
           <iframe
             width="100%"
@@ -78,5 +89,5 @@ export function LessonVideo({ lesson, isLoadingLesson }: LessonVideoProps) {
         <InfoAboutLessonVideo lesson={lesson} />
       </Flex>
     </>
-  )
+  );
 }

@@ -24,8 +24,8 @@ export const theme = extendTheme({
     }
   },
   fonts: {
-    heading: 'Roboto Condensed, sans-serif',
-    body: 'Roboto Condensed, sans-serif',
+    heading: 'Open Sans, sans-serif',
+    body: 'Open Sans, sans-serif',
   },
   styles: {
     global: {

@@ -1,22 +1,22 @@
 import {
   Box,
-  Button as ChakraButton, 
-  ChakraProps, 
-  useDisclosure, 
+  Button as ChakraButton,
+  ChakraProps,
+  useDisclosure,
   useToast,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+} from "@chakra-ui/react";
+import { useState } from "react";
 
-import Lordicon from '@/components/ReactLordicon';
-import { Tooltip } from '@/components/Tooltip';
+import Lordicon from "@/components/ReactLordicon";
+import { Tooltip } from "@/components/Tooltip";
 
-import { ConfirmRemoveTrailModal } from './ConfirmRemoveTrailModal';
+import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
 
-import { apiError } from '@/utils/apiFormatError';
+import { apiError } from "@/utils/apiFormatError";
 
-import { kaguyaApi } from '@/services/kaguya/apiClient';
-import { queryClient } from '@/services/reactQueryClient';
-import { PlaylistData } from '../Playlists';
+import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { queryClient } from "@/services/reactQueryClient";
+import { PlaylistData } from "../Playlists";
 
 interface TrailData {
   id: string;
@@ -42,13 +42,15 @@ export interface AddRemoveTrailButtonProps {
 
 export function AddRemoveTrailButton({
   isMdVersion,
-  trail
+  trail,
 }: AddRemoveTrailButtonProps) {
-  const propsEquals: ChakraProps = !isMdVersion ? {
-    position: 'absolute',
-    top: "-5",
-    right: "0",
-  } : {};
+  const propsEquals: ChakraProps = !isMdVersion
+    ? {
+        position: "absolute",
+        top: "-5",
+        right: "0",
+      }
+    : {};
 
   const [loading, setLoading] = useState(false);
 
@@ -59,63 +61,66 @@ export function AddRemoveTrailButton({
     setLoading(true);
 
     try {
-      await kaguyaApi.post('/user-trails', {
-        trail_id: trail?.id
+      await kaguyaApi.post("/user-trails", {
+        trail_id: trail?.id,
       });
 
       toast({
-        title: 'Trilha adicionada',
+        title: "Trilha adicionada",
         description: `Você adicionou a trilha de ${trail?.name} na sua conta.`,
-        status: 'success',
+        status: "success",
         duration: 5000,
         isClosable: true,
-        position: 'top-right',
+        position: "top-right",
       });
 
-      queryClient.setQueryData<TrailData | undefined>(['uniqueTrail', trail?.slug], (data) => {
-        if(data) {
-          return {
-            ...data,
-            user_trail: {
-              progress: data?.user_trail?.progress as number,
-              enabled: true,
-            },
-            _count: {
-              ...data._count,
-              users: data._count.users + 1,
-            },
+      queryClient.setQueryData<TrailData | undefined>(
+        ["uniqueTrail", trail?.slug],
+        (data) => {
+          if (data) {
+            return {
+              ...data,
+              user_trail: {
+                progress: data?.user_trail?.progress as number,
+                enabled: true,
+              },
+              _count: {
+                ...data._count,
+                users: data._count.users + 1,
+              },
+            };
           }
+
+          return data;
         }
+      );
 
-        return data;
-      });
-
-      await queryClient.invalidateQueries(['playlistsFromTrail', trail?.slug]);
-      await queryClient.invalidateQueries('othersTrails');
-      await queryClient.invalidateQueries('userTrails');
+      await queryClient.invalidateQueries(["playlistsFromTrail", trail?.slug]);
+      await queryClient.invalidateQueries("othersTrails");
+      await queryClient.invalidateQueries("userTrails");
     } catch (error: any) {
       const errors = apiError(error);
 
-      errors.messages.forEach(messageError => {
+      errors.messages.forEach((messageError) => {
         toast({
-          title: 'Erro na adição da trilha na conta',
+          title: "Erro na adição da trilha na conta",
           description: messageError,
-          status: 'error',
+          status: "error",
           duration: 6000,
           isClosable: true,
-          position: 'top-right',
+          position: "top-right",
         });
-      })
+      });
     }
 
     setLoading(false);
   }
 
   async function handleRemoveUserTrail() {
-    confirmRemoveTrailModal.onOpen();    
+    confirmRemoveTrailModal.onOpen();
   }
 
-  if(trail?.user_trail) {
+  if (trail?.user_trail?.enabled) {
     return (
       <>
         <ChakraButton
@@ -127,28 +132,24 @@ export function AddRemoveTrailButton({
           px="6"
           gap="2"
           _hover={{
-            bg:"normal",
-            filter: "brightness(120%)"
+            bg: "normal",
+            filter: "brightness(120%)",
           }}
           disabled={loading}
           onClick={handleRemoveUserTrail}
           {...propsEquals}
         >
-          <Lordicon 
-            trigger='hover'
-            icon='trash'
-            size={20}
-          />
-          {isMdVersion && 'Remover trilha'}
+          <Lordicon trigger="hover" icon="trash" size={20} />
+          {isMdVersion && "Remover trilha"}
         </ChakraButton>
 
-        <ConfirmRemoveTrailModal 
-          modal={confirmRemoveTrailModal} 
+        <ConfirmRemoveTrailModal
+          modal={confirmRemoveTrailModal}
           trail={trail}
           setLoading={setLoading}
         />
       </>
-    )
+    );
   }
 
   return (
@@ -163,15 +164,15 @@ export function AddRemoveTrailButton({
         px="6"
         gap="2"
         _hover={{
-          bg:"normal",
-          filter: "brightness(120%)"
+          bg: "normal",
+          filter: "brightness(120%)",
         }}
         disabled={loading}
         onClick={addUserTrail}
         {...propsEquals}
       >
-        <Lordicon icon="addCard" size={20}/>
-        {isMdVersion && 'Adicionar trilha'}
+        <Lordicon icon="addCard" size={20} />
+        {isMdVersion && "Adicionar trilha"}
         <Box
           mb="10"
           mr="-8"
@@ -189,15 +190,15 @@ export function AddRemoveTrailButton({
               icon="error"
               size={50}
               delay={1000}
-              trigger='loop'  
+              trigger="loop"
               colors={{
-                primary: 'white',
-                secondary: 'white',
+                primary: "white",
+                secondary: "white",
               }}
             />
           </Tooltip>
         </Box>
       </ChakraButton>
     </>
-  )
+  );
 }

@@ -1,18 +1,17 @@
-
-import { 
-  Box, 
-  Flex, 
-  Heading, 
-  Image, 
-  Link as ChakraLink, 
-  Stack, 
-  Text
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { Button } from '@/components/Button';
-import Lordicon from '@/components/ReactLordicon';
-import { TrailMenu } from './TrailMenu';
-import { trailCount } from '@/utils/format/trailCount';
+import {
+  Box,
+  Flex,
+  Heading,
+  Image,
+  Link as ChakraLink,
+  Stack,
+  Text,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
+import { Button } from "@/components/Button";
+import Lordicon from "@/components/ReactLordicon";
+import { TrailMenu } from "./TrailMenu";
+import { trailCount } from "@/utils/format/trailCount";
 
 interface TrailData {
   id: string;
@@ -40,17 +39,12 @@ interface TrailProps {
   trail: TrailData;
 }
 
-export function Trail({
-  trail
-}: TrailProps) {
-
+export function Trail({ trail }: TrailProps) {
   const trailCountTexts = trailCount(trail);
 
   return (
     <>
-      <Box
-        position="relative"
-      >
+      <Box position="relative">
         <NextLink href={`/trail/${trail.slug}`} passHref>
           <ChakraLink
             display="flex"
@@ -61,64 +55,34 @@ export function Trail({
             borderRadius="md"
             cursor="pointer"
             _hover={{
-              textDecoration:"none"
+              textDecoration: "none",
             }}
           >
-            <Flex
-              alignItems="center"
-              gap="4"
-            >
+            <Flex alignItems="center" gap="4">
               <Image
-                src={trail.avatar_url}
+                src={trail.avatar_url || "/assets/gifs/defaultAvatar.gif"}
                 alt={`Avatar da trilha de ${trail.name}.`}
-                    
-                w={["12","16"]}
-                h={["12","16"]}
+                w={["12", "16"]}
+                h={["12", "16"]}
               />
-              <Stack
-                flexDirection="column"
-              >
-                <Heading
-                  fontSize={["sm", "md", "2xl"]}
-                >
-                  {trail.name}
-                </Heading>
+              <Stack flexDirection="column">
+                <Heading fontSize={["sm", "md", "2xl"]}>{trail.name}</Heading>
                 <Box>
-                  <Text
-                    color="gray.300"
-                    fontSize={["sm"]}
-                  >
+                  <Text color="gray.300" fontSize={["sm"]}>
                     {trailCountTexts.playlists}
                   </Text>
-                  <Text
-                    color="gray.300"
-                    fontSize={["sm"]}
-                  >
+                  <Text color="gray.300" fontSize={["sm"]}>
                     {trailCountTexts.lessons}
                   </Text>
-                  <Text
-                    color="gray.300"
-                    fontSize={["sm"]}
-                  >
+                  <Text color="gray.300" fontSize={["sm"]}>
                     {trailCountTexts.users}
                   </Text>
                 </Box>
               </Stack>
             </Flex>
-            <Box
-              ml="auto"
-              display="flex"
-              flexDirection="column"
-            >
-              <Button
-                py="1"
-                mt="auto"
-              >
-                <Lordicon 
-                  icon='flatArrow' 
-                  size={20} 
-                  trigger='hover' 
-                />
+            <Box ml="auto" display="flex" flexDirection="column">
+              <Button py="1" mt="auto">
+                <Lordicon icon="flatArrow" size={20} trigger="hover" />
               </Button>
             </Box>
           </ChakraLink>

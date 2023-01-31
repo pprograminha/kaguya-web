@@ -1,11 +1,17 @@
-import { useQuery } from 'react-query';
-import { CircularProgress, Flex, Heading, keyframes,useToken } from '@chakra-ui/react';
+import { useQuery } from "react-query";
+import {
+  CircularProgress,
+  Flex,
+  Heading,
+  keyframes,
+  useToken,
+} from "@chakra-ui/react";
 
-import { DividerLine } from '@/components/DividerLine';
-import { kaguyaApi } from '@/services/kaguya/apiClient';
+import { DividerLine } from "@/components/DividerLine";
+import { kaguyaApi } from "@/services/kaguya/apiClient";
 
-import { OthersTrailsNoContent } from './OthersTrailsNoContent';
-import { Trail } from './Trail';
+import { OthersTrailsNoContent } from "./OthersTrailsNoContent";
+import { Trail } from "./Trail";
 
 const animate = keyframes`
   from {  
@@ -16,7 +22,7 @@ const animate = keyframes`
     opacity: 1;
     transform: translateX(0);
   }
-`
+`;
 
 interface TrailData {
   id: string;
@@ -33,7 +39,7 @@ interface TrailData {
     users: number;
     lessons: number;
   };
-  
+
   user_trail: {
     progress: number;
     enabled: boolean;
@@ -41,26 +47,31 @@ interface TrailData {
 }
 
 export function OthersTrails() {
-  const [blackAlpha900, blackAlpha850] = useToken('colors', ['blackAlpha.900','blackAlpha.850'])
-  
-  const { data, isFetching } = useQuery<TrailData[]>('othersTrails', async () => {
-    const response = await kaguyaApi.get<TrailData[]>('/trails/list-all', {
-      params: {
-        take: 10,
-        exclude_my_trails: true,
-      }
-    });
+  const [blackAlpha900, blackAlpha850] = useToken("colors", [
+    "blackAlpha.900",
+    "blackAlpha.850",
+  ]);
 
-    return response.data;
-  }, {
-    staleTime: 1000 * 60 * 10 , // 60 minutes
-  });
+  const { data, isFetching } = useQuery<TrailData[]>(
+    "othersTrails",
+    async () => {
+      const response = await kaguyaApi.get<TrailData[]>("/trails/list-all", {
+        params: {
+          take: 10,
+          exclude_my_trails: true,
+        },
+      });
+
+      return response.data;
+    },
+    {}
+  );
 
   return (
     <>
       <Flex
         animation={`${animate} 0.6s ease`}
-        borderRadius={'lg'}
+        borderRadius={"lg"}
         bg={`linear-gradient(to right, ${blackAlpha850}, ${blackAlpha900})`}
         flexDirection="column"
         flex="1"
@@ -77,11 +88,7 @@ export function OthersTrails() {
         >
           Outras trilhas
           {isFetching && (
-            <CircularProgress
-              isIndeterminate
-              color='pink.800'
-              size={6}
-            />
+            <CircularProgress isIndeterminate color="pink.800" size={6} />
           )}
         </Heading>
 
@@ -98,9 +105,8 @@ export function OthersTrails() {
             px="2"
             pb="8"
           >
-            {data && data.map(trail => (
-              <Trail key={trail.id} trail={trail} />
-            ))}
+            {data &&
+              data.map((trail) => <Trail key={trail.id} trail={trail} />)}
           </Flex>
         )}
       </Flex>

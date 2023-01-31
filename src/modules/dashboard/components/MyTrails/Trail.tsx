@@ -1,43 +1,39 @@
-import { 
-  GridItem, 
-  Button, 
-  Image, 
+import {
+  GridItem,
+  Button,
+  Image,
   Text,
   Box,
-  useDisclosure, 
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
+  useDisclosure,
+} from "@chakra-ui/react";
+import NextLink from "next/link";
 
-import Lordicon from '@/components/ReactLordicon';
-import { Progress } from '@/components/Progress';
-import { ConfirmRemoveTrailModal } from './ConfirmRemoveTrailModal';
+import Lordicon from "@/components/ReactLordicon";
+import { Progress } from "@/components/Progress";
+import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
 
 interface UserTrail {
   id: string;
   name: string;
   slug: string;
   avatar_url: string;
-  
+
   user_trail: {
     progress: number;
     enabled: boolean;
-  }
+  };
 }
 
 interface TrailProps {
   trail: UserTrail;
 }
 
-export function Trail({
-  trail
-}: TrailProps) {
+export function Trail({ trail }: TrailProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <>
-      <Box
-        position="relative"
-      >
+      <Box position="relative">
         <Button
           position="absolute"
           top="2"
@@ -45,13 +41,12 @@ export function Trail({
           bg="blackAlpha.600"
           zIndex="10"
           _hover={{
-            bg:"normal",
-            opacity: "0.7"
+            bg: "normal",
+            opacity: "0.7",
           }}
-
           onClick={onOpen}
         >
-          <Lordicon icon="trash"/>
+          <Lordicon icon="trash" />
         </Button>
         <NextLink href={`/trail/${trail.slug}`}>
           <GridItem
@@ -65,12 +60,11 @@ export function Trail({
             borderRadius="md"
             cursor="pointer"
           >
-            <Image 
-              src={trail.avatar_url}
+            <Image
+              src={trail.avatar_url || "/assets/gifs/defaultAvatar.gif"}
               alt={`Avatar da trilha de ${trail.name}`}
-
-              w={["14","16"]}
-              h={["14","16"]}
+              w={["14", "16"]}
+              h={["14", "16"]}
             />
             <Text
               fontSize={["sm", "md", "xl"]}
@@ -87,10 +81,10 @@ export function Trail({
         </NextLink>
       </Box>
 
-      <ConfirmRemoveTrailModal 
+      <ConfirmRemoveTrailModal
         modal={{
           isOpen,
-          onClose
+          onClose,
         }}
         trail={trail}
       />

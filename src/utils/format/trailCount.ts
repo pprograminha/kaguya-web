@@ -11,14 +11,14 @@ export function trailCount(trail?: TrailCountProps) {
   const playlistCountText = playlistCount === 1 ? `${playlistCount} playlist` : `${playlistCount} playlists`;
 
   const lessonsCount = trail?._count.lessons;
-  const lessonsCountText = lessonsCount === 1 ? `${lessonsCount} aulas` : `${lessonsCount} aulas`;
+  const lessonsCountText = lessonsCount === 1 ? `${lessonsCount} aula` : `${lessonsCount} aulas`;
 
   const usersCount = trail?._count.users;
   const usersCountText = usersCount === 1 ? `${usersCount} aluno` : `${usersCount} alunos`;
 
   return {
-    lessons: playlistCountText,
-    playlists: lessonsCountText,
+    lessons: lessonsCountText,
+    playlists: playlistCountText,
     users: usersCountText,
   };
 }

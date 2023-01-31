@@ -8,7 +8,7 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
   let cookies = parseCookies(ctx);
   
   const kaguyaApi = axios.create({
-    baseURL: 'https://kaguya-it.herokuapp.com',
+    baseURL: 'http://localhost:3333',
   });
   
   kaguyaApi.defaults.headers.common.Authorization = `Bearer ${cookies[tokenCookieKey]}`;

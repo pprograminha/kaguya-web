@@ -1,9 +1,9 @@
-import { 
-  Breadcrumb, 
-  BreadcrumbItemProps as ChakraBreadCrumbItemProps
-} from '@chakra-ui/react';
-import { MdOutlineKeyboardArrowRight } from 'react-icons/md';
-import { BreadCrumbItem } from './Item';
+import {
+  Breadcrumb,
+  BreadcrumbItemProps as ChakraBreadCrumbItemProps,
+} from "@chakra-ui/react";
+import { MdOutlineKeyboardArrowRight } from "react-icons/md";
+import { BreadCrumbItem } from "./Item";
 
 interface BreadCrumbItemData {
   link: string;
@@ -27,7 +27,6 @@ export function BreadCrumbContainer({
       <Breadcrumb
         spacing="2"
         separator={separator || <MdOutlineKeyboardArrowRight size={20} />}
-        mx={["4", "6"]}
       >
         {items.map((item, index) => (
           <BreadCrumbItem
@@ -47,5 +46,5 @@ export function BreadCrumbContainer({
         />
       </Breadcrumb>
     </>
-  )
+  );
 }
