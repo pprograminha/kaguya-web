@@ -1,8 +1,7 @@
-import { AccordionItem } from '@chakra-ui/react';
-
-import { useRouter } from 'next/router';
-import { LessonListFromBlock } from '../LessonsListFromBlock';
-import { BlockInfo } from './BlockInfo';
+import { AccordionItem } from "@chakra-ui/react";
+import { BlockInfo } from "./BlockInfo";
+import { LessonListFromBlock } from "../LessonsListFromBlock";
+import { useRouter } from "next/router";
 
 interface Lesson {
   id: string;
@@ -16,25 +15,23 @@ interface Block {
   id: string;
   name: string;
   slug: string;
-  
+
   user_block: {
     progress: number;
   } | null;
 
-  lessons: Lesson[]
+  lessons: Lesson[];
 }
 
 export interface BlockProps {
   block: Block;
 }
 
-export function Block({
-  block,
-}: BlockProps) {
+export function Block({ block }: BlockProps) {
   const router = useRouter();
   const query = router.query;
 
-  const slugs = query?.slug || [] as string[];
+  const slugs = query?.slug || ([] as string[]);
   const lessonSlug = slugs[4] as string;
 
   return (
@@ -48,5 +45,5 @@ export function Block({
         />
       </AccordionItem>
     </>
-  )
+  );
 }
