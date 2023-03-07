@@ -1,18 +1,18 @@
 import {
-  GridItem,
+  Box,
   Button,
+  GridItem,
   Image,
   Text,
-  Box,
   useDisclosure,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
 
-import Lordicon from "@/components/ReactLordicon";
-import { Progress } from "@/components/Progress";
 import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
+import Lordicon from "@/components/ReactLordicon";
+import NextLink from "next/link";
+import { Progress } from "@/components/Progress";
 
-interface UserTrail {
+interface TrailData {
   id: string;
   name: string;
   slug: string;
@@ -25,7 +25,7 @@ interface UserTrail {
 }
 
 interface TrailProps {
-  trail: UserTrail;
+  trail: TrailData;
 }
 
 export function Trail({ trail }: TrailProps) {
