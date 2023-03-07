@@ -3,20 +3,17 @@ import {
   Button as ChakraButton,
   ChakraProps,
   useDisclosure,
+  useMediaQuery,
   useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
-
-import Lordicon from "@/components/ReactLordicon";
-import { Tooltip } from "@/components/Tooltip";
 
 import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
-
+import Lordicon from "@/components/ReactLordicon";
 import { apiError } from "@/utils/apiFormatError";
-
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { queryClient } from "@/services/reactQueryClient";
-import { PlaylistData } from "../Playlists";
+import { useState } from "react";
+import { useTrail } from "@/hooks/useTrail";
 
 interface TrailData {
   id: string;
@@ -40,22 +37,15 @@ export interface AddRemoveTrailButtonProps {
   trail: TrailData | undefined;
 }
 
-export function AddRemoveTrailButton({
-  isMdVersion,
-  trail,
-}: AddRemoveTrailButtonProps) {
-  const propsEquals: ChakraProps = !isMdVersion
-    ? {
-        position: "absolute",
-        top: "-5",
-        right: "0",
-      }
-    : {};
+export function AddRemoveTrailButton({ trail }: AddRemoveTrailButtonProps) {
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   const [loading, setLoading] = useState(false);
 
   const toast = useToast();
   const confirmRemoveTrailModal = useDisclosure();
+
+  const { setTrailData } = useTrail();
 
   async function addUserTrail() {
     setLoading(true);
@@ -78,7 +68,7 @@ export function AddRemoveTrailButton({
         ["uniqueTrail", trail?.slug],
         (data) => {
           if (data) {
-            return {
+            const finalData = {
               ...data,
               user_trail: {
                 progress: data?.user_trail?.progress as number,
@@ -89,6 +79,10 @@ export function AddRemoveTrailButton({
                 users: data._count.users + 1,
               },
             };
+
+            setTrailData(finalData);
+
+            return finalData;
           }
 
           return data;
@@ -137,10 +131,9 @@ export function AddRemoveTrailButton({
           }}
           disabled={loading}
           onClick={handleRemoveUserTrail}
-          {...propsEquals}
         >
           <Lordicon trigger="hover" icon="trash" size={20} />
-          {isMdVersion && "Remover trilha"}
+          {isLargerThan768 && "Remover trilha"}
         </ChakraButton>
 
         <ConfirmRemoveTrailModal
@@ -169,35 +162,9 @@ export function AddRemoveTrailButton({
         }}
         disabled={loading}
         onClick={addUserTrail}
-        {...propsEquals}
       >
         <Lordicon icon="addCard" size={20} />
-        {isMdVersion && "Adicionar trilha"}
-        <Box
-          mb="10"
-          mr="-8"
-          p="1"
-          bg="pink.800"
-          borderRadius="full"
-          borderColor="pink.800"
-        >
-          <Tooltip
-            placement="right-start"
-            hasArrow
-            label="Adicione esta trilha antes de acessar as playlists"
-          >
-            <Lordicon
-              icon="error"
-              size={50}
-              delay={1000}
-              trigger="loop"
-              colors={{
-                primary: "white",
-                secondary: "white",
-              }}
-            />
-          </Tooltip>
-        </Box>
+        {isLargerThan768 && "Adicionar trilha"}
       </ChakraButton>
     </>
   );
