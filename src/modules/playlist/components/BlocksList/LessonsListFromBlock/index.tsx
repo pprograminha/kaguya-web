@@ -1,36 +1,11 @@
-import { AccordionPanel } from '@chakra-ui/react';
-import { Lesson } from './Lesson';
+import { BlockData, LessonData } from "@/services/kaguya/types";
 
-interface LessonData {
-  id: string;
-  name: string;
-  slug: string;
-  completed: boolean;
-}
-
-interface LessonData {
-  id: string;
-  name: string;
-  slug: string;
-  completed: boolean;
-  block_id: string;
-}
-
-interface Block {
-  id: string;
-  name: string;
-  slug: string;
-  
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: LessonData[]
-}
+import { AccordionPanel } from "@chakra-ui/react";
+import { Lesson } from "./Lesson";
 
 export interface LessonListFromBlocks {
   lessons?: LessonData[];
-  block: Block;
+  block: BlockData;
   currentLessonSlug?: string;
 }
 
@@ -48,16 +23,17 @@ export function LessonListFromBlock({
         display="flex"
         flexDirection="column"
       >
-        {lessons && lessons.map((lesson, index) => (
-          <Lesson
-            key={lesson.id}
-            block={block}
-            lesson={lesson}
-            isCurrentLesson={lesson.slug === currentLessonSlug}
-            hasNextLesson={index !== lessons?.length - 1}
-          />
-        ))}
+        {lessons &&
+          lessons.map((lesson, index) => (
+            <Lesson
+              key={lesson.id}
+              block={block}
+              lesson={lesson}
+              isCurrentLesson={lesson.slug === currentLessonSlug}
+              hasNextLesson={index !== lessons?.length - 1}
+            />
+          ))}
       </AccordionPanel>
     </>
-  )
+  );
 }

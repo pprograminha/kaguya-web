@@ -1,39 +1,19 @@
 import {
   Box,
+  Link as ChakraLink,
   Flex,
   Heading,
   Image,
-  Link as ChakraLink,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import NextLink from "next/link";
+
 import { Button } from "@/components/Button";
 import Lordicon from "@/components/ReactLordicon";
+import NextLink from "next/link";
+import { TrailData } from "@/services/kaguya/types";
 import { TrailMenu } from "./TrailMenu";
 import { trailCount } from "@/utils/format/trailCount";
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: string;
-
-  created_at: string;
-  updated_at: string;
-
-  _count: {
-    playlists: number;
-    users: number;
-    lessons: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
 
 interface TrailProps {
   trail: TrailData;

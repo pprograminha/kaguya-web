@@ -1,3 +1,4 @@
+import { BlockData, LessonData } from "@/services/kaguya/types";
 import { Box, Link as ChakraLink, ChakraProps, Flex } from "@chakra-ui/react";
 
 import { ChangeCompleteLessonButton } from "@/components/ChangeCompleteLessonButton";
@@ -22,30 +23,11 @@ const defaultLessonStyle: ChakraProps = {
   },
 };
 
-interface Lesson {
-  id: string;
-  name: string;
-  slug: string;
-  completed: boolean;
-  block_id: string;
-}
-
-export interface Block {
-  id: string;
-  name: string;
-  slug: string;
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: Lesson[];
-}
-
 export interface LessonProps {
   isCurrentLesson?: boolean;
-  lesson: Lesson;
-  block: Block;
   hasNextLesson?: boolean;
+  lesson: LessonData;
+  block: BlockData;
 }
 
 export function Lesson({

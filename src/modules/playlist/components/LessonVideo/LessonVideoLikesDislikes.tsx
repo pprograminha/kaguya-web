@@ -1,92 +1,96 @@
-import { ChakraProps, Flex, Text, useToast, useToken } from '@chakra-ui/react';
-import { AiFillDislike, AiFillLike, AiOutlineDislike, AiOutlineLike } from 'react-icons/ai';
+import {
+  AiFillDislike,
+  AiFillLike,
+  AiOutlineDislike,
+  AiOutlineLike,
+} from "react-icons/ai";
+import { ChakraProps, Flex, Text, useToast, useToken } from "@chakra-ui/react";
+import {
+  LikeDislikeState,
+  changeLikeDislikeState,
+} from "@/utils/changeLikeDislikeState";
 
-import { Button } from '@/components/Button';
-
-import { kaguyaApi } from '@/services/kaguya/apiClient';
-import { queryClient } from '@/services/reactQueryClient';
-
-import { apiError } from '@/utils/apiFormatError';
-import { changeLikeDislikeState, LikeDislikeState } from '@/utils/changeLikeDislikeState';
-
-interface Lesson {
-  id: string;
-  slug: string;
-  state: 'none' | 'liked' | 'disliked';
-
-  _count: {
-		dislikes: number;
-		likes: number;
-		views: number;
-	},
-}
+import { Button } from "@/components/Button";
+import { LessonData } from "@/services/kaguya/types";
+import { apiError } from "@/utils/apiFormatError";
+import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { queryClient } from "@/services/reactQueryClient";
 
 type LessonVideoLikesDislikesProps = {
-  lesson?: Lesson;
-}
+  lesson?: LessonData;
+};
 
 export function LessonVideoLikesDislikes({
   lesson,
 }: LessonVideoLikesDislikesProps) {
   const toast = useToast();
-  const [pink500]= useToken("colors", ['pink.500'])
+  const [pink500] = useToken("colors", ["pink.500"]);
 
   const commonButtonStyle: ChakraProps = {
-    bg:"none",
-    _hover:{
+    bg: "none",
+    _hover: {
       bg: "none",
     },
     fontSize: ["md"],
-    fontWeight:"normal",
+    fontWeight: "normal",
     py: ["0"],
     _active: {
-      bg: 'blackAlpha.600',
-    }
+      bg: "blackAlpha.600",
+    },
   };
 
-  async function changeLikeDislikeStateLesson(state: 'none' | 'like' | 'dislike') {
+  async function changeLikeDislikeStateLesson(
+    state: "none" | "like" | "dislike"
+  ) {
     const states: Record<string, LikeDislikeState> = {
-      like: 'liked',
-      dislike: 'disliked',
-      none: 'none'
+      like: "liked",
+      dislike: "disliked",
+      none: "none",
     };
 
     try {
-      queryClient.setQueryData<Lesson | undefined>(['showLesson', lesson?.slug], (data) => {
-        if(data) {
-          const newCountValues = changeLikeDislikeState({
-            prevState: data.state,
-            nextState: states[state],
-            dislikes: data._count.dislikes,
-            likes: data._count.likes,
-          });
-      
-          return {
-            ...data,
-            state: states[state],
-            _count: {
-              ...data._count,
-              ...newCountValues,
-            }
+      queryClient.setQueryData<LessonData | undefined>(
+        ["showLesson", lesson?.slug],
+        (data) => {
+          if (data) {
+            const newCountValues = changeLikeDislikeState({
+              prevState: data.state,
+              nextState: states[state],
+              dislikes: data?._count?.dislikes || 0,
+              likes: data?._count?.likes || 0,
+            });
+
+            return {
+              ...data,
+              state: states[state],
+              ...(data._count
+                ? {
+                    _count: {
+                      ...data._count,
+                      ...newCountValues,
+                    },
+                  }
+                : {}),
+            };
           }
         }
-      });
+      );
 
-      await kaguyaApi.post('/likes', {
+      await kaguyaApi.post("/likes", {
         lesson_id: lesson?.id,
-        state
+        state,
       });
     } catch (error: any) {
       const errors = apiError(error);
 
-      errors.messages.forEach(messageError => {
+      errors.messages.forEach((messageError) => {
         toast({
-          title: 'Erro ao reagir à aula',
+          title: "Erro ao reagir à aula",
           description: messageError,
-          status: 'error',
+          status: "error",
           duration: 6000,
           isClosable: true,
-          position: 'top-right',
+          position: "top-right",
         });
       });
     }
@@ -95,46 +99,42 @@ export function LessonVideoLikesDislikes({
   return (
     <>
       <Flex>
-        {lesson?.state === 'liked' ? (
+        {lesson?.state === "liked" ? (
           <Button
             {...commonButtonStyle}
-
-            onClick={() => changeLikeDislikeStateLesson('none')}
+            onClick={() => changeLikeDislikeStateLesson("none")}
           >
             <AiFillLike size={20} color={pink500} />
-            <Text>{lesson?._count.likes}</Text>
+            <Text>{lesson?._count?.likes || 0}</Text>
           </Button>
         ) : (
           <Button
             {...commonButtonStyle}
-
-            onClick={() => changeLikeDislikeStateLesson('like')}
+            onClick={() => changeLikeDislikeStateLesson("like")}
           >
-            <AiOutlineLike size={20}/>
-            <Text>{lesson?._count.likes}</Text>
+            <AiOutlineLike size={20} />
+            <Text>{lesson?._count?.likes || 0}</Text>
           </Button>
         )}
 
-        {lesson?.state === 'disliked' ? (
+        {lesson?.state === "disliked" ? (
           <Button
             {...commonButtonStyle}
-
-            onClick={() => changeLikeDislikeStateLesson('none')}
+            onClick={() => changeLikeDislikeStateLesson("none")}
           >
             <AiFillDislike size={20} color={pink500} />
-            <Text>{lesson?._count.dislikes}</Text>
+            <Text>{lesson?._count?.dislikes || 0}</Text>
           </Button>
         ) : (
           <Button
             {...commonButtonStyle}
-
-            onClick={() => changeLikeDislikeStateLesson('dislike')}
+            onClick={() => changeLikeDislikeStateLesson("dislike")}
           >
-            <AiOutlineDislike size={20}/>
-            <Text>{lesson?._count.dislikes}</Text>
+            <AiOutlineDislike size={20} />
+            <Text>{lesson?._count?.dislikes || 0}</Text>
           </Button>
         )}
       </Flex>
     </>
-  )
+  );
 }

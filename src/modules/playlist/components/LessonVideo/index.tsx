@@ -1,27 +1,11 @@
-import { modifyYoutubeUrl } from "@/utils/modifyYoutubeUrl";
 import { Flex, Skeleton, useMediaQuery } from "@chakra-ui/react";
+
 import { InfoAboutLessonVideo } from "./InfoAboutLessonVideo";
-
-interface Lesson {
-  id: string;
-  name: string;
-  description: string;
-  link: string;
-  slug: string;
-
-  completed: boolean;
-  state: "none" | "liked" | "disliked";
-
-  _count: {
-    dislikes: number;
-    likes: number;
-    views: number;
-  };
-  block_id: string;
-}
+import { LessonData } from "@/services/kaguya/types";
+import { modifyYoutubeUrl } from "@/utils/modifyYoutubeUrl";
 
 interface LessonVideoProps {
-  lesson?: Lesson;
+  lesson?: LessonData;
   isLoadingLesson?: boolean;
 }
 

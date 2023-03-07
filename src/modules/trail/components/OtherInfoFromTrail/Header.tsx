@@ -1,10 +1,6 @@
 import { Flex, Heading, Image } from "@chakra-ui/react";
 
-interface TrailData {
-  id: string;
-  name: string;
-  avatar_url: string;
-}
+import { TrailData } from "@/services/kaguya/types";
 
 export interface OtherInfoFromTrailHeaderProps {
   trail?: TrailData;

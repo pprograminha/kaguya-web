@@ -1,38 +1,10 @@
 import { Box, CircularProgress, Flex, Heading } from "@chakra-ui/react";
+import { PlaylistData, TrailData } from "@/services/kaguya/types";
 
 import { PlaylistItem } from "./PlaylistItem";
 import { PlaylistsNoContent } from "./PlaylistsNoContent";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { useQuery } from "react-query";
-
-export interface PlaylistData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: null;
-
-  created_at: string;
-  updated_at: string;
-
-  user_playlist: {
-    progress: number;
-  } | null;
-
-  trail_id: string;
-}
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  avatar_url: string;
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  };
-}
 
 export interface PlaylistsContainerProps {
   is2xlVersion?: boolean;

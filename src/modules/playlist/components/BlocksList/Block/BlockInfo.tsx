@@ -9,29 +9,12 @@ import {
   useToken,
 } from "@chakra-ui/react";
 
+import { BlockData } from "@/services/kaguya/types";
 import { BsCheckLg } from "react-icons/bs";
 import { useTrail } from "@/hooks/useTrail";
 
-interface Lesson {
-  id: string;
-  name: string;
-  slug: string;
-}
-
-interface Block {
-  id: string;
-  name: string;
-  slug: string;
-
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: Lesson[];
-}
-
 export interface BlockProps {
-  block?: Block;
+  block?: BlockData;
 }
 
 export function BlockInfo({ block }: BlockProps) {

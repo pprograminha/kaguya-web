@@ -11,18 +11,7 @@ import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
 import Lordicon from "@/components/ReactLordicon";
 import NextLink from "next/link";
 import { Progress } from "@/components/Progress";
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  avatar_url: string;
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  };
-}
+import { TrailData } from "@/services/kaguya/types";
 
 interface TrailProps {
   trail: TrailData;

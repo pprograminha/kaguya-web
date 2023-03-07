@@ -1,4 +1,3 @@
-import { useQuery } from "react-query";
 import {
   CircularProgress,
   Flex,
@@ -8,10 +7,11 @@ import {
 } from "@chakra-ui/react";
 
 import { DividerLine } from "@/components/DividerLine";
-import { kaguyaApi } from "@/services/kaguya/apiClient";
-
 import { OthersTrailsNoContent } from "./OthersTrailsNoContent";
 import { Trail } from "./Trail";
+import { TrailData } from "@/services/kaguya/types";
+import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { useQuery } from "react-query";
 
 const animate = keyframes`
   from {  
@@ -23,28 +23,6 @@ const animate = keyframes`
     transform: translateX(0);
   }
 `;
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: string;
-
-  created_at: string;
-  updated_at: string;
-
-  _count: {
-    playlists: number;
-    users: number;
-    lessons: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
 
 export function OthersTrails() {
   const [blackAlpha900, blackAlpha850] = useToken("colors", [

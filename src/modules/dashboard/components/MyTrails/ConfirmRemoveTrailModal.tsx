@@ -11,21 +11,10 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
+import { TrailData } from "@/services/kaguya/types";
 import { apiError } from "@/utils/apiFormatError";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { queryClient } from "@/services/reactQueryClient";
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  avatar_url: string;
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  };
-}
 
 interface ConfirmRemoveTrailModalProps {
   trail: TrailData;

@@ -1,3 +1,5 @@
+import { PlaylistData, TrailData } from "@/services/kaguya/types";
+
 import { Link as ChakraLink } from "@chakra-ui/react";
 import NextLink from "next/link";
 import { PlaylistDescription } from "./Description";
@@ -5,37 +7,8 @@ import { PlaylistIndex } from "./PlaylistIndex";
 import { PlaylistTitle } from "./Title";
 import { Progress } from "../../../../../components/Progress";
 
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  avatar_url: string;
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  };
-}
-
-interface Playlist {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: null;
-
-  created_at: string;
-  updated_at: string;
-
-  user_playlist: {
-    progress: number;
-  } | null;
-
-  trail_id: string;
-}
-
 interface PlaylistItemProps {
-  playlist: Playlist;
+  playlist: PlaylistData;
   index: number;
 
   trail?: TrailData;

@@ -1,7 +1,5 @@
 import {
-  Box,
   Button as ChakraButton,
-  ChakraProps,
   useDisclosure,
   useMediaQuery,
   useToast,
@@ -9,28 +7,12 @@ import {
 
 import { ConfirmRemoveTrailModal } from "./ConfirmRemoveTrailModal";
 import Lordicon from "@/components/ReactLordicon";
+import { TrailData } from "@/services/kaguya/types";
 import { apiError } from "@/utils/apiFormatError";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { queryClient } from "@/services/reactQueryClient";
 import { useState } from "react";
 import { useTrail } from "@/hooks/useTrail";
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-
-  _count: {
-    lessons: number;
-    playlists: number;
-    users: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
 
 export interface AddRemoveTrailButtonProps {
   isMdVersion?: boolean;

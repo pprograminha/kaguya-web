@@ -1,25 +1,10 @@
 import { Flex } from "@chakra-ui/react";
+import { LessonData } from "@/services/kaguya/types";
 import { LessonDescription } from "./LessonDescription";
 import { LessonTitle } from "./LessonTitle";
 
-interface Lesson {
-  id: string;
-  name: string;
-  description: string;
-  slug: string;
-
-  completed: boolean;
-
-  _count: {
-    dislikes: number;
-    likes: number;
-    views: number;
-  };
-  block_id: string;
-}
-
 type LessonInfoProps = {
-  lesson?: Lesson;
+  lesson?: LessonData;
   isLoadingLesson: boolean;
 };
 
