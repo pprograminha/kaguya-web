@@ -10,7 +10,7 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
   const baseURL = process.env.NODE_ENV === 'production' ? 'https://platform-backend-production.up.railway.app' : 'http://localhost:3333';
   
   const kaguyaApi = axios.create({
-    baseURL,
+    baseURL: 'https://platform-backend-production.up.railway.app',
   });
   
   kaguyaApi.defaults.headers.common.Authorization = `Bearer ${cookies[tokenCookieKey]}`;
