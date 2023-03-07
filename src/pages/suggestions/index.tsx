@@ -1,13 +1,14 @@
-import { Header } from "@/components/Header";
 import {
   Box,
+  Link as ChakraLink,
   Flex,
   Heading,
   Image,
-  Link as ChakraLink,
   Text,
 } from "@chakra-ui/react";
+
 import Head from "next/head";
+import { Header } from "@/components/Header";
 import NextLink from "next/link";
 
 export default function ListSuggestionsPage() {
@@ -23,15 +24,15 @@ export default function ListSuggestionsPage() {
         <Header headerType={"has-user-profile"} />
 
         <Flex
+          flexDirection={"column"}
           maxW={980}
           w="100%"
-          flexDirection={"column"}
           mt={16}
           mb={8}
           px={4}
           mx={["0", "auto"]}
         >
-          <Flex gap={4} mb={8}>
+          <Flex gap={4}>
             <Heading>Listagem de sugestões</Heading>
             <NextLink href="/suggestions/create">
               <ChakraLink
@@ -55,7 +56,17 @@ export default function ListSuggestionsPage() {
               </ChakraLink>
             </NextLink>
           </Flex>
-          <Flex as="main" flexDirection="column" gap={4}>
+          <Box mt={2}>
+            <Text color="gray.300">
+              A funcionalidade de sugestões está em fase de desenvolvimento.
+            </Text>
+            <Text color="gray.300">
+              Após a versão 1 da funcionalidade estiver pronta, os próprios
+              usuários poderão sugerir novas trilhas, playlists e aulas e a
+              comunidade decidirá se o conteúdo irá para a plataforma.
+            </Text>
+          </Box>
+          <Flex as="main" flexDirection="column" gap={4} mt={8}>
             <NextLink href={`/suggestions/view/slug`}>
               <ChakraLink
                 display="flex"
