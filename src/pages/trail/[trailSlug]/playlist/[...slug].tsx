@@ -1,22 +1,21 @@
 import {
-  Flex,
-  Skeleton,
-  useMediaQuery,
-  useToast
-} from '@chakra-ui/react';
-import Head from 'next/head';
-import { GetServerSideProps } from 'next';
-import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+  BlocksList,
+  LessonInfo,
+  LessonVideo,
+} from "@/modules/playlist/components";
+import { Flex, Skeleton, useMediaQuery, useToast } from "@chakra-ui/react";
 
-import { BreadCrumbContainer } from '@/components/BreadCrumb/Container';
-import { Header } from '@/components/Header';
-
-import { BlocksList, LessonInfo, LessonVideo } from '@/modules/playlist/components';
-
-import { kaguyaApi } from '@/services/kaguya/apiClient';
-
-import { withSSRAuth } from '@/utils/withSSRAuth';
+import { AddRemoveTrailButton } from "@/modules/trail/components/TrailInfoHeader/AddRemoveTrailButton";
+import { BreadCrumbContainer } from "@/components/BreadCrumb/Container";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
+import { Header } from "@/components/Header";
+import { PlaylistData } from "@/modules/trail/components";
+import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { useQuery } from "react-query";
+import { useRouter } from "next/router";
+import { useTrail } from "@/hooks/useTrail";
+import { withSSRAuth } from "@/utils/withSSRAuth";
 
 interface TrailData {
   id: string;
@@ -26,6 +25,12 @@ interface TrailData {
     progress: number;
     enabled: boolean;
   } | null;
+
+  _count: {
+    lessons: number;
+    playlists: number;
+    users: number;
+  };
 }
 
 interface Lesson {
@@ -36,19 +41,19 @@ interface Lesson {
   slug: string;
 
   completed: boolean;
-  state: 'none' | 'liked' | 'disliked';
+  state: "none" | "liked" | "disliked";
 
   _count: {
-		dislikes: number;
-		likes: number;
-		views: number;
-	},
+    dislikes: number;
+    likes: number;
+    views: number;
+  };
   block_id: string;
 }
 
 export default function PlaylistPage() {
-  const [isLargerThan1024] = useMediaQuery('(min-width: 1024px)');
-  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   const toast = useToast();
 
@@ -56,108 +61,118 @@ export default function PlaylistPage() {
   const query = router.query;
 
   const trailSlug = query?.trailSlug as string;
-  const [
-    playlistSlug, 
+  const [playlistSlug, blockText, blockSlug, lessonText, lessonSlug] =
+    query?.slug || ([] as string[]);
 
-    blockText, 
-    blockSlug, 
+  const { setTrailData } = useTrail();
 
-    lessonText, 
-    lessonSlug
-  ] = query?.slug || [] as string[];
+  const trail = useQuery<TrailData | undefined>(
+    ["uniqueTrail", trailSlug],
+    async () => {
+      try {
+        const response = await kaguyaApi.get<TrailData>("/trails/show", {
+          params: {
+            slug: trailSlug,
+          },
+        });
 
-  const trail = useQuery<TrailData | undefined>(['uniqueTrail', trailSlug], async () => {
-    try {
-      const response = await kaguyaApi.get<TrailData>('/trails/show', {
-        params: {
-          slug: trailSlug,
-        }
-      });
-  
-      return response.data;
-    } catch (error) {  
-      toast({
-        title: 'Erro na listagem da trilha',
-        description: 'Possivelmente esta trilha não existe ou ocorreu um erro interno.',
-        status: 'error',
-        duration: 6000,
-        isClosable: true,
-        position: 'top-right',
-      });
-      return;
+        setTrailData(response.data);
+
+        return response.data;
+      } catch (error) {
+        toast({
+          title: "Erro na listagem da trilha",
+          description:
+            "Possivelmente esta trilha não existe ou ocorreu um erro interno.",
+          status: "error",
+          duration: 6000,
+          isClosable: true,
+          position: "top-right",
+        });
+        return;
+      }
+    },
+    {
+      staleTime: 1000 * 60 * 10, // 60 minutes
+      enabled: !!trailSlug,
     }
-  }, {
-    staleTime: 1000 * 60 * 10, // 60 minutes
-    enabled: !!trailSlug,
-  });
+  );
 
-  const playlist = useQuery<TrailData | undefined>(['uniquePlaylist', playlistSlug], async () => {
-    const response = await kaguyaApi.get<TrailData>('/playlists/show', {
-      params: {
-        playlist_slug: playlistSlug,
-        trail_slug: trailSlug
-      }
-    });
+  const playlist = useQuery<PlaylistData | undefined>(
+    ["uniquePlaylist", playlistSlug],
+    async () => {
+      const response = await kaguyaApi.get<PlaylistData>("/playlists/show", {
+        params: {
+          playlist_slug: playlistSlug,
+          trail_slug: trailSlug,
+        },
+      });
 
-    return response.data;
-  }, {
-    staleTime: 1000 * 60 * 10, // 60 minutes
-    enabled: !!trailSlug && !!playlistSlug,
-  });
+      return response.data;
+    },
+    {
+      staleTime: 1000 * 60 * 10, // 60 minutes
+      enabled: !!trailSlug && !!playlistSlug,
+    }
+  );
 
-  const lesson = useQuery<Lesson>(['showLesson', lessonSlug], async () => {
-    const response = await kaguyaApi.get<Lesson>('/lessons/show', {
-      params: {
-        block_slug: blockSlug,
-        lesson_slug: lessonSlug,
-      }
-    });
+  const lesson = useQuery<Lesson>(
+    ["showLesson", lessonSlug],
+    async () => {
+      const response = await kaguyaApi.get<Lesson>("/lessons/show", {
+        params: {
+          block_slug: blockSlug,
+          lesson_slug: lessonSlug,
+        },
+      });
 
-    return response.data;
-  }, {
-    staleTime: 1000 * 60 * 10, // 60 minutes,
-    enabled: !!lessonSlug && !!blockSlug
-  });
+      return response.data;
+    },
+    {
+      staleTime: 1000 * 60 * 10, // 60 minutes,
+      enabled: !!lessonSlug && !!blockSlug,
+    }
+  );
 
   const isFetching = playlist.isFetching || trail.isFetching;
-  const isLoading = lesson.isLoading || playlist.isLoading || trail.isLoading || isFetching;
+  const isLoading =
+    lesson.isLoading || playlist.isLoading || trail.isLoading || isFetching;
 
-  if(!isLoading && !lesson) {
-    router.push('/dashboard');
+  if (!isLoading && !lesson) {
+    router.push("/dashboard");
 
     return;
   }
-  
+
   return (
     <>
       <Head>
-        <title>Kaguya - {isLoading ? '...Carregando' : lesson.data?.name} </title>
+        <title>
+          Kaguya - {isLoading ? "...Carregando" : lesson.data?.name}
+        </title>
       </Head>
 
-      <Flex
-        flexDirection="column"
-      >
-        <Header headerType={'has-user-profile'}/>
+      <Flex flexDirection="column">
+        <Header headerType={"has-user-profile"} />
 
         <Flex
           flexDirection="column"
           maxWidth={1480}
           w="100%"
-          
           mt="16"
           mx={["0", "auto"]}
         >
           {isLoading ? (
-            <Skeleton  
-              borderRadius="md"                    
-              height= "16px"
+            <Skeleton
+              borderRadius="md"
+              height="16px"
               maxW="md"
               ml="4"
-              endColor="blackAlpha.700" 
-              startColor="blackAlpha.600" 
+              endColor="blackAlpha.700"
+              startColor="blackAlpha.600"
             />
           ) : (
-            <>
+            <Flex ml={4} alignItems="center" gap={4}>
               {!isLargerThan768 ? (
                 <BreadCrumbContainer
                   separator=" "
@@ -165,19 +180,26 @@ export default function PlaylistPage() {
                     {
                       link: `/trail/${trail?.data?.slug}`,
                       title: `Voltar para ${trail?.data?.name}`,
-                    }
+                    },
                   ]}
                 />
               ) : (
-              <BreadCrumbContainer 
-                items={[
-                  {link: '/dashboard', title: 'Dashboard'},
-                  {link: `/trail/${trail.data?.slug}`, title: trail.data?.name},
-                ]}
-                currentItem={{ link: `/trail/${trailSlug}/playlist/${playlistSlug}`, title: playlist.data?.name}}
-              />
+                <BreadCrumbContainer
+                  items={[
+                    { link: "/dashboard", title: "Dashboard" },
+                    {
+                      link: `/trail/${trail.data?.slug}`,
+                      title: trail.data?.name,
+                    },
+                  ]}
+                  currentItem={{
+                    link: `/trail/${trailSlug}/playlist/${playlistSlug}/block/${blockSlug}/lesson/${lessonSlug}`,
+                    title: playlist.data?.name,
+                  }}
+                />
               )}
-            </>
+              {trail.data && <AddRemoveTrailButton trail={trail.data} />}
+            </Flex>
           )}
 
           <Flex
@@ -188,23 +210,29 @@ export default function PlaylistPage() {
           >
             <Flex
               flexDirection="column"
-              maxWidth={!isLargerThan1024 ? '100%' : 880}
+              maxWidth={!isLargerThan1024 ? "100%" : 880}
               w="100%"
             >
-              <LessonVideo isLoadingLesson={lesson.isLoading} lesson={lesson.data} />
-              <LessonInfo isLoadingLesson={lesson.isLoading} lesson={lesson.data} />
+              <LessonVideo
+                isLoadingLesson={lesson.isLoading}
+                lesson={lesson.data}
+              />
+              <LessonInfo
+                isLoadingLesson={lesson.isLoading}
+                lesson={lesson.data}
+              />
             </Flex>
-            
+
             <BlocksList playlistSlug={playlistSlug} trailSlug={trailSlug} />
           </Flex>
         </Flex>
       </Flex>
     </>
-  )
+  );
 }
 
 export const getServerSideProps: GetServerSideProps = withSSRAuth(async () => {
   return {
-    props: {}
-  }
-})
+    props: {},
+  };
+});

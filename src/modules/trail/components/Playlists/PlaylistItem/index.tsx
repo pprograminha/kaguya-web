@@ -1,11 +1,21 @@
-import { 
-  Link as ChakraLink,
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
-import { Progress } from '../../../../../components/Progress';
-import { PlaylistDescription } from './Description';
-import { PlaylistIndex } from './PlaylistIndex';
-import { PlaylistTitle } from './Title';
+import { Link as ChakraLink } from "@chakra-ui/react";
+import NextLink from "next/link";
+import { PlaylistDescription } from "./Description";
+import { PlaylistIndex } from "./PlaylistIndex";
+import { PlaylistTitle } from "./Title";
+import { Progress } from "../../../../../components/Progress";
+
+interface TrailData {
+  id: string;
+  name: string;
+  slug: string;
+  avatar_url: string;
+
+  user_trail: {
+    progress: number;
+    enabled: boolean;
+  };
+}
 
 interface Playlist {
   id: string;
@@ -13,10 +23,10 @@ interface Playlist {
   slug: string;
   description: string;
   avatar_url: null;
-  
+
   created_at: string;
   updated_at: string;
-  
+
   user_playlist: {
     progress: number;
   } | null;
@@ -24,9 +34,6 @@ interface Playlist {
   trail_id: string;
 }
 
-interface TrailData {
-  slug: string;
-}
 interface PlaylistItemProps {
   playlist: Playlist;
   index: number;
@@ -34,40 +41,39 @@ interface PlaylistItemProps {
   trail?: TrailData;
 }
 
-export function PlaylistItem({
-  playlist,
-  index,
-  trail,
-}: PlaylistItemProps) {
+export function PlaylistItem({ playlist, index, trail }: PlaylistItemProps) {
   return (
     <>
-      <NextLink href={`/trail/${trail?.slug}/playlist/${playlist.slug}`} passHref>
+      <NextLink
+        href={`/trail/${trail?.slug}/playlist/${playlist.slug}`}
+        passHref
+      >
         <ChakraLink
           display="flex"
           flexDirection="column"
-          bg='blackAlpha.500'
-
+          bg="blackAlpha.500"
           pt="12"
           px={["4", "8"]}
           pb={playlist.user_playlist ? "8" : "12"}
-
           position="relative"
           transition="all 0.3s"
           border="1px solid transparent"
           borderRadius="md"
           _hover={{
-            border: '1px solid',
-            borderColor: 'pink.500',
+            border: "1px solid",
+            borderColor: "pink.500",
           }}
         >
-          <PlaylistIndex value={index}/>
+          <PlaylistIndex value={index} />
           <PlaylistTitle title={playlist.name} />
-          <PlaylistDescription
-            description={playlist.description}
-          />
+          <PlaylistDescription description={playlist.description} />
 
-          {playlist.user_playlist && (
-            <Progress percent={playlist.user_playlist.progress} mt="12"/>
+          {trail && trail.user_trail?.enabled && (
+            <>
+              {playlist.user_playlist && (
+                <Progress percent={playlist.user_playlist.progress} mt="12" />
+              )}
+            </>
           )}
         </ChakraLink>
       </NextLink>
