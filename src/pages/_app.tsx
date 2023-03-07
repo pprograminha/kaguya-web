@@ -3,6 +3,7 @@ import { AuthProvider } from "contexts/AuthContext";
 import { ChakraProvider } from "@chakra-ui/react";
 import { QueryClientProvider } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+import { TrailProvider } from "@/contexts/TrailContext";
 import { queryClient } from "@/services/reactQueryClient";
 import { theme } from "../styles/theme";
 
@@ -11,9 +12,11 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <QueryClientProvider client={queryClient}>
         <AuthProvider>
-          <ChakraProvider theme={theme}>
-            <Component {...pageProps} />
-          </ChakraProvider>
+          <TrailProvider>
+            <ChakraProvider theme={theme}>
+              <Component {...pageProps} />
+            </ChakraProvider>
+          </TrailProvider>
         </AuthProvider>
         <ReactQueryDevtools />
       </QueryClientProvider>
