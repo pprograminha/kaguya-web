@@ -1,10 +1,4 @@
-import { GetServerSideProps } from "next";
-import Head from "next/head";
-import { useRouter } from "next/router";
-import { useQuery } from "react-query";
-
 import { Flex, useBreakpointValue, useToast } from "@chakra-ui/react";
-
 import {
   OtherInfoFromTrail,
   PlaylistsContainer,
@@ -12,36 +6,18 @@ import {
   TrailInfoHeader,
   TrailSkeletonLoading,
 } from "@/modules/trail/components";
+import { Quote, quotes } from "@/services/quotes";
 
 import { BreadCrumbContainer } from "@/components/BreadCrumb/Container";
 import { DividerLine } from "@/components/DividerLine";
+import { GetServerSideProps } from "next";
+import Head from "next/head";
 import { Header } from "@/components/Header";
-
+import { TrailData } from "@/services/kaguya/types";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { useQuery } from "react-query";
+import { useRouter } from "next/router";
 import { withSSRAuth } from "@/utils/withSSRAuth";
-import { Quote, quotes } from "@/services/quotes";
-
-export interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: string;
-
-  created_at: string;
-  updated_at: string;
-
-  _count: {
-    playlists: number;
-    users: number;
-    lessons: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
 
 type TrailProps = {
   quote: Quote;

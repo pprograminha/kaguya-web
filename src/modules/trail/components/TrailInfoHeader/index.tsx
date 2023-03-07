@@ -1,45 +1,28 @@
-import { 
+import {
   CircularProgress,
-  Flex, 
+  Flex,
   useBreakpointValue,
-  useToken
-} from '@chakra-ui/react';
-import { TrailDescription } from '../TrailDescription';
+  useToken,
+} from "@chakra-ui/react";
 
-import { AddRemoveTrailButton } from './AddRemoveTrailButton';
-import { TrailTitle } from './TrailTitle';
-
-interface TrailData {
-  id: string;
-  name: string;
-  description: string;
-  slug: string;
-  
-  _count: {
-    lessons: number;
-    playlists: number;
-    users: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
+import { AddRemoveTrailButton } from "./AddRemoveTrailButton";
+import { TrailData } from "@/services/kaguya/types";
+import { TrailDescription } from "../TrailDescription";
+import { TrailTitle } from "./TrailTitle";
 
 interface TrailInfoHeaderProps {
   trail: TrailData | undefined;
   isFetching?: boolean;
 }
 
-export function TrailInfoHeader({
-  trail,
-  isFetching
-}: TrailInfoHeaderProps) {
-  const [blackAlpha900, blackAlpha700, pink800] = useToken("colors", ['blackAlpha.900', 'blackAlpha.700', 'pink.800'])
-  const isMdVersion = useBreakpointValue({ 
+export function TrailInfoHeader({ trail, isFetching }: TrailInfoHeaderProps) {
+  const [blackAlpha700, pink800] = useToken("colors", [
+    "blackAlpha.700",
+    "pink.800",
+  ]);
+  const isMdVersion = useBreakpointValue({
     base: false,
-    "md": true
+    md: true,
   });
 
   return (
@@ -63,36 +46,19 @@ export function TrailInfoHeader({
         {isFetching && (
           <CircularProgress
             isIndeterminate
-            color='pink.800'
+            color="pink.800"
             size={6}
             position="absolute"
             top="4"
           />
         )}
-        <Flex
-          flexDirection="column"
-          alignItems="center"
-        >
-          <Flex
-            w="100%"
-            flexDirection="column"
-          >
-            <Flex
-              justifyContent="space-between"
-              alignItems="center"
-              mt="8"
-            >
-              <TrailTitle
-                trailName={trail?.name || ''}
-              />
-              <AddRemoveTrailButton 
-                isMdVersion={isMdVersion}
-                trail={trail}
-              />
+        <Flex flexDirection="column" alignItems="center">
+          <Flex w="100%" flexDirection="column">
+            <Flex justifyContent="space-between" alignItems="center" mt="8">
+              <TrailTitle trailName={trail?.name || ""} />
+              <AddRemoveTrailButton isMdVersion={isMdVersion} trail={trail} />
             </Flex>
-            <TrailDescription
-              description={trail?.description || ''}
-            />
+            <TrailDescription description={trail?.description || ""} />
           </Flex>
         </Flex>
       </Flex>

@@ -1,41 +1,19 @@
-import { Box, useBreakpointValue } from '@chakra-ui/react';
-import { DiscordComunityInfo } from '../DiscordComunityInfo';
-import { DividerLine } from '../../../../components/DividerLine';
-import { OtherInfoFromTrailHeader } from './Header';
-import { TrailStudentsCount } from './TrailStudensCount';
+import { Box, useBreakpointValue } from "@chakra-ui/react";
 
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: string;
-  
-  created_at: string;
-  updated_at: string;
-
-  _count: {
-    playlists: number;
-    users: number;
-    lessons: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
+import { DiscordComunityInfo } from "../DiscordComunityInfo";
+import { DividerLine } from "../../../../components/DividerLine";
+import { OtherInfoFromTrailHeader } from "./Header";
+import { TrailData } from "@/services/kaguya/types";
+import { TrailStudentsCount } from "./TrailStudensCount";
 
 export interface OtherTrailInfoProps {
   trail?: TrailData;
 }
 
-export function OtherInfoFromTrail({
-  trail
-}: OtherTrailInfoProps) {
-  const isWideVersion = useBreakpointValue({ 
+export function OtherInfoFromTrail({ trail }: OtherTrailInfoProps) {
+  const isWideVersion = useBreakpointValue({
     base: false,
-    "lg": true
+    lg: true,
   });
 
   return (
@@ -45,7 +23,7 @@ export function OtherInfoFromTrail({
         p={["4", "6", "8"]}
         borderRadius="md"
         mt={["0", "8"]}
-        mb={isWideVersion ? "12": "0"}
+        mb={isWideVersion ? "12" : "0"}
         maxW="max"
         h="max"
       >
@@ -53,9 +31,9 @@ export function OtherInfoFromTrail({
         <TrailStudentsCount trail={trail} />
 
         <DividerLine />
-        
+
         <DiscordComunityInfo />
       </Box>
     </>
-  )
+  );
 }

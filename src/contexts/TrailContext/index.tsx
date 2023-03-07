@@ -1,14 +1,6 @@
 import { createContext, useState } from "react";
 
-export interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-}
+import { TrailData } from "@/services/kaguya/types";
 
 type TrailContextData = {
   trail: TrailData | undefined;

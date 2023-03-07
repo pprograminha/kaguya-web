@@ -10,22 +10,15 @@ import {
   Text,
   useToast,
 } from "@chakra-ui/react";
+import { PlaylistData, TrailData } from "@/services/kaguya/types";
 
-import { PlaylistData } from "../Playlists";
-import { TrailData } from "pages/trail/[trailSlug]";
 import { apiError } from "@/utils/apiFormatError";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { queryClient } from "@/services/reactQueryClient";
 import { useTrail } from "@/hooks/useTrail";
 
-interface UserTrail {
-  id: string;
-  name: string;
-  slug: string;
-}
-
 interface ConfirmRemoveTrailModalProps {
-  trail: UserTrail | undefined;
+  trail: TrailData | undefined;
   modal: {
     isOpen: boolean;
     onClose: () => void;

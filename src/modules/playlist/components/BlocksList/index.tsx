@@ -2,32 +2,12 @@ import { Accordion, Flex } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 
 import { Block } from "./Block";
+import { BlockData } from "@/services/kaguya/types";
 import { BlocksSkeletonLoading } from "../BlocksListSkeletonLoading";
 import { findLastIndex } from "@/utils/findLastIndex";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
-
-interface Lesson {
-  id: string;
-  name: string;
-  slug: string;
-  completed: boolean;
-
-  block_id: string;
-}
-
-interface BlockData {
-  id: string;
-  name: string;
-  slug: string;
-
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: Lesson[];
-}
 
 export interface BlocksListProps {
   playlistSlug: string;

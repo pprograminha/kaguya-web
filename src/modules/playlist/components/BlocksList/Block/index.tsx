@@ -1,30 +1,11 @@
 import { AccordionItem } from "@chakra-ui/react";
+import { BlockData } from "@/services/kaguya/types";
 import { BlockInfo } from "./BlockInfo";
 import { LessonListFromBlock } from "../LessonsListFromBlock";
 import { useRouter } from "next/router";
 
-interface Lesson {
-  id: string;
-  name: string;
-  slug: string;
-  completed: boolean;
-  block_id: string;
-}
-
-interface Block {
-  id: string;
-  name: string;
-  slug: string;
-
-  user_block: {
-    progress: number;
-  } | null;
-
-  lessons: Lesson[];
-}
-
 export interface BlockProps {
-  block: Block;
+  block: BlockData;
 }
 
 export function Block({ block }: BlockProps) {

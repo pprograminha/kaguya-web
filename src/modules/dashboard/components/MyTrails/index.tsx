@@ -1,5 +1,3 @@
-import { useAuth } from "@/hooks/useAuth";
-import { kaguyaApi } from "@/services/kaguya/apiClient";
 import {
   Box,
   CircularProgress,
@@ -7,9 +5,13 @@ import {
   Heading,
   keyframes,
 } from "@chakra-ui/react";
-import { useQuery } from "react-query";
+
 import { MyTrailsNoContent } from "./MyTrailsNoContent";
 import { Trail } from "./Trail";
+import { TrailData } from "@/services/kaguya/types";
+import { kaguyaApi } from "@/services/kaguya/apiClient";
+import { useAuth } from "@/hooks/useAuth";
+import { useQuery } from "react-query";
 
 const animate = keyframes`
   from {  
@@ -22,35 +24,13 @@ const animate = keyframes`
   }
 `;
 
-interface UserTrail {
-  id: string;
-  name: string;
-  slug: string;
-  description: string;
-  avatar_url: string;
-
-  created_at: string;
-  updated_at: string;
-
-  _count: {
-    playlists: number;
-    users: number;
-    lessons: number;
-  };
-
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  };
-}
-
 export function MyTrails() {
   const { user } = useAuth();
 
-  const { data, isFetching } = useQuery<UserTrail[]>(
+  const { data, isFetching } = useQuery<TrailData[]>(
     "userTrails",
     async () => {
-      const response = await kaguyaApi.get<UserTrail[]>(
+      const response = await kaguyaApi.get<TrailData[]>(
         "/user-trails/list-all",
         {
           params: {

@@ -4,52 +4,18 @@ import {
   LessonVideo,
 } from "@/modules/playlist/components";
 import { Flex, Skeleton, useMediaQuery, useToast } from "@chakra-ui/react";
+import { LessonData, PlaylistData, TrailData } from "@/services/kaguya/types";
 
 import { AddRemoveTrailButton } from "@/modules/trail/components/TrailInfoHeader/AddRemoveTrailButton";
 import { BreadCrumbContainer } from "@/components/BreadCrumb/Container";
 import { GetServerSideProps } from "next";
 import Head from "next/head";
 import { Header } from "@/components/Header";
-import { PlaylistData } from "@/modules/trail/components";
 import { kaguyaApi } from "@/services/kaguya/apiClient";
 import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import { useTrail } from "@/hooks/useTrail";
 import { withSSRAuth } from "@/utils/withSSRAuth";
-
-interface TrailData {
-  id: string;
-  name: string;
-  slug: string;
-  user_trail: {
-    progress: number;
-    enabled: boolean;
-  } | null;
-
-  _count: {
-    lessons: number;
-    playlists: number;
-    users: number;
-  };
-}
-
-interface Lesson {
-  id: string;
-  name: string;
-  link: string;
-  description: string;
-  slug: string;
-
-  completed: boolean;
-  state: "none" | "liked" | "disliked";
-
-  _count: {
-    dislikes: number;
-    likes: number;
-    views: number;
-  };
-  block_id: string;
-}
 
 export default function PlaylistPage() {
   const [isLargerThan1024] = useMediaQuery("(min-width: 1024px)");
@@ -116,10 +82,10 @@ export default function PlaylistPage() {
     }
   );
 
-  const lesson = useQuery<Lesson>(
+  const lesson = useQuery<LessonData>(
     ["showLesson", lessonSlug],
     async () => {
-      const response = await kaguyaApi.get<Lesson>("/lessons/show", {
+      const response = await kaguyaApi.get<LessonData>("/lessons/show", {
         params: {
           block_slug: blockSlug,
           lesson_slug: lessonSlug,
