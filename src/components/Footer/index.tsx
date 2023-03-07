@@ -1,23 +1,20 @@
-import { 
+import {
+  Box,
   Link as ChakraLink,
-  Box, 
-  Flex, 
-  Text, 
+  Divider,
+  Flex,
+  Text,
   useMediaQuery,
-  Divider
-} from '@chakra-ui/react';
-import NextLink from 'next/link';
+} from "@chakra-ui/react";
+
+import NextLink from "next/link";
 
 export function Footer() {
-  const [isLargerThan768] = useMediaQuery('(min-width: 768px)');
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
 
   return (
     <>
-      <Box
-        as="footer"
-        bg="blackAlpha.800"
-        p="8"
-      >
+      <Box as="footer" bg="blackAlpha.800" p="8">
         <Flex
           w="100%"
           maxW={1480}
@@ -35,7 +32,7 @@ export function Footer() {
               alignItems="center"
               gap="6"
             >
-              Kaguya - 2022
+              Kaguya - {new Date().getFullYear()}
             </Text>
           </Box>
 
@@ -44,35 +41,23 @@ export function Footer() {
             flexDirection={!isLargerThan768 ? "column" : "row"}
           >
             <NextLink href="/terms" passHref>
-              <ChakraLink
-                color="gray.300"
-              >
-                Termos de uso
-              </ChakraLink>
+              <ChakraLink color="gray.300">Termos de uso</ChakraLink>
             </NextLink>
 
-            <Divider orientation='vertical' />
+            <Divider orientation="vertical" />
 
             <NextLink href="/privacy-policy" passHref>
-              <ChakraLink
-                color="gray.300"
-              >
-                Politica de privacidade
-              </ChakraLink>
+              <ChakraLink color="gray.300">Politica de privacidade</ChakraLink>
             </NextLink>
 
-            <Divider orientation='vertical' />
+            <Divider orientation="vertical" />
 
             <NextLink href="/help" passHref>
-              <ChakraLink
-                color="gray.300"
-              >
-                Ajuda
-              </ChakraLink>
+              <ChakraLink color="gray.300">Ajuda</ChakraLink>
             </NextLink>
           </Flex>
         </Flex>
       </Box>
     </>
-  )
+  );
 }
