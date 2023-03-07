@@ -463,54 +463,49 @@ export default function HomePage() {
                     anos.
                   </Text>
                   <Flex gap={2} flexWrap="wrap">
-                    <NextLink
+                    <ChakraLink
                       href="https://github.com/Tiaguin061"
                       target="_blank"
+                      bg="gray.600"
+                      color="white"
+                      size={["sm", "md", "lg"]}
+                      p={2}
+                      borderRadius="md"
+                      textAlign="center"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      gap={2}
+                      _hover={{
+                        bg: "normal",
+                        opacity: "0.9",
+                      }}
                     >
-                      <ChakraLink
-                        bg="gray.600"
-                        color="white"
-                        size={["sm", "md", "lg"]}
-                        p={2}
-                        borderRadius="md"
-                        textAlign="center"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap={2}
-                        _hover={{
-                          bg: "normal",
-                          opacity: "0.9",
-                        }}
-                      >
-                        <AiFillGithub size={18} />
-                        Acessar github
-                      </ChakraLink>
-                    </NextLink>
-                    <NextLink
+                      <AiFillGithub size={18} />
+                      Acessar github
+                    </ChakraLink>
+
+                    <ChakraLink
                       href="https://tiagogoncalves.netlify.app"
                       target="_blank"
+                      bg="pink.600"
+                      color="white"
+                      size={["sm", "md", "lg"]}
+                      p={2}
+                      borderRadius="md"
+                      textAlign="center"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      gap={2}
+                      _hover={{
+                        bg: "normal",
+                        opacity: "0.9",
+                      }}
                     >
-                      <ChakraLink
-                        bg="pink.600"
-                        color="white"
-                        size={["sm", "md", "lg"]}
-                        p={2}
-                        borderRadius="md"
-                        textAlign="center"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap={2}
-                        _hover={{
-                          bg: "normal",
-                          opacity: "0.9",
-                        }}
-                      >
-                        <BsFolderSymlinkFill size={18} />
-                        Acessar Portfólio
-                      </ChakraLink>
-                    </NextLink>
+                      <BsFolderSymlinkFill size={18} />
+                      Acessar Portfólio
+                    </ChakraLink>
                   </Flex>
                 </Flex>
 
@@ -532,31 +527,28 @@ export default function HomePage() {
                     Desenvolvedor fullstack NextJS, NodeJS e Typescript.
                   </Text>
                   <Flex gap={2}>
-                    <NextLink
+                    <ChakraLink
                       href="https://github.com/pprograminha"
                       target="_blank"
+                      bg="gray.600"
+                      color="white"
+                      size={["sm", "md", "lg"]}
+                      p={2}
+                      mt={2}
+                      borderRadius="md"
+                      textAlign="center"
+                      display="flex"
+                      alignItems="center"
+                      justifyContent="center"
+                      gap={2}
+                      _hover={{
+                        bg: "normal",
+                        opacity: "0.9",
+                      }}
                     >
-                      <ChakraLink
-                        bg="gray.600"
-                        color="white"
-                        size={["sm", "md", "lg"]}
-                        p={2}
-                        mt={2}
-                        borderRadius="md"
-                        textAlign="center"
-                        display="flex"
-                        alignItems="center"
-                        justifyContent="center"
-                        gap={2}
-                        _hover={{
-                          bg: "normal",
-                          opacity: "0.9",
-                        }}
-                      >
-                        <AiFillGithub size={18} />
-                        Acessar github
-                      </ChakraLink>
-                    </NextLink>
+                      <AiFillGithub size={18} />
+                      Acessar github
+                    </ChakraLink>
                   </Flex>
                 </Flex>
               </Flex>
