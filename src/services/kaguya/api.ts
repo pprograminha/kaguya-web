@@ -11,7 +11,7 @@ export function setupAPIClient(ctx: GetServerSidePropsContext | undefined = unde
     process.env.NODE_ENV === 'production' ? (
       process.env.KAGUYA_API_BASE_URL ? 
       process.env.KAGUYA_API_BASE_URL :
-      'https://platform-backend-production.up.railway.app'
+      'https://api.kaguya.com.br'
     ) : 'http://localhost:3333';
   
   const kaguyaApi = axios.create({
